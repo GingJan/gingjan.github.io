@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Git常用基本命令 | Zjien&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文持续更新中…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git常用基本命令">
+<meta property="og:url" content="http://blog.zjien.com/2016/05/24/git-command/index.html">
+<meta property="og:site_name" content="Zjien's blog">
+<meta property="og:description" content="本文持续更新中…">
+<meta property="og:updated_time" content="2017-02-12T15:51:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git常用基本命令">
+<meta name="twitter:description" content="本文持续更新中…">
+  
+    <link rel="alternative" href="/atom.xml" title="Zjien&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <script src="/style.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84712864-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zjien</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">唯一不会背叛你的，只有你的知识</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives">所有文章</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=p5Gek5SekZCVkOfW1onEyMo" title="mail">mail</a>
+		        
+					<a class="github" target="_blank" href="https://github.com/zjien" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/reyen-zhen" title="zhihu">zhihu</a>
+		        
+					<a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/4510072/zjien" title="StackOverflow">StackOverflow</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Zjien</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/avatar.png" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Zjien</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">唯一不会背叛你的，只有你的知识</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=p5Gek5SekZCVkOfW1onEyMo" title="mail">mail</a>
+			        
+						<a class="github" target="_blank" href="https://github.com/zjien" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/reyen-zhen" title="zhihu">zhihu</a>
+			        
+						<a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/4510072/zjien" title="StackOverflow">StackOverflow</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-git-command" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git常用基本命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　<strong> Git常用命令 </strong>：本文讲解并且亲测了常用的Git命令<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git init</td>
+<td></td>
+<td></td>
+<td>初始化/新建 当前目录为本地git仓库</td>
+</tr>
+<tr>
+<td>git add</td>
+<td>-A或-add</td>
+<td></td>
+<td>添加当前目录下所有未被tracking以及被修改的文件到index中</td>
+</tr>
+<tr>
+<td>git add</td>
+<td></td>
+<td>file</td>
+<td>添加 file文件/指定文件 到index中</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>–cached</td>
+<td>file</td>
+<td>只删除index中指定的文件，而处于工作目录（也即文件目录）中的文件不会受到影响（不会被删除）</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>-f或–force</td>
+<td>file</td>
+<td>同时删除index和工作目录中指定的文件</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>-r</td>
+<td>*</td>
+<td>删除index暂存区里的全部文件 </td>
+</tr>
+<tr>
+<td>git status</td>
+<td></td>
+<td></td>
+<td>查看当前已经初始化的目录下所有文件的状态(处于 .gitignore 文件里的文件会被)</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>-m</td>
+<td>‘message’</td>
+<td>提交当前index中的文件到仓库repo中，并且附上提交说明/信息</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>-am</td>
+<td>‘message’</td>
+<td>git add 和 git commit 的组合</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>–amend -m</td>
+<td>‘this is amend command’</td>
+<td>当index没有新文件/修改的文件的前提下，该参数可以用来修改上一次commit的说明。当index中有新的文件或者修改的文件，该参数就会把这次index里的文件追加到上一次的commit中，而不会产生一次新的commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td></td>
+<td>显示所有的commit记录</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>-1</td>
+<td></td>
+<td>显示1行日志 -n为n行</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>–stat</td>
+<td></td>
+<td>显示每个文件的变动信息</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>-p -m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>v1.0</td>
+<td>显示v1.0的日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>fjf01</td>
+<td>显示某个commit的详细内容</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD</td>
+<td>显示HEAD指向的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^</td>
+<td>显示HEAD的父(上一个版本)的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^^</td>
+<td>显示HEAD的上两个版本的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^5</td>
+<td>显示HEAD的上5个版本的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>v1.0</td>
+<td>显示v1.0标签的版本信息</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td></td>
+<td></td>
+<td>显示已存在的tag</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-l</td>
+<td></td>
+<td>显示已存在的tag</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-a v3.0 -m ‘new version’</td>
+<td></td>
+<td>给当前HEAD指向的commit打上标签(tag)，每次打tag都需要加上说明-m</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-a v3.1 eci3t8 -m ‘new version’</td>
+<td></td>
+<td>给以前的某个历史提交打上标签(tag)，并附加上说明-m</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>–tags</td>
+<td></td>
+<td>把标签推送到远程仓库，不加–tags参数默认是不会把标签推送到远程的</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td></td>
+<td>xxx.git</td>
+<td>克隆远程仓库到本地</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td></td>
+<td>xxx.git local_dir</td>
+<td>克隆远程仓库到本地指定目录下</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td>-b</td>
+<td>new_branch_name <a href="https://xxxxx.git" target="_blank" rel="external">https://xxxxx.git</a></td>
+<td>clone时创建新的分支替代默认Origin HEAD（master）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git config</td>
+<td>–system</td>
+<td>user.name “your name”</td>
+<td>该系统下，所有用户使用的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–global</td>
+<td>user.name “your name”</td>
+<td>该用户下的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–local</td>
+<td>user.name “your name”</td>
+<td>该 项目project/仓库repository 下的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–system</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–global</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–local</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–list</td>
+<td></td>
+<td>查看配置，注意，所处的目录不同，显示的配置信息也不同哦</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分支命令"><a href="#分支命令" class="headerlink" title="分支命令"></a>分支命令</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>dev</td>
+<td>切换到dev分支上，也是把dev分支的代码检出到工作区（working tree）</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value</td>
+<td>把指定历史版本的代码完整检出到工作区</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value /path/to/file</td>
+<td>将指定文件的某个历史版本检出到工作区</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value:/path/to/file new-name</td>
+<td>将指定文件的某个历史版本检出到工作区并且修改该文件名</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-t</td>
+<td>origin/dev</td>
+<td>创建本地dev分支(与远程对应分支同名)并换到该分支上，并且设置新分支dev的upstream信息</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-b</td>
+<td>dev origin/dev</td>
+<td>等同于上面命令。从当前分支创建并检出（切换到）新分支的命令。实际上是git checkout -b new-branch-name current-branch 的简写形式，即默认从当前HEAD分支创建新新分支</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-b</td>
+<td>new-branch-name 172je2</td>
+<td>从历史版本为 172je2 上创建新分支并且切换到该分之上</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>new-branch-name</td>
+<td>172je2</td>
+<td>从历史版本为 172je2 上创建新分支，但不会切换到该分之上</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>-a</td>
+<td></td>
+<td>查看所有分支</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>-d</td>
+<td>branch_name</td>
+<td>删除branch_name分支</td>
+</tr>
+<tr>
+<td>git merge</td>
+<td></td>
+<td>branch_name</td>
+<td>把branch_name分支合并到本分支中（fast-forward模式）</td>
+</tr>
+<tr>
+<td>git merge</td>
+<td>–no-ff</td>
+<td>branch_name</td>
+<td>把branch_name分支合并到本分支中，非fast-forward模式，即会创建一个合并的提交</td>
+</tr>
+</tbody>
+</table>
+<h3 id="修改commit"><a href="#修改commit" class="headerlink" title="修改commit"></a>修改commit</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git rebase</td>
+<td>-i</td>
+<td>到哪个旧commit的hash值</td>
+<td>注意，该commit是不会被合并的。接着进入交互模式，排第一行的是最旧的commit，除了这一个外，把每个commit前的pick改成squash，就相当于合并到第一行的commit上，接着修改commit信息。 </td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>几点说明：</p>
+<ul>
+<li>一次commit是指当你输入git log是，看到的一串码，如commit e7d1b777de790970af704dbeac8c0ef3d21335b4，这算一次commit</li>
+</ul>
+</blockquote>
+<p>[<a href="https://www.pureweber.com/article/git-pretty-output/" target="_blank" rel="external">https://www.pureweber.com/article/git-pretty-output/</a>]</p>
+</the>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/05/24/git-command/" class="archive-article-date">
+  	<time datetime="2016-05-24T09:08:33.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-05-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本管理/">版本管理</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/Git/">Git</a><a class="article-category-link" href="/categories/Git/Git命令/">Git命令</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/05/25/settimeout-and-setintervel/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          超时调用和循环调用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/24/sync-vs-async-and-they-transfer/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">同步编程与异步编程的转换和对比</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="git-command" data-title="Git常用基本命令" data-url="http://blog.zjien.com/2016/05/24/git-command/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zjien"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <br/>
+        <p>
+        <span id="busuanzi_container_site_pv">
+            本站总访问量&nbsp;<span style="color:rgba(255, 0, 0, 0.58);font-family:lucida grande,lucida sans unicode,lucida,helvetica,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;font-size:16px;" id="busuanzi_value_site_pv"></span>&nbsp;次
+        </span>
+        <span id="busuanzi_container_site_uv">
+            | 访客数&nbsp;<span style="color:rgba(255, 0, 0, 0.58);font-family:lucida grande,lucida sans unicode,lucida,helvetica,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;font-size:16px;" id="busuanzi_value_site_uv"></span>&nbsp;人次
+        </span>
+        </p>
+    <br/>
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Zjien
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/API设计/" style="font-size: 10px;">API设计</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/CSS布局/" style="font-size: 10px;">CSS布局</a> <a href="/tags/Command/" style="font-size: 10px;">Command</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/Frontend/" style="font-size: 10px;">Frontend</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/Git基础/" style="font-size: 10px;">Git基础</a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Linux命令/" style="font-size: 10px;">Linux命令</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/OOP基础/" style="font-size: 10px;">OOP基础</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHP基础/" style="font-size: 10px;">PHP基础</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SQL执行/" style="font-size: 10px;">SQL执行</a> <a href="/tags/composer基本使用/" style="font-size: 10px;">composer基本使用</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/代码设计/" style="font-size: 10px;">代码设计</a> <a href="/tags/依赖管理/" style="font-size: 10px;">依赖管理</a> <a href="/tags/前段/" style="font-size: 10px;">前段</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/单位/" style="font-size: 10px;">单位</a> <a href="/tags/单线程/" style="font-size: 10px;">单线程</a> <a href="/tags/变量/" style="font-size: 10px;">变量</a> <a href="/tags/回调/" style="font-size: 10px;">回调</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/字体大小/" style="font-size: 10px;">字体大小</a> <a href="/tags/布局/" style="font-size: 10px;">布局</a> <a href="/tags/布局-排版/" style="font-size: 12.5px;">布局/排版</a> <a href="/tags/异常处理/" style="font-size: 10px;">异常处理</a> <a href="/tags/异步/" style="font-size: 12.5px;">异步</a> <a href="/tags/异步编程/" style="font-size: 10px;">异步编程</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/接口设计/" style="font-size: 10px;">接口设计</a> <a href="/tags/数据库优化/" style="font-size: 10px;">数据库优化</a> <a href="/tags/数据库操作/" style="font-size: 10px;">数据库操作</a> <a href="/tags/文字布局/" style="font-size: 10px;">文字布局</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/查询优化/" style="font-size: 10px;">查询优化</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/版本管理/" style="font-size: 10px;">版本管理</a> <a href="/tags/生成器函数/" style="font-size: 10px;">生成器函数</a> <a href="/tags/级联/" style="font-size: 10px;">级联</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/耗时任务/" style="font-size: 10px;">耗时任务</a> <a href="/tags/访问控制/" style="font-size: 10px;">访问控制</a> <a href="/tags/迭代器/" style="font-size: 10px;">迭代器</a> <a href="/tags/队列/" style="font-size: 10px;">队列</a> <a href="/tags/静-动态—全-局变量/" style="font-size: 10px;">静/动态—全/局变量</a> <a href="/tags/魔术方法/" style="font-size: 10px;">魔术方法</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.yangxitian.cn/">Shelter</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">爱沉思，爱，Google热衷粉</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

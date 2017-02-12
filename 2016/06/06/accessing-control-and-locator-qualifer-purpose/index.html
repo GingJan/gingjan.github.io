@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>访问修饰符的意义 | Zjien&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="访问修饰符和访问控制的意义 ：本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法get()和set()的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="访问修饰符的意义">
+<meta property="og:url" content="http://blog.zjien.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/index.html">
+<meta property="og:site_name" content="Zjien's blog">
+<meta property="og:description" content="访问修饰符和访问控制的意义 ：本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法get()和set()的使用">
+<meta property="og:updated_time" content="2017-02-12T12:23:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="访问修饰符的意义">
+<meta name="twitter:description" content="访问修饰符和访问控制的意义 ：本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法get()和set()的使用">
+  
+    <link rel="alternative" href="/atom.xml" title="Zjien&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <script src="/style.js"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84712864-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/img/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zjien</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">唯一不会背叛你的，只有你的知识</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives">所有文章</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友链</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=p5Gek5SekZCVkOfW1onEyMo" title="mail">mail</a>
+		        
+					<a class="github" target="_blank" href="https://github.com/zjien" title="github">github</a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/reyen-zhen" title="zhihu">zhihu</a>
+		        
+					<a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/4510072/zjien" title="StackOverflow">StackOverflow</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Zjien</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/img/avatar.png" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Zjien</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">唯一不会背叛你的，只有你的知识</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=p5Gek5SekZCVkOfW1onEyMo" title="mail">mail</a>
+			        
+						<a class="github" target="_blank" href="https://github.com/zjien" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/reyen-zhen" title="zhihu">zhihu</a>
+			        
+						<a class="StackOverflow" target="_blank" href="http://stackoverflow.com/users/4510072/zjien" title="StackOverflow">StackOverflow</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-accessing-control-and-locator-qualifer-purpose" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      访问修饰符的意义
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　<strong> 访问修饰符和访问控制的意义 </strong>：本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法<strong>get()和</strong>set()的使用<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p>先上一段代码好说明问题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> $_salary;<span class="comment">//私用属性命名加_</span></div><div class="line">    <span class="comment">//setter and getter</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSalary</span><span class="params">()</span> </span>&#123;<span class="comment">//如果只有get，那么说明该 属性/成员变量 只是可读，不可写</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_salary;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSalary</span><span class="params">($salary)</span> </span>&#123;<span class="comment">//如果只有set，说明该 属性/成员变量 只是可写，不可读</span></div><div class="line">        <span class="keyword">$this</span>-&gt;_salary = $salary;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>如上，我们觉得好像private改成public也没什么大问题，但是如果有这样一个场景，调用代码中，多处调用了User的salary属性，有写的也有读的，但是有一天，你不想让调用者修改salary了（禁用写），那怎么办？要怎么保证调用者的代码中没有直接修改salary的代码？如果提供了setter，那么只要把setter删掉，一旦调用代码中有没清理干净的对salary进行写入/修改 的代码，那么就会抛出异常。而使用public $salary这种方式的话，改成private后，虽然是可以禁止写了但是连读取也被禁止了。</li>
+<li>对写入数据的操作/过滤，使用setter和getter，可以统一对写入/读取 进行操作或者过滤，比如要去掉写入数据中的空格，如果使用public，那么要在每个调用处写上trim()，但是我们无法保证每处都写上trim了。如果用setter，那么我们可以在setter中写一次trim即可，而且也保证对每次写入都会进行过滤，不会有遗漏。</li>
+</ul>
+<blockquote>
+<p>注意:由于 <strong>get() 和 </strong>set() 是在遍历所有成员变量，找不到匹配的成员变量时才被调用。因此，其效率是低于直接访问成员变量的形式。在一些表示数据结构、数据集合等简单情况下，且不需读写控制等， 可以考虑使用成员变量作为属性直接访问，这样可以提高一点效率。<br>另外一个提高效率的技巧就是：使用 $k1 = $obj-&gt;getK1() 来代替 $k1 = $obj-&gt;K1 ， 用 $obj-&gt;setK1($value) 来代替 $obj-&gt;K1 = $value 。 这在功能上是完全一样的效果，但是避免了使用 <strong>get() 和 </strong>set() ，相当于绕过了遍历的过程。</p>
+</blockquote>
+<p>这里还要区分，在类里成员变量和属性的区别。成员变量和属性的区别与联系在于：</p>
+<ul>
+<li>成员变量是一个“内”概念，反映的是就类的结构构成而言的该你那。属性是一个“外”概念，反映的是类的功能逻辑意义而言的概念。</li>
+<li>成员变量没有读写权限控制，而属性可以指定为只读或只写，或可读可写。</li>
+<li>成员变量不对读出作任何后处理，不对写入作任何预处理，而属性则可以。</li>
+<li>public成员变量可以视为一个可读可写、没有任何预处理或后处理的属性。 而private成员变量由于外部不可见，与属性“外”的特性不相符，所以不能视为属性。</li>
+<li>虽然大多数情况下，属性会由某个或某些成员变量来表示，但属性与成员变量没有必然的对应关系， 比如与非门的 output 属性，就没有一个所谓的 $output 成员变量与之对应。</li>
+</ul>
+<p>为了更形象，我们看个例子<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotAndGate</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> $_k1;</div><div class="line">    <span class="keyword">private</span> $_k2;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setK1</span><span class="params">($value)</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;$_k1 = $value;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setK2</span><span class="params">($value)</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;$_k2 = $value;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getOutput</span><span class="params">()</span> </span>&#123;<span class="comment">//与非门有两个输入，当两个输入都为真时，与非门的输出为假，否则，输出为真。</span></div><div class="line">        <span class="keyword">if</span> ( !<span class="keyword">$this</span>-&gt;_k1 || !<span class="keyword">$this</span>-&gt;_k2 ) <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">elseif</span> (<span class="keyword">$this</span>-&gt;_k1 &amp;&amp; <span class="keyword">$this</span>-&gt;_k2) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面的代码中，与非门类有两个成员变量， <code>$_k1</code> 和 <code>$_k2</code> 。<strong>但是有3个属性</strong>，表示2个输入的 <code>key1</code> 和 <code>key2</code> ，以及表示输出的 <code>output</code>。<br>由于我们知道，属性一般是通过<code>$obj-&gt;property</code>方式来访问的，但是这里根本没有<code>output</code>这个成员变量呀？那还怎么访问呢？<br>没错，这时候就要靠我们的<code>魔术方法__get()</code>来配合<code>getter</code>了，上<code>__get()</code>的代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span> </span>&#123;</div><div class="line">    $getter = <span class="string">'get'</span> . $name;<span class="comment">//如此，当调用$obj-&gt;output属性时，就会去调用getOutput()，以达到具有output属性的效果</span></div><div class="line">    <span class="keyword">if</span> (method_exists(<span class="keyword">$this</span>, $getter)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$getter();</div><div class="line">    &#125; <span class="keyword">elseif</span> (method_exists(<span class="keyword">$this</span>, <span class="string">'set'</span>.$name)) &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'只存在setter，也即该属性为只写'</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'无'</span> , $name , <span class="string">'属性'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>欢迎转载但请附上链接，谢谢。</p>
+<p><a href="http://www.digpage.com/property.html" target="_blank" rel="external">参考：http://www.digpage.com/property.html</a></p>
+<p>如有什么错误，欢迎提出、讨论，大家共同进步 ^_^</p>
+</the>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/06/06/accessing-control-and-locator-qualifer-purpose/" class="archive-article-date">
+  	<time datetime="2016-06-06T14:45:07.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-06-06</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP基础/">OOP基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/访问控制/">访问控制</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/魔术方法/">魔术方法</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<i class="icon-price-tags"></i>
+	<a class="article-category-link" href="/categories/PHP/">PHP</a><a class="article-category-link" href="/categories/PHP/代码之上/">代码之上</a><a class="article-category-link" href="/categories/PHP/代码之上/OOP/">OOP</a>
+	</div>
+
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/06/13/cascade-delete-in-yii/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          在Yii中如何处理级联删除
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/02/yii-service-locator/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Yii框架的服务定位器</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="accessing-control-and-locator-qualifer-purpose" data-title="访问修饰符的意义" data-url="http://blog.zjien.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"zjien"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <br/>
+        <p>
+        <span id="busuanzi_container_site_pv">
+            本站总访问量&nbsp;<span style="color:rgba(255, 0, 0, 0.58);font-family:lucida grande,lucida sans unicode,lucida,helvetica,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;font-size:16px;" id="busuanzi_value_site_pv"></span>&nbsp;次
+        </span>
+        <span id="busuanzi_container_site_uv">
+            | 访客数&nbsp;<span style="color:rgba(255, 0, 0, 0.58);font-family:lucida grande,lucida sans unicode,lucida,helvetica,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;font-size:16px;" id="busuanzi_value_site_uv"></span>&nbsp;人次
+        </span>
+        </p>
+    <br/>
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Zjien
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/"
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/API设计/" style="font-size: 10px;">API设计</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/CSS布局/" style="font-size: 10px;">CSS布局</a> <a href="/tags/Command/" style="font-size: 10px;">Command</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/Frontend/" style="font-size: 10px;">Frontend</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/Git基础/" style="font-size: 10px;">Git基础</a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Linux命令/" style="font-size: 10px;">Linux命令</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/OOP基础/" style="font-size: 10px;">OOP基础</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHP基础/" style="font-size: 10px;">PHP基础</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SQL执行/" style="font-size: 10px;">SQL执行</a> <a href="/tags/composer基本使用/" style="font-size: 10px;">composer基本使用</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/代码设计/" style="font-size: 10px;">代码设计</a> <a href="/tags/依赖管理/" style="font-size: 10px;">依赖管理</a> <a href="/tags/前段/" style="font-size: 10px;">前段</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/单位/" style="font-size: 10px;">单位</a> <a href="/tags/单线程/" style="font-size: 10px;">单线程</a> <a href="/tags/变量/" style="font-size: 10px;">变量</a> <a href="/tags/回调/" style="font-size: 10px;">回调</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/字体大小/" style="font-size: 10px;">字体大小</a> <a href="/tags/布局/" style="font-size: 10px;">布局</a> <a href="/tags/布局-排版/" style="font-size: 12.5px;">布局/排版</a> <a href="/tags/异常处理/" style="font-size: 10px;">异常处理</a> <a href="/tags/异步/" style="font-size: 12.5px;">异步</a> <a href="/tags/异步编程/" style="font-size: 10px;">异步编程</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/接口设计/" style="font-size: 10px;">接口设计</a> <a href="/tags/数据库优化/" style="font-size: 10px;">数据库优化</a> <a href="/tags/数据库操作/" style="font-size: 10px;">数据库操作</a> <a href="/tags/文字布局/" style="font-size: 10px;">文字布局</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/查询优化/" style="font-size: 10px;">查询优化</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/版本管理/" style="font-size: 10px;">版本管理</a> <a href="/tags/生成器函数/" style="font-size: 10px;">生成器函数</a> <a href="/tags/级联/" style="font-size: 10px;">级联</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/耗时任务/" style="font-size: 10px;">耗时任务</a> <a href="/tags/访问控制/" style="font-size: 10px;">访问控制</a> <a href="/tags/迭代器/" style="font-size: 10px;">迭代器</a> <a href="/tags/队列/" style="font-size: 10px;">队列</a> <a href="/tags/静-动态—全-局变量/" style="font-size: 10px;">静/动态—全/局变量</a> <a href="/tags/魔术方法/" style="font-size: 10px;">魔术方法</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.yangxitian.cn/">Shelter</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">爱沉思，爱，Google热衷粉</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
