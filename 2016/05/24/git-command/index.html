@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://blog.zjien.com/2016/05/24/git-command/index.html">
 <meta property="og:site_name" content="Zjien's blog">
 <meta property="og:description" content="本文持续更新中…">
-<meta property="og:updated_time" content="2017-02-12T15:51:35.000Z">
+<meta property="og:updated_time" content="2017-02-27T01:59:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git常用基本命令">
 <meta name="twitter:description" content="本文持续更新中…">
@@ -471,6 +471,12 @@ ga('send', 'pageview');
 <td>从历史版本为 172je2 上创建新分支并且切换到该分之上</td>
 </tr>
 <tr>
+<td>git checkout</td>
+<td>–</td>
+<td><file-name></file-name></td>
+<td>取消对文件的修改,还原到最近的版本,废弃本地做的修改</td>
+</tr>
+<tr>
 <td>git branch</td>
 <td>new-branch-name</td>
 <td>172je2</td>
@@ -520,6 +526,15 @@ ga('send', 'pageview');
 </tr>
 </tbody>
 </table>
+<h2 id="按功能排序"><a href="#按功能排序" class="headerlink" title="按功能排序"></a>按功能排序</h2><h3 id="取消修改-恢复版本"><a href="#取消修改-恢复版本" class="headerlink" title="取消修改,恢复版本"></a>取消修改,恢复版本</h3><p><strong>取消对文件的修改。还原到最近的版本，废弃本地做的修改。</strong><br><code>git checkout -- &lt;file&gt;</code></p>
+<p><strong>取消已经暂存的文件。即，撤销先前”git add”的操作</strong><br><code>git reset HEAD &lt;file&gt;...</code></p>
+<p><strong>修改最后一次提交。用于修改上一次的提交信息，或漏提交文件等情况。</strong><br><code>git commit --amend</code></p>
+<p><strong>回退所有内容到上一个版本</strong><br><code>git reset HEAD^</code></p>
+<p><strong>回退a.py这个文件的版本到上一个版本</strong><br><code>git reset HEAD^ a.py</code></p>
+<p><strong>向前回退到第3个版本</strong><br><code>git reset –soft HEAD~3</code></p>
+<p><strong>将本地的状态回退到和远程的一样</strong><br><code>git reset –hard origin/master</code></p>
+<p><strong>回退到某个版本</strong><br><code>git reset 057d</code></p>
+<p><strong>回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit.(代码回滚到上个版本，并提交git)</strong><br><code>git revert HEAD</code></p>
 <blockquote>
 <p>几点说明：</p>
 <ul>
@@ -566,7 +581,7 @@ ga('send', 'pageview');
     </a>
   
   
-    <a href="/2016/05/24/sync-vs-async-and-they-transfer/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/24/sync-vs-async-and-they-transfers/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">同步编程与异步编程的转换和对比</div>
       <i class="icon-circle-right"></i>
     </a>
