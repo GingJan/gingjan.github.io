@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://blog.zjien.com/2016/05/24/git-command/index.html">
 <meta property="og:site_name" content="Zjien's blog">
 <meta property="og:description" content="本文持续更新中…">
-<meta property="og:updated_time" content="2017-02-27T01:59:59.000Z">
+<meta property="og:updated_time" content="2017-04-19T02:44:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git常用基本命令">
 <meta name="twitter:description" content="本文持续更新中…">
@@ -207,6 +207,12 @@ ga('send', 'pageview');
 <td>添加 file文件/指定文件 到index中</td>
 </tr>
 <tr>
+<td>git add</td>
+<td></td>
+<td>.</td>
+<td>递归添加当前目录下的所有文件(包含目录)到index中</td>
+</tr>
+<tr>
 <td>git rm</td>
 <td>–cached</td>
 <td>file</td>
@@ -228,7 +234,13 @@ ga('send', 'pageview');
 <td>git status</td>
 <td></td>
 <td></td>
-<td>查看当前已经初始化的目录下所有文件的状态(处于 .gitignore 文件里的文件会被)</td>
+<td>查看整个项目已经初始化的目录下所有文件的状态(处于 .gitignore 文件里的文件会被)</td>
+</tr>
+<tr>
+<td>git status</td>
+<td></td>
+<td>.</td>
+<td>查看当前目录下所有文件和目录的状态(非递归,也即当前目录内的子目录内的文件无法查看)</td>
 </tr>
 <tr>
 <td>git commit</td>
@@ -535,6 +547,7 @@ ga('send', 'pageview');
 <p><strong>将本地的状态回退到和远程的一样</strong><br><code>git reset –hard origin/master</code></p>
 <p><strong>回退到某个版本</strong><br><code>git reset 057d</code></p>
 <p><strong>回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit.(代码回滚到上个版本，并提交git)</strong><br><code>git revert HEAD</code></p>
+<p><strong>回滚单个文件</strong><br><code>git reset sha-1 path/to/file</code><br><code>git commit path/to/file -m &#39;message&#39;</code><br><code>git checkout path/to/file</code></p>
 <blockquote>
 <p>几点说明：</p>
 <ul>
