@@ -1,0 +1,1558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Zjien&#39;s blog</title>
+  <subtitle>技术令人向往，但更令人向往的是——生活。</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://blog.zjien.com/"/>
+  <updated>2017-02-12T14:34:14.000Z</updated>
+  <id>http://blog.zjien.com/</id>
+  
+  <author>
+    <name>Zjien</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何在mac上解压分离的压缩文件</title>
+    <link href="http://blog.zjien.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/"/>
+    <id>http://blog.zjien.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</id>
+    <published>2017-02-12T14:04:40.000Z</published>
+    <updated>2017-02-12T14:34:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong>解压分离压缩文件</strong>：本篇文章向各位展示如何解压分离的压缩文件<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<p><the rest="" of="" contents="" |="" 余下全文=""><br>首先，目前据我所知，有两种不同类型的分离压缩文件</the></p>
+<h3 id="一、xxx-zip-001、xxx-zip-002、xxx-zip003类型"><a href="#一、xxx-zip-001、xxx-zip-002、xxx-zip003类型" class="headerlink" title="一、xxx.zip.001、xxx.zip.002、xxx.zip003类型"></a>一、xxx.zip.001、xxx.zip.002、xxx.zip003类型</h3><h4 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h4><p>在终端中输入：</p>
+<p><code>for i in</code>seq  1 5<code>; do cat xxx.zip.00$i &gt;&gt; single.zip; done</code> #实则为一个循环语句</p>
+<p><code>unzip single.zip</code></p>
+<p>解压成功。</p>
+<p>其实上面那句循环相当于：</p>
+<p><code>cat xxx.zip.001 &gt; single.zip</code> #把数据重定向到single.zip</p>
+<p><code>cat xxx.zip.002 &gt;&gt; single.zip</code> #把数据以追加方式重定向到single.zip</p>
+<p><code>cat xxx.zip.003 &gt;&gt; single.zip</code></p>
+<p><code>cat xxx.zip.004 &gt;&gt; single.zip</code></p>
+<p><code>cat xxx.zip.005 &gt;&gt; single.zip</code></p>
+<p>或者可以：<code>cat xxx.zip.00* &gt;&gt; already_exist_single.zip</code></p>
+<h3 id="二、xxx-z01、xxx-z02、xxx-z03、xxx-zip类型"><a href="#二、xxx-z01、xxx-z02、xxx-z03、xxx-zip类型" class="headerlink" title="二、xxx.z01、xxx.z02、xxx.z03、xxx.zip类型"></a>二、xxx.z01、xxx.z02、xxx.z03、xxx.zip类型</h3><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p><code>zip -s 0 xxx.zip —out unsplit.zip</code> #把分开的文件合并成一个文件</p>
+<p><code>-s</code> 代表把压缩的文件分为几部分压缩，<code>0</code> 代表不分割，具体数字如 <code>100m</code> 则代表分为每份大小100m。</p>
+<p>以上，如有错误，请指正，谢谢。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt;解压分离压缩文件&lt;/strong&gt;：本篇文章向各位展示如何解压分离的压缩文件&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://blog.zjien.com/categories/Mac/"/>
+    
+      <category term="OS X" scheme="http://blog.zjien.com/categories/Mac/OS-X/"/>
+    
+      <category term="Commonly Command" scheme="http://blog.zjien.com/categories/Mac/OS-X/Commonly-Command/"/>
+    
+    
+      <category term="Mac" scheme="http://blog.zjien.com/tags/Mac/"/>
+    
+      <category term="Command" scheme="http://blog.zjien.com/tags/Command/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux-让耗时任务在后台运行</title>
+    <link href="http://blog.zjien.com/2016/09/01/Linux-run-in-background/"/>
+    <id>http://blog.zjien.com/2016/09/01/Linux-run-in-background/</id>
+    <published>2016-09-01T04:10:41.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> 让终端的任务/耗时任务在后台运行 </strong>：我们在终端中打开耗时任务时，无法进行其他操作或者当网络端口时，任务未执行完毕就终止了。有什么办法令任务在后台运行呢？<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+<p>涉及命令<br><code>ps -ef</code> 查看进程<br><code>pstree</code> 查看进程树<br><code>jobs</code> 查看当前终端的任务列表<br><code>commands &amp;</code>，命令后加<code>&amp;</code>代表将该命令放置后台运行<br><code>nohup commands &amp;</code><br><code>setsid commands</code><br><code>(commands &amp;)</code> 效果同上面setsid<br><code>ctrl+z</code> (暂停/挂起当前 作业，在使用编辑器时特别有用，退出编辑器时，保存了光标所在的当前位置，下次进入编辑器时不用再次寻找上次光标所处位置)<br><code>bg %work_num如bg %1</code>（把作业从挂起转为继续运行）<br><code>disown -h %1work_num</code>使某个作业忽略HUP信号<br><code>disown -ah</code> 所有作业忽略HUP信号<br><code>disown -rh</code> 使正在运行的作业忽略HUP信号<br><code>screen -dmS session_name</code> 建立一个断开模式的会话<br><code>screen -list</code> 列出所有会话<br><code>screen -r session_name</code> 重新连接指定会话</p>
+<p>我们在终端中打开耗时任务时，无法进行其他操作或者当网络端口时，任务未执行完毕就终止了。有什么办法令任务在后台运行呢？</p>
+<h2 id="一、逐个添加"><a href="#一、逐个添加" class="headerlink" title="一、逐个添加"></a>一、逐个添加</h2><p>1.通过忽略hangup信号（此信号在终端关闭或者网络断开时就会发出），该种方式可通过jobs命令来查看作业列表<br><code>nohup ping www.google.com &amp;</code><br>查看进程<br><code>ps -ef | grep www.google.com</code></p>
+<p>2.通过把任务移为其他进程（非终端进程）的子进程来运行，这样就不会受到终端的HUP信号影响了，该种方式通过jobs命令是无法查看作业列表<br><code>setsid ping www.google.com</code></p>
+<p>3.把任务放置到子shell(subshell)下运行，这样就不会受到终端的HUP信号影响了，该种方式通过jobs命令是无法查看作业列表，因为任务已经不属于该终端的作业了<br><code>(ping www.google.com &amp;)</code></p>
+<hr>
+<h2 id="二、补救"><a href="#二、补救" class="headerlink" title="二、补救"></a>二、补救</h2><p>如果我们执行了一个耗时任务，想在该耗时任务运行期间让它到后台运行，这时添加nohup或setsid已经迟了，怎么做？</p>
+<h3 id="disown"><a href="#disown" class="headerlink" title="disown"></a>disown</h3><p><code>disown -h %1</code></p>
+<hr>
+<h2 id="三、一步完成"><a href="#三、一步完成" class="headerlink" title="三、一步完成"></a>三、一步完成</h2><p>当有很多耗时任务，而我们又不想一个一个去加nohup ,setsid时，怎么办？</p>
+<h3 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h3><p><code>screen -dmS session_name</code></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/" target="_blank" rel="external">参考：https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/</a></p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; 让终端的任务/耗时任务在后台运行 &lt;/strong&gt;：我们在终端中打开耗时任务时，无法进行其他操作或者当网络端口时，任务未执行完毕就终止了。有什么办法令任务在后台运行呢？&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux命令" scheme="http://blog.zjien.com/categories/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="Linux" scheme="http://blog.zjien.com/tags/Linux/"/>
+    
+      <category term="Linux命令" scheme="http://blog.zjien.com/tags/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="耗时任务" scheme="http://blog.zjien.com/tags/%E8%80%97%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>查看一次SQL的执行时间与相关参数</title>
+    <link href="http://blog.zjien.com/2016/07/03/mysql-sql-execution-check-out/"/>
+    <id>http://blog.zjien.com/2016/07/03/mysql-sql-execution-check-out/</id>
+    <published>2016-07-03T09:02:47.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> mysql之sql执行过程窥探 </strong>：本文讲解如何窥探sql执行过程的相关参数<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p>1.首先查看当前session（会话）的profiling是否打开<br><code>select @@profiling</code><br><img src="/img/mysql-sql-execution-check-out/mysql1.png" alt="profiling=0，未打开"><br>若为0，则未打开，</p>
+<p>2.打开profiling<br><code>set profiling=1</code><br><img src="/img/mysql-sql-execution-check-out/mysql2.png" alt="set profiling=1，开启profiling"></p>
+<p>3.执行一些sql<br><img src="/img/mysql-sql-execution-check-out/mysql3.png" alt="执行sql"></p>
+<p>4.查看所有已执行的sql的profile<br><code>show profiles</code><br><img src="/img/mysql-sql-execution-check-out/mysql4.png" alt="profiles"></p>
+<p>5.看看刚才某条sql执行的具体时间拆分，2是个某次查询的id<br><code>show profile for query id</code><br><img src="/img/mysql-sql-execution-check-out/mysql5.png" alt="profile for query 2"></p>
+<p>6.看看刚才某条sql执行的具体时间拆分，并加上相应的cpu信息 (cpu也可以换成all，以查看更多系统指标)<br><code>show profile cpu for query id</code><br><img src="/img/mysql-sql-execution-check-out/mysql6.png" alt="profile cpu for query 2"></p>
+<p>整理自：<a href="http://itindex.net/detail/51526-mysql-sql-%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4" target="_blank" rel="external">http://itindex.net/detail/51526-mysql-sql-%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4</a></p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; mysql之sql执行过程窥探 &lt;/strong&gt;：本文讲解如何窥探sql执行过程的相关参数&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://blog.zjien.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="Database" scheme="http://blog.zjien.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Database/"/>
+    
+      <category term="Mysql" scheme="http://blog.zjien.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Database/Mysql/"/>
+    
+    
+      <category term="数据库优化" scheme="http://blog.zjien.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="查询优化" scheme="http://blog.zjien.com/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="性能优化" scheme="http://blog.zjien.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="mysql" scheme="http://blog.zjien.com/tags/mysql/"/>
+    
+      <category term="SQL" scheme="http://blog.zjien.com/tags/SQL/"/>
+    
+      <category term="SQL执行" scheme="http://blog.zjien.com/tags/SQL%E6%89%A7%E8%A1%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>REST API 响应状态码</title>
+    <link href="http://blog.zjien.com/2016/06/21/rest-status-code-setting/"/>
+    <id>http://blog.zjien.com/2016/06/21/rest-status-code-setting/</id>
+    <published>2016-06-21T11:18:08.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> 响应状态码 </strong>：本文简单介绍了设计REST API时，返回的响应应该设置什么样的状态码<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h2><p>在涉及REST风格的API时，使用适当和Http响应状态码是很重要的，这样可以提高API消费者（客户端）对API响应信息的理解</p>
+<h3 id="状态码分为5大类"><a href="#状态码分为5大类" class="headerlink" title="状态码分为5大类"></a>状态码分为5大类</h3><ul>
+<li>1xx：临时响应</li>
+<li>2xx：成功</li>
+<li>3xx：重定向</li>
+<li>4xx：请求错误</li>
+<li>5xx：服务器错误</li>
+</ul>
+<h3 id="每类的详细"><a href="#每类的详细" class="headerlink" title="每类的详细"></a>每类的详细</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">状态码</th>
+<th style="text-align:center">HTTP方法</th>
+<th style="text-align:center">响应体内容</th>
+<th style="text-align:center">含义</th>
+<th>Status text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1xx</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">2xx</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">200</td>
+<td style="text-align:center">GET,PUT</td>
+<td style="text-align:center">资源</td>
+<td style="text-align:center">操作成功</td>
+<td>OK</td>
+</tr>
+<tr>
+<td style="text-align:center">201</td>
+<td style="text-align:center">POST</td>
+<td style="text-align:center">资源,元数据</td>
+<td style="text-align:center">资源创建成功</td>
+<td>Created </td>
+</tr>
+<tr>
+<td style="text-align:center">202</td>
+<td style="text-align:center">POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">请求已被接受</td>
+<td>Accepted</td>
+</tr>
+<tr>
+<td style="text-align:center">204</td>
+<td style="text-align:center">DELETE,PUT,PATCH</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">操作已经执行成功，但是响应体没有数据返回。多用于多次修改同一个资源时填写表单的情况下</td>
+<td>No Content</td>
+</tr>
+<tr>
+<td style="text-align:center">205</td>
+<td style="text-align:center">POST</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">操作已经执行成功，但是响应体没有数据返回。多用于创建资源时填写表单的情况下。请看下面解释与204的区别</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">3xx</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">301</td>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">uri链接</td>
+<td style="text-align:center">资源已被移除（永久重定向）</td>
+<td>Moved permamently</td>
+</tr>
+<tr>
+<td style="text-align:center">302</td>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">uri链接</td>
+<td style="text-align:center">重定向（临时重定向），http/1.0 的产物</td>
+<td>Found</td>
+</tr>
+<tr>
+<td style="text-align:center">303</td>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">uri链接</td>
+<td style="text-align:center">重定向（临时重定向），同302，http/1.1的产物，浏览器会根据返回的uri，自动请求该uri</td>
+<td>See Other</td>
+</tr>
+<tr>
+<td style="text-align:center">304</td>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">资源没有被修改，使用时header必须带上If-Modified_Since或者If-None-Match</td>
+<td>Not Modified</td>
+</tr>
+<tr>
+<td style="text-align:center">307</td>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">uri链接</td>
+<td style="text-align:center">重定向（临时重定向），同302，http/1.1的产物，浏览器会根据返回的uri，自动请求该uri</td>
+<td>Temporary Redirect</td>
+</tr>
+<tr>
+<td style="text-align:center">4xx</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">400</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">参数列表错误(缺少，格式不匹配)</td>
+</tr>
+<tr>
+<td style="text-align:center">401</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">未授权</td>
+</tr>
+<tr>
+<td style="text-align:center">403</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">访问受限，授权过期</td>
+</tr>
+<tr>
+<td style="text-align:center">404</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">资源，服务未找到</td>
+</tr>
+<tr>
+<td style="text-align:center">405</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">不允许的http方法</td>
+</tr>
+<tr>
+<td style="text-align:center">409</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">资源冲突，或者资源被锁定</td>
+</tr>
+<tr>
+<td style="text-align:center">415</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">不支持的数据(媒体)类型</td>
+</tr>
+<tr>
+<td style="text-align:center">429</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">请求过多被限制</td>
+</tr>
+<tr>
+<td style="text-align:center">5xx</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">500</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">服务器内部错误/应用系统内部错误</td>
+</tr>
+<tr>
+<td style="text-align:center">501</td>
+<td style="text-align:center">GET,POST,PUT,DELETE,PATCH</td>
+<td style="text-align:center">错误提示(消息)</td>
+<td style="text-align:center">接口未实现</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>附加说明：N/A 代表不适用</p>
+</blockquote>
+<hr>
+<h2 id="接口文档"><a href="#接口文档" class="headerlink" title="接口文档"></a>接口文档</h2><ul>
+<li>简单说明</li>
+<li>访问地址</li>
+<li>请求方式</li>
+<li>返回结果</li>
+<li>返回结果的字段说明</li>
+<li>错误代码</li>
+<li>更新记录</li>
+</ul>
+<hr>
+<h2 id="状态码的详解"><a href="#状态码的详解" class="headerlink" title="状态码的详解"></a>状态码的详解</h2><h3 id="HTTP响应状态码主要分为这几种大类："><a href="#HTTP响应状态码主要分为这几种大类：" class="headerlink" title="HTTP响应状态码主要分为这几种大类："></a>HTTP响应状态码主要分为这几种大类：</h3><ul>
+<li>1xx：临时响应</li>
+<li>2xx：成功</li>
+<li>3xx：重定向</li>
+<li>4xx：请求错误</li>
+<li>5xx：服务器错误</li>
+</ul>
+<h3 id="204"><a href="#204" class="headerlink" title="204"></a>204</h3><p>请求执行成功，但是响应体没有数据返回，浏览器不用刷新页面也不用跳转页面，所以如果是表单页面，那么表单里填写的数据将不会被清除。另外一点，即使是<a>标签，如果a标签里的链接返回的是204，那么页面也是不会发生跳转。同时返回204也是代表客户端和服务器端的状态（指该资源状态）已经同步</a></p>
+<h3 id="205-（204与205区别）"><a href="#205-（204与205区别）" class="headerlink" title="205 （204与205区别）"></a>205 （204与205区别）</h3><p>请求执行成功，但是响应体没有数据返回，浏览器清空表单数据，方便用户再次填写新数据。</p>
+<h3 id="304（304与204区别）"><a href="#304（304与204区别）" class="headerlink" title="304（304与204区别）"></a>304（304与204区别）</h3><p>注意与204的区别，204情况下是返回空文档，并且该文档会替换上次缓存的文件，因此会有文档/文件没有加载的情况（如没有加载jQuery文件因此提示无$函数等）。而304是使用上次缓存</p>
+<hr>
+<h2 id="其他需要注意的地方"><a href="#其他需要注意的地方" class="headerlink" title="其他需要注意的地方"></a>其他需要注意的地方</h2><p>这里谈谈REST其他需要注意的地方，注意，以下内容不是标准。</p>
+<h3 id="PUT与PATCH区别"><a href="#PUT与PATCH区别" class="headerlink" title="PUT与PATCH区别"></a>PUT与PATCH区别</h3><p>我们都知道，更新操作可以通过PUT与PATCH方式提交请求，但是问题来了，PUT和PATCH有什么区别呢？<br>PUT，正如其词，就是把一大堆数据PUT到服务端，使用PUT更新资源时，需要把资源的所有属性都要提交到服务端。<br>PATCH，补丁，碎片，可以知道，使用PATCH更新资源时，只需要把资源的部分属性/信息提交到服务端即可。</p>
+<h3 id="关于URI设计"><a href="#关于URI设计" class="headerlink" title="关于URI设计"></a>关于URI设计</h3><ul>
+<li>从属关系使用嵌套形式，即articles/1/comments，articles/1/comments/2</li>
+<li>筛选使用查询键值对的形式，即?key=value，articles?title=first_api</li>
+</ul>
+<h2 id="关于各种框架对REST的支持与实现"><a href="#关于各种框架对REST的支持与实现" class="headerlink" title="关于各种框架对REST的支持与实现"></a>关于各种框架对REST的支持与实现</h2><p>本节内容打算放到另一篇文章讲<br>未完待续…</p>
+<p><a href="http://www.cnblogs.com/cathsfz/archive/2012/06/19/2553431.html" target="_blank" rel="external">整理自</a><br><a href="http://www.bkjia.com/headlines/491296.html" target="_blank" rel="external">整理自</a><br><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">整理自</a><br><a href="http://www.cnblogs.com/cathsfz/archive/2012/06/19/2553431.html" target="_blank" rel="external">整理自</a></p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; 响应状态码 &lt;/strong&gt;：本文简单介绍了设计REST API时，返回的响应应该设置什么样的状态码&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="REST" scheme="http://blog.zjien.com/categories/REST/"/>
+    
+      <category term="设计" scheme="http://blog.zjien.com/categories/REST/%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="架构" scheme="http://blog.zjien.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="API设计" scheme="http://blog.zjien.com/tags/API%E8%AE%BE%E8%AE%A1/"/>
+    
+      <category term="接口设计" scheme="http://blog.zjien.com/tags/%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Yii的redirect()方法无法终止执行代码</title>
+    <link href="http://blog.zjien.com/2016/06/16/yii-redirect-cannot-stop-execution/"/>
+    <id>http://blog.zjien.com/2016/06/16/yii-redirect-cannot-stop-execution/</id>
+    <published>2016-06-16T02:55:54.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> 坑爹的redirect() </strong>：在controller里的redirect方法在跳转后，无法终止后续代码的执行。特别在init方法中更棘手。<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h3 id="遇到的情况-问题"><a href="#遇到的情况-问题" class="headerlink" title="遇到的情况/问题"></a>遇到的情况/问题</h3><p>在写权限控制的时候，在BaseController里的init方法设置了权限检测，如果权限不足则跳转并且终止执行后续代码，可是问题来了，使用了redirect()方法后，确实是跳转了，但是后续操作依然可以执行，显然没有做到控制权限的效果。</p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>查看redirect源码后，发现redirect()方法只是做了一些头的设置和跳转，并不会终止后续代码的执行，通过在init方法里加<code>return</code> 、<code>return false</code>、 <code>return true</code>等方法后，依然无效。难道要用<code>header(&#39;Location: &#39; . $redirect_url);exit;</code>来解决问题？测试后，使用该方法确实可以解决问题，但是这样写会不会有点恶心啊，于是乎发现Yii有提供<code>Yii:$app-&gt;response-&gt;send();</code>和<code>Yii:$app-&gt;end();</code>可以做到同样效果，最后就在init里使用了<code>Yii::$app-&gt;end();</code>来解决了这个问题。</p>
+<h3 id="再次遇到问题"><a href="#再次遇到问题" class="headerlink" title="再次遇到问题"></a>再次遇到问题</h3><p>经过检验，在普通的actionName()方法里，可以使用return 来终止后续代码的执行，但是在init里却不管用，什么情况？<strong>有待研究</strong>(因为init()只是执行了并没有return？)</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>在普通的actionName方法里，可以使用<code>return</code>、<code>Yii:$app-&gt;response-&gt;send();</code>、<code>Yii:$app-&gt;end();</code>来解决问题，建议使用<code>return</code>更简洁</li>
+<li>在init方法里，只能使用<code>Yii:$app-&gt;response-&gt;send();</code>和<code>Yii:$app-&gt;end();</code>来解决问题了。</li>
+</ul>
+<p>如有什么错误，欢迎指定和讨论</p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; 坑爹的redirect() &lt;/strong&gt;：在controller里的redirect方法在跳转后，无法终止后续代码的执行。特别在init方法中更棘手。&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+    
+      <category term="Yii" scheme="http://blog.zjien.com/categories/PHP/Yii/"/>
+    
+    
+      <category term="框架" scheme="http://blog.zjien.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/tags/%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="php" scheme="http://blog.zjien.com/tags/php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Yii中如何处理级联删除</title>
+    <link href="http://blog.zjien.com/2016/06/13/cascade-delete-in-yii/"/>
+    <id>http://blog.zjien.com/2016/06/13/cascade-delete-in-yii/</id>
+    <published>2016-06-13T03:39:41.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> Yii的级联删除 </strong>：本文讲解通过Yii在代码层进行级联删除<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<p><the rest="" of="" contents="" |="" 余下全文=""><br>数据库表里使用了外键并且使用了Restrict模式，导致删除一张表的记录时，因为外键和其他表关联起来了，导致无法删除，需要把关联表的记录同时也删除了才可以操作目标表记录的删除操作。</the></p>
+<p>第一步：重写beforeDelete()<br>在Model里，重写beforeDelete()，然后在该方法的最后一行<code>return parent::beforeDelete();</code>即可<br>当然与beforeDelete方法对应的afterDelete方法也能做其他事情。<br>充分发挥before和after的作用吧<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">beforeDelete</span><span class="params">()</span> </span>&#123;</div><div class="line">        $id = <span class="keyword">$this</span>-&gt;id;;</div><div class="line">        A::deleteAll([<span class="string">'id'</span>=&gt;$id]);<span class="comment">//级联删除</span></div><div class="line">        B::deleteAll([<span class="string">'id'</span>=&gt;$id]);</div><div class="line">        C::deleteAll([<span class="string">'id'</span>=&gt;$id]);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">parent</span>::beforeDelete();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; Yii的级联删除 &lt;/strong&gt;：本文讲解通过Yii在代码层进行级联删除&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+    
+      <category term="Yii" scheme="http://blog.zjien.com/categories/PHP/Yii/"/>
+    
+    
+      <category term="框架" scheme="http://blog.zjien.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="级联" scheme="http://blog.zjien.com/tags/%E7%BA%A7%E8%81%94/"/>
+    
+      <category term="数据库操作" scheme="http://blog.zjien.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>访问修饰符的意义</title>
+    <link href="http://blog.zjien.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/"/>
+    <id>http://blog.zjien.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</id>
+    <published>2016-06-06T14:45:07.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> 访问修饰符和访问控制的意义 </strong>：本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法<strong>get()和</strong>set()的使用<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p>先上一段代码好说明问题<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> $_salary;<span class="comment">//私用属性命名加_</span></div><div class="line">    <span class="comment">//setter and getter</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSalary</span><span class="params">()</span> </span>&#123;<span class="comment">//如果只有get，那么说明该 属性/成员变量 只是可读，不可写</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_salary;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSalary</span><span class="params">($salary)</span> </span>&#123;<span class="comment">//如果只有set，说明该 属性/成员变量 只是可写，不可读</span></div><div class="line">        <span class="keyword">$this</span>-&gt;_salary = $salary;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>如上，我们觉得好像private改成public也没什么大问题，但是如果有这样一个场景，调用代码中，多处调用了User的salary属性，有写的也有读的，但是有一天，你不想让调用者修改salary了（禁用写），那怎么办？要怎么保证调用者的代码中没有直接修改salary的代码？如果提供了setter，那么只要把setter删掉，一旦调用代码中有没清理干净的对salary进行写入/修改 的代码，那么就会抛出异常。而使用public $salary这种方式的话，改成private后，虽然是可以禁止写了但是连读取也被禁止了。</li>
+<li>对写入数据的操作/过滤，使用setter和getter，可以统一对写入/读取 进行操作或者过滤，比如要去掉写入数据中的空格，如果使用public，那么要在每个调用处写上trim()，但是我们无法保证每处都写上trim了。如果用setter，那么我们可以在setter中写一次trim即可，而且也保证对每次写入都会进行过滤，不会有遗漏。</li>
+</ul>
+<blockquote>
+<p>注意:由于 <strong>get() 和 </strong>set() 是在遍历所有成员变量，找不到匹配的成员变量时才被调用。因此，其效率是低于直接访问成员变量的形式。在一些表示数据结构、数据集合等简单情况下，且不需读写控制等， 可以考虑使用成员变量作为属性直接访问，这样可以提高一点效率。<br>另外一个提高效率的技巧就是：使用 $k1 = $obj-&gt;getK1() 来代替 $k1 = $obj-&gt;K1 ， 用 $obj-&gt;setK1($value) 来代替 $obj-&gt;K1 = $value 。 这在功能上是完全一样的效果，但是避免了使用 <strong>get() 和 </strong>set() ，相当于绕过了遍历的过程。</p>
+</blockquote>
+<p>这里还要区分，在类里成员变量和属性的区别。成员变量和属性的区别与联系在于：</p>
+<ul>
+<li>成员变量是一个“内”概念，反映的是就类的结构构成而言的该你那。属性是一个“外”概念，反映的是类的功能逻辑意义而言的概念。</li>
+<li>成员变量没有读写权限控制，而属性可以指定为只读或只写，或可读可写。</li>
+<li>成员变量不对读出作任何后处理，不对写入作任何预处理，而属性则可以。</li>
+<li>public成员变量可以视为一个可读可写、没有任何预处理或后处理的属性。 而private成员变量由于外部不可见，与属性“外”的特性不相符，所以不能视为属性。</li>
+<li>虽然大多数情况下，属性会由某个或某些成员变量来表示，但属性与成员变量没有必然的对应关系， 比如与非门的 output 属性，就没有一个所谓的 $output 成员变量与之对应。</li>
+</ul>
+<p>为了更形象，我们看个例子<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotAndGate</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> $_k1;</div><div class="line">    <span class="keyword">private</span> $_k2;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setK1</span><span class="params">($value)</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;$_k1 = $value;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setK2</span><span class="params">($value)</span> </span>&#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;$_k2 = $value;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getOutput</span><span class="params">()</span> </span>&#123;<span class="comment">//与非门有两个输入，当两个输入都为真时，与非门的输出为假，否则，输出为真。</span></div><div class="line">        <span class="keyword">if</span> ( !<span class="keyword">$this</span>-&gt;_k1 || !<span class="keyword">$this</span>-&gt;_k2 ) <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">elseif</span> (<span class="keyword">$this</span>-&gt;_k1 &amp;&amp; <span class="keyword">$this</span>-&gt;_k2) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面的代码中，与非门类有两个成员变量， <code>$_k1</code> 和 <code>$_k2</code> 。<strong>但是有3个属性</strong>，表示2个输入的 <code>key1</code> 和 <code>key2</code> ，以及表示输出的 <code>output</code>。<br>由于我们知道，属性一般是通过<code>$obj-&gt;property</code>方式来访问的，但是这里根本没有<code>output</code>这个成员变量呀？那还怎么访问呢？<br>没错，这时候就要靠我们的<code>魔术方法__get()</code>来配合<code>getter</code>了，上<code>__get()</code>的代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span> </span>&#123;</div><div class="line">    $getter = <span class="string">'get'</span> . $name;<span class="comment">//如此，当调用$obj-&gt;output属性时，就会去调用getOutput()，以达到具有output属性的效果</span></div><div class="line">    <span class="keyword">if</span> (method_exists(<span class="keyword">$this</span>, $getter)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$getter();</div><div class="line">    &#125; <span class="keyword">elseif</span> (method_exists(<span class="keyword">$this</span>, <span class="string">'set'</span>.$name)) &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'只存在setter，也即该属性为只写'</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">echo</span> <span class="string">'无'</span> , $name , <span class="string">'属性'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>欢迎转载但请附上链接，谢谢。</p>
+<p><a href="http://www.digpage.com/property.html" target="_blank" rel="external">参考：http://www.digpage.com/property.html</a></p>
+<p>如有什么错误，欢迎提出、讨论，大家共同进步 ^_^</p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; 访问修饰符和访问控制的意义 &lt;/strong&gt;：本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法&lt;strong&gt;get()和&lt;/strong&gt;set()的使用&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+    
+      <category term="代码之上" scheme="http://blog.zjien.com/categories/PHP/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
+    
+      <category term="OOP" scheme="http://blog.zjien.com/categories/PHP/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/OOP/"/>
+    
+    
+      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+    
+      <category term="OOP基础" scheme="http://blog.zjien.com/tags/OOP%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="魔术方法" scheme="http://blog.zjien.com/tags/%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/"/>
+    
+      <category term="访问控制" scheme="http://blog.zjien.com/tags/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Yii框架的服务定位器</title>
+    <link href="http://blog.zjien.com/2016/06/02/yii-service-locator/"/>
+    <id>http://blog.zjien.com/2016/06/02/yii-service-locator/</id>
+    <published>2016-06-02T12:02:51.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> Yii——组件注册 </strong>：Yii的组件相当于Laravel的服务，同样需要注册到一个IOC容器中，以便在应用其他地方使用这些组件/服务<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p>这相当与在laravel中，使用$app应用的register或者singleton方法注册服务，而在Yii中则称为服务定位器Service Locator。</p>
+<h2 id="注册组件"><a href="#注册组件" class="headerlink" title="注册组件"></a>注册组件</h2><p>在Yii中，要注册组件(laravel中称之为服务)可以使用如下方式：</p>
+<h3 id="方法一：set方法"><a href="#方法一：set方法" class="headerlink" title="方法一：set方法"></a>方法一：set方法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">di</span>\<span class="title">ServiceLocator</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">caching</span>\<span class="title">FileCache</span>;</div><div class="line">$locator = <span class="keyword">new</span> ServiceLocator;</div><div class="line">$locator-&gt;set(<span class="string">'cache'</span>, <span class="string">'yii\caching\ApcCache'</span>);<span class="comment">//使用类名直接创建</span></div><div class="line">$locator-&gt;set(<span class="string">'db'</span>, [<span class="comment">//通过配置数组来注册</span></div><div class="line"><span class="string">'class'</span> =&gt; <span class="string">'yii\db\Connection'</span>,</div><div class="line"><span class="string">'dsn'</span> =&gt; <span class="string">'mysql:host=localhost;dbname=demo'</span>,</div><div class="line"><span class="string">'username'</span> =&gt; <span class="string">'root'</span>,</div><div class="line"><span class="string">'password'</span> =&gt; <span class="string">''</span>,</div><div class="line">]);</div><div class="line">$locator-&gt;set(<span class="string">'search'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;<span class="comment">//通过一个匿名函数返回实例来注册</span></div><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> app\components\SolrService;</div><div class="line">&#125;);</div><div class="line">$locator-&gt;set(<span class="string">'pageCache'</span>, <span class="keyword">new</span> FileCache);<span class="comment">//直接使用new实例化来注册</span></div></pre></td></tr></table></figure>
+<h3 id="方法二：在配置文件中配置"><a href="#方法二：在配置文件中配置" class="headerlink" title="方法二：在配置文件中配置"></a>方法二：在配置文件中配置</h3><p>返回配置数组的方式，即在应用的配置文件中配置components项<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> [</div><div class="line">    <span class="string">'components'</span> =&gt; [</div><div class="line">        <span class="string">'db'</span> =&gt; [</div><div class="line">            <span class="string">'class'</span> =&gt; <span class="string">'yii\db\Connection'</span>,</div><div class="line">            <span class="string">'dsn'</span> =&gt; <span class="string">'mysql:host=localhost;dbname=demo'</span>,</div><div class="line">            <span class="string">'username'</span> =&gt; <span class="string">'root'</span>,</div><div class="line">            <span class="string">'password'</span> =&gt; <span class="string">''</span>,</div><div class="line">        ],</div><div class="line">        <span class="string">'cache'</span> =&gt; <span class="string">'yii\caching\ApcCache'</span>,</div><div class="line">        <span class="string">'search'</span> =&gt; <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> app\components\SolrService;</div><div class="line">        &#125;，</div><div class="line">    ]，</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>请谨慎注册太多应用组件，应用组件就像全局变量，使用太多可能加大测试和维护的难度。 一般情况下可以在需要时再创建本地组件。</p>
+</blockquote>
+<hr>
+<h2 id="使用-访问-组件"><a href="#使用-访问-组件" class="headerlink" title="使用/访问 组件"></a>使用/访问 组件</h2><p>通过访问上面注册时的名字/ID 来访问，两种方式，get(‘name/id’)和属性<br>$cache = $locator-&gt;get(‘cache’);<br>$cache = $locator-&gt;cache;//通过属性</p>
+<hr>
+<h2 id="检查是否注册某个组件"><a href="#检查是否注册某个组件" class="headerlink" title="检查是否注册某个组件"></a>检查是否注册某个组件</h2><p>$locator-&gt;has(‘name’);</p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; Yii——组件注册 &lt;/strong&gt;：Yii的组件相当于Laravel的服务，同样需要注册到一个IOC容器中，以便在应用其他地方使用这些组件/服务&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+    
+      <category term="Yii" scheme="http://blog.zjien.com/categories/PHP/Yii/"/>
+    
+      <category term="framework" scheme="http://blog.zjien.com/categories/PHP/Yii/framework/"/>
+    
+    
+      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+    
+      <category term="框架" scheme="http://blog.zjien.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/tags/%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="framework" scheme="http://blog.zjien.com/tags/framework/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript的单线程和异步之间的关系</title>
+    <link href="http://blog.zjien.com/2016/06/01/js-async-singleThread-queue/"/>
+    <id>http://blog.zjien.com/2016/06/01/js-async-singleThread-queue/</id>
+    <published>2016-06-01T03:26:32.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> js的异步、线程、队列 </strong>：本文介绍javascript的异步和单线程的关系，以及简单解释了单线程的js怎么异步处理。<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
+<h2 id="异步计时函数setTimeout"><a href="#异步计时函数setTimeout" class="headerlink" title="异步计时函数setTimeout()"></a>异步计时函数setTimeout()</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> begin = <span class="keyword">new</span> <span class="built_in">Date</span>();<span class="comment">//代码开始</span></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">    alert(<span class="string">'你好，这个程序已经运行了'</span> + (end - begin) + <span class="string">'毫秒'</span>);</div><div class="line">&#125;,<span class="number">3000</span>);<span class="comment">//1秒后弹出对话框</span></div><div class="line"><span class="keyword">while</span> ((<span class="keyword">new</span> <span class="built_in">Date</span>() - begin) &lt; <span class="number">6000</span>) &#123;&#125;<span class="comment">//循环代码持续3秒，3秒后，整个js调用栈的程序才执行完毕（在控制台中可以看到3秒后才出现一个响应undefined）</span></div></pre></td></tr></table></figure>
+<p>上面的代码跟下面的对比一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> begin = <span class="keyword">new</span> <span class="built_in">Date</span>();<span class="comment">//代码开始</span></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">    alert(<span class="string">'你好，这个程序已经运行了'</span> + (end - begin) + <span class="string">'毫秒'</span>);</div><div class="line">&#125;,<span class="number">6000</span>);<span class="comment">//6秒后弹出对话框</span></div><div class="line"><span class="keyword">while</span> ((<span class="keyword">new</span> <span class="built_in">Date</span>() - begin) &lt; <span class="number">3000</span>) &#123;&#125;<span class="comment">//循环代码持续3秒，3秒后，js调用栈执行完毕，控制台出现undefined，然后再过6-3=3秒后，出现弹框</span></div></pre></td></tr></table></figure></p>
+<p>解析：<br>当js解析器解析到setTimeout时，就调用了浏览器的api——异步函数setTimeout，此时js继续往下解析执行，而浏览器就另有一个线程来处理异步函数setTimeout，也就是1秒后把回调函数放入js执行队列中。而此时，js调用栈中继续执行剩下的代码，直至完成了后面的循环后（调用栈中所有代码已经执行完毕）才解析队列中的回调函数来执行。</p>
+<hr>
+<h2 id="异步IO函数"><a href="#异步IO函数" class="headerlink" title="异步IO函数"></a>异步IO函数</h2><p>这里我们介绍下ajax，为了方便起见，直接使用jquery来说明<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.get(<span class="string">'http://blog.zjien.com'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">resData</span>)</span>&#123;</div><div class="line">alert(resData);</div><div class="line">&#125; );</div><div class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>js在解析并执行到$.get()时，发起http请求，我看打开F12可以看到请求是处于Pending状态，通过WireShark或Fiddler2可以查看到HTTP请求状态，可知请求是成功发送并且有响应，但是因为下面的while是死循环，因此$.get()里的回调函数一直在队列中排队，得不到js的解析和执行，呈现出假死的状态。<br>换一种形式来展示<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.get(<span class="string">'http://blog.zjien.com'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">resData</span>)</span>&#123;</div><div class="line">alert(resData);</div><div class="line">&#125;);</div><div class="line">alert(<span class="string">'go on?'</span>);</div></pre></td></tr></table></figure></p>
+<p>js解析并执行到go on时，浏览器弹出窗口，暂时不要关闭窗口，通过F12可以看到，请求是Pending状态，但通过Wireshark等工具看到请求是完成并得到响应的，只是因为go on阻塞/阻止了时间循环，导致$.get的回调无法执行，只有按下确定关闭了go on框，回调才得以执行。这是在chrome的情况如此。<br>在Firefox下却不会出现此情况，go on并不能阻止事件循环，所以上面两个代码段的ajax（$.get）的回调都可以执行，于是界面出现3个alert弹框。</p>
+<blockquote>
+<p>注意，每个窗口有一个js线程(单线程)，若一个窗口中有多个tag，那么这多个tag都是用同一个js线程。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; js的异步、线程、队列 &lt;/strong&gt;：本文介绍javascript的异步和单线程的关系，以及简单解释了单线程的js怎么异步处理。&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Javascript" scheme="http://blog.zjien.com/categories/Javascript/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/categories/Javascript/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="js" scheme="http://blog.zjien.com/tags/js/"/>
+    
+      <category term="异步" scheme="http://blog.zjien.com/tags/%E5%BC%82%E6%AD%A5/"/>
+    
+      <category term="单线程" scheme="http://blog.zjien.com/tags/%E5%8D%95%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="线程" scheme="http://blog.zjien.com/tags/%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="队列" scheme="http://blog.zjien.com/tags/%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>超时调用和循环调用</title>
+    <link href="http://blog.zjien.com/2016/05/25/settimeout-and-setintervel/"/>
+    <id>http://blog.zjien.com/2016/05/25/settimeout-and-setintervel/</id>
+    <published>2016-05-25T15:36:28.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> setTimeout和setInterval </strong>：本文介绍这两个浏览器提供的api及其底层的原理<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h3 id="超时调用就是setTimeout-function-delay"><a href="#超时调用就是setTimeout-function-delay" class="headerlink" title="超时调用就是setTimeout(function(){}, delay);"></a>超时调用就是setTimeout(function(){}, delay);</h3><p>第一参数：要执行的回调函数<br>第二参数：延迟多少毫秒，表示在指定时间之后添加回调函数到执行队列中，如果指定时间之后队列中没有其他要执行的代码，那么被添加的代码（即回调函数）会被立即执行。如果队列中有其他代码，那么回调函数会在队列里的代码执行完毕之后才执行。</p>
+<p>可以使用<code>clearTimeout()；</code>来清楚 未执行 的任务<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;, <span class="number">1000</span>);</div><div class="line">clearTimeout(a);</div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="循环调用就是setInterval"><a href="#循环调用就是setInterval" class="headerlink" title="循环调用就是setInterval();"></a>循环调用就是setInterval();</h3><p>第一参数：要执行的回调函数<br>第二参数：延迟多少毫秒，表示定期添加回调函数到执行队列中，如果指定时间之后队列中没有其他要执行的代码，那么被添加的代码（即回调函数）会被立即执行。如果队列中有其他代码，那么回调函数会在队列里的代码执行完毕之后才执行。注意，这个函数会定期不停的添加回调函数到执行队列的。</p>
+<p>清除同上，使用<code>clearInterval(a);</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;, <span class="number">1000</span>);</div><div class="line">clearInterval(a);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>以上两个函数都不一定会严格按照指定的时间间隔执行，这主要看执行队列中是否还有其他待执行的代码（也因为JS是单线程的）</p>
+<p>注意,setTimeout和setInterval都是浏览器的api（由浏览器提供的内置函数），是一种异步函数。上面所说的队列是准确来说是指 异步任务队列 ，而js在执行着的代码是处于js调用栈里的代码<br><img src="/img/js-called-stack1.png" alt="js调用栈和异步队列1"><br><img src="/img/js-called-stack2.png" alt="js调用栈和异步队列2"></p>
+</blockquote>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; setTimeout和setInterval &lt;/strong&gt;：本文介绍这两个浏览器提供的api及其底层的原理&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Javascript" scheme="http://blog.zjien.com/categories/Javascript/"/>
+    
+      <category term="前端" scheme="http://blog.zjien.com/categories/Javascript/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/categories/Javascript/%E5%89%8D%E7%AB%AF/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="异步" scheme="http://blog.zjien.com/tags/%E5%BC%82%E6%AD%A5/"/>
+    
+      <category term="Javascript" scheme="http://blog.zjien.com/tags/Javascript/"/>
+    
+      <category term="回调" scheme="http://blog.zjien.com/tags/%E5%9B%9E%E8%B0%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git常用基本命令</title>
+    <link href="http://blog.zjien.com/2016/05/24/git-command/"/>
+    <id>http://blog.zjien.com/2016/05/24/git-command/</id>
+    <published>2016-05-24T09:08:33.000Z</published>
+    <updated>2017-04-19T02:44:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> Git常用命令 </strong>：本文讲解并且亲测了常用的Git命令<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git init</td>
+<td></td>
+<td></td>
+<td>初始化/新建 当前目录为本地git仓库</td>
+</tr>
+<tr>
+<td>git add</td>
+<td>-A或-add</td>
+<td></td>
+<td>添加当前目录下所有未被tracking以及被修改的文件到index中</td>
+</tr>
+<tr>
+<td>git add</td>
+<td></td>
+<td>file</td>
+<td>添加 file文件/指定文件 到index中</td>
+</tr>
+<tr>
+<td>git add</td>
+<td></td>
+<td>.</td>
+<td>递归添加当前目录下的所有文件(包含目录)到index中</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>–cached</td>
+<td>file</td>
+<td>只删除index中指定的文件，而处于工作目录（也即文件目录）中的文件不会受到影响（不会被删除）</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>-f或–force</td>
+<td>file</td>
+<td>同时删除index和工作目录中指定的文件</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>-r</td>
+<td>*</td>
+<td>删除index暂存区里的全部文件 </td>
+</tr>
+<tr>
+<td>git status</td>
+<td></td>
+<td></td>
+<td>查看整个项目已经初始化的目录下所有文件的状态(处于 .gitignore 文件里的文件会被)</td>
+</tr>
+<tr>
+<td>git status</td>
+<td></td>
+<td>.</td>
+<td>查看当前目录下所有文件和目录的状态(非递归,也即当前目录内的子目录内的文件无法查看)</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>-m</td>
+<td>‘message’</td>
+<td>提交当前index中的文件到仓库repo中，并且附上提交说明/信息</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>-am</td>
+<td>‘message’</td>
+<td>git add 和 git commit 的组合</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>–amend -m</td>
+<td>‘this is amend command’</td>
+<td>当index没有新文件/修改的文件的前提下，该参数可以用来修改上一次commit的说明。当index中有新的文件或者修改的文件，该参数就会把这次index里的文件追加到上一次的commit中，而不会产生一次新的commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td></td>
+<td>显示所有的commit记录</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>-1</td>
+<td></td>
+<td>显示1行日志 -n为n行</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>–stat</td>
+<td></td>
+<td>显示每个文件的变动信息</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>-p -m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>v1.0</td>
+<td>显示v1.0的日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>fjf01</td>
+<td>显示某个commit的详细内容</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD</td>
+<td>显示HEAD指向的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^</td>
+<td>显示HEAD的父(上一个版本)的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^^</td>
+<td>显示HEAD的上两个版本的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^5</td>
+<td>显示HEAD的上5个版本的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>v1.0</td>
+<td>显示v1.0标签的版本信息</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td></td>
+<td></td>
+<td>显示已存在的tag</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-l</td>
+<td></td>
+<td>显示已存在的tag</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-a v3.0 -m ‘new version’</td>
+<td></td>
+<td>给当前HEAD指向的commit打上标签(tag)，每次打tag都需要加上说明-m</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-a v3.1 eci3t8 -m ‘new version’</td>
+<td></td>
+<td>给以前的某个历史提交打上标签(tag)，并附加上说明-m</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>–tags</td>
+<td></td>
+<td>把标签推送到远程仓库，不加–tags参数默认是不会把标签推送到远程的</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td></td>
+<td>xxx.git</td>
+<td>克隆远程仓库到本地</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td></td>
+<td>xxx.git local_dir</td>
+<td>克隆远程仓库到本地指定目录下</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td>-b</td>
+<td>new_branch_name <a href="https://xxxxx.git" target="_blank" rel="external">https://xxxxx.git</a></td>
+<td>clone时创建新的分支替代默认Origin HEAD（master）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git config</td>
+<td>–system</td>
+<td>user.name “your name”</td>
+<td>该系统下，所有用户使用的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–global</td>
+<td>user.name “your name”</td>
+<td>该用户下的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–local</td>
+<td>user.name “your name”</td>
+<td>该 项目project/仓库repository 下的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–system</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–global</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–local</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–list</td>
+<td></td>
+<td>查看配置，注意，所处的目录不同，显示的配置信息也不同哦</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分支命令"><a href="#分支命令" class="headerlink" title="分支命令"></a>分支命令</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>dev</td>
+<td>切换到dev分支上，也是把dev分支的代码检出到工作区（working tree）</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value</td>
+<td>把指定历史版本的代码完整检出到工作区</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value /path/to/file</td>
+<td>将指定文件的某个历史版本检出到工作区</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value:/path/to/file new-name</td>
+<td>将指定文件的某个历史版本检出到工作区并且修改该文件名</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-t</td>
+<td>origin/dev</td>
+<td>创建本地dev分支(与远程对应分支同名)并换到该分支上，并且设置新分支dev的upstream信息</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-b</td>
+<td>dev origin/dev</td>
+<td>等同于上面命令。从当前分支创建并检出（切换到）新分支的命令。实际上是git checkout -b new-branch-name current-branch 的简写形式，即默认从当前HEAD分支创建新新分支</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-b</td>
+<td>new-branch-name 172je2</td>
+<td>从历史版本为 172je2 上创建新分支并且切换到该分之上</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>–</td>
+<td><file-name></file-name></td>
+<td>取消对文件的修改,还原到最近的版本,废弃本地做的修改</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>new-branch-name</td>
+<td>172je2</td>
+<td>从历史版本为 172je2 上创建新分支，但不会切换到该分之上</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>-a</td>
+<td></td>
+<td>查看所有分支</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>-d</td>
+<td>branch_name</td>
+<td>删除branch_name分支</td>
+</tr>
+<tr>
+<td>git merge</td>
+<td></td>
+<td>branch_name</td>
+<td>把branch_name分支合并到本分支中（fast-forward模式）</td>
+</tr>
+<tr>
+<td>git merge</td>
+<td>–no-ff</td>
+<td>branch_name</td>
+<td>把branch_name分支合并到本分支中，非fast-forward模式，即会创建一个合并的提交</td>
+</tr>
+</tbody>
+</table>
+<h3 id="修改commit"><a href="#修改commit" class="headerlink" title="修改commit"></a>修改commit</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git rebase</td>
+<td>-i</td>
+<td>到哪个旧commit的hash值</td>
+<td>注意，该commit是不会被合并的。接着进入交互模式，排第一行的是最旧的commit，除了这一个外，把每个commit前的pick改成squash，就相当于合并到第一行的commit上，接着修改commit信息。 </td>
+</tr>
+</tbody>
+</table>
+<h2 id="按功能排序"><a href="#按功能排序" class="headerlink" title="按功能排序"></a>按功能排序</h2><h3 id="取消修改-恢复版本"><a href="#取消修改-恢复版本" class="headerlink" title="取消修改,恢复版本"></a>取消修改,恢复版本</h3><p><strong>取消对文件的修改。还原到最近的版本，废弃本地做的修改。</strong><br><code>git checkout -- &lt;file&gt;</code></p>
+<p><strong>取消已经暂存的文件。即，撤销先前”git add”的操作</strong><br><code>git reset HEAD &lt;file&gt;...</code></p>
+<p><strong>修改最后一次提交。用于修改上一次的提交信息，或漏提交文件等情况。</strong><br><code>git commit --amend</code></p>
+<p><strong>回退所有内容到上一个版本</strong><br><code>git reset HEAD^</code></p>
+<p><strong>回退a.py这个文件的版本到上一个版本</strong><br><code>git reset HEAD^ a.py</code></p>
+<p><strong>向前回退到第3个版本</strong><br><code>git reset –soft HEAD~3</code></p>
+<p><strong>将本地的状态回退到和远程的一样</strong><br><code>git reset –hard origin/master</code></p>
+<p><strong>回退到某个版本</strong><br><code>git reset 057d</code></p>
+<p><strong>回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit.(代码回滚到上个版本，并提交git)</strong><br><code>git revert HEAD</code></p>
+<p><strong>回滚单个文件</strong><br><code>git reset sha-1 path/to/file</code><br><code>git commit path/to/file -m &#39;message&#39;</code><br><code>git checkout path/to/file</code></p>
+<blockquote>
+<p>几点说明：</p>
+<ul>
+<li>一次commit是指当你输入git log是，看到的一串码，如commit e7d1b777de790970af704dbeac8c0ef3d21335b4，这算一次commit</li>
+</ul>
+</blockquote>
+<p>[<a href="https://www.pureweber.com/article/git-pretty-output/" target="_blank" rel="external">https://www.pureweber.com/article/git-pretty-output/</a>]</p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      本文持续更新中…
+    
+    </summary>
+    
+      <category term="Git" scheme="http://blog.zjien.com/categories/Git/"/>
+    
+      <category term="Git命令" scheme="http://blog.zjien.com/categories/Git/Git%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="Git" scheme="http://blog.zjien.com/tags/Git/"/>
+    
+      <category term="版本管理" scheme="http://blog.zjien.com/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>同步编程与异步编程的转换和对比</title>
+    <link href="http://blog.zjien.com/2016/05/24/sync-vs-async-and-they-transfers/"/>
+    <id>http://blog.zjien.com/2016/05/24/sync-vs-async-and-they-transfers/</id>
+    <published>2016-05-23T18:38:42.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> 同步转换异步 </strong>： 本文介绍了nodejs下的同步模型转换成异步模型（异步代码的设计）<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="开始转变思路"><a href="#开始转变思路" class="headerlink" title="开始转变思路"></a>开始转变思路</h2><p>这里转变思路是指由同步模型代码转换成异步模型代码<br>要使用Node.js，就有必要了解异步编程的工作原理。异步代码设计并非简单的设计，需要一番学习。本文在同步代码示例旁边给出了异步代码示例，表明如何更改同步代码，才能变成异步代码。这些示例都围绕Node.js的文件系统(fs)模块，因为它是唯一含有同步I/O操作及异步I/O操作的模块。有了这两种示例，你可以开始转变思路了。</p>
+<hr>
+<h2 id="相关代码和独立代码"><a href="#相关代码和独立代码" class="headerlink" title="相关代码和独立代码"></a>相关代码和独立代码</h2><p>回调函数(callback function)是Node.js中异步事件驱动型编程的基本构建模块。它们是作为变量，传递给异步I/O操作的函数。一旦操作完成，回调函数就被调用。回调函数是Node.js中实现事件的机制。<br>下面显示的示例表明了如何将同步I/O操作转换成异步I/O操作，并显示了回调函数的使用。示例使用异步fs.readdirSync()调用，读取当前目录的文件名称，然后把文件名称记录到控制台，最后读取当前进程的进程编号(process id)。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*相关代码和独立代码*/</span></div><div class="line">    <span class="comment">//任务：读取当前目录下的所有文件名称。并获取当前进程的编号pid</span></div><div class="line">    <span class="comment">//对任务的分析：因为读取文件名称 和 获取当前进程pid 是两件无关联的独立事情，所以如果要在一份代码中完成这两任务，可以考虑对它们进行异步处理</span></div><div class="line"><span class="comment">//同步版本</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>),filenames,i,processId;</div><div class="line"><span class="comment">//1、读取当前目录下的文件名称</span></div><div class="line">filenames = fs.readdirSync(<span class="string">'.'</span>);<span class="comment">//处理器等待该处的IO操作，所以此处需要改成异步fs.readdir()</span></div><div class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i&lt; filenames.length; i++) &#123;</div><div class="line">    <span class="built_in">console</span>.log(filenames[i]);</div><div class="line">&#125;</div><div class="line"><span class="comment">//到此，都是做了同一件事，就是读取文件名称并且显示在控制台上。</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"ready"</span>);</div><div class="line"><span class="comment">//2、获取当前进程的pid</span></div><div class="line">processId = process.getuid();<span class="comment">//因为是同步模式，所以要在上面readdirSync执行完后才会执行此行代码。</span></div><div class="line"><span class="comment">//异步版本</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>), filenames, i, processId;</div><div class="line"><span class="comment">//1、读取当前目录下的文件名称</span></div><div class="line">fs.readdir(<span class="string">'.'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, filenames</span>) </span>&#123;<span class="comment">//第二个参数为回调，因为这里是异步模式，而跟任务1有关的一系列操作都放到回调里面，因为当读取完成后，相关联的一系列操作将会被回调，执行。</span></div><div class="line">    <span class="keyword">var</span> i;</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;filenames.length; i++) &#123;</div><div class="line">        <span class="built_in">console</span>.log(filenames[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'ready'</span>);</div><div class="line">&#125;);</div><div class="line"><span class="comment">//2、获取当前进程的pid</span></div><div class="line">processId = process.getuid();<span class="comment">//因为是异步模式，所以当上面readdir被调用后，不用等待它执行完毕，就马上执行此行代码。这就是异步模式</span></div></pre></td></tr></table></figure></p>
+<p>在同步示例中，处理器等待fs.readdirSync() I/O操作，所以这是需要更改的操作。Node.js中该函数的异步版本是fs.readdir()。它与fs.readdirSync()一样，但是回调函数作为第二个参数。<br>使用回调函数模式的规则如下：把同步函数换成对应的异步函数，然后把原先在同步调用后执行的代码放在回调函数里面。回调函数中的代码与同步示例中的代码执行一模一样的操作。它把文件名称记录到控制台。它在异步I/O操作返回之后执行。<br>就像文件名称的记录依赖fs.readdirSync() I/O操作的结果，所列文件数量的记录也依赖其结果。进程编号的存储独立于I/O操作的结果。因而，必须把它们移到异步代码中的不同位置。<br>规则就是将相关代码移到回调函数中，而独立代码的位置不用管。一旦I/O操作完成，相关代码就被执行，而独立代码在I/O操作被调用之后立即执行。</p>
+<hr>
+<h2 id="对顺序要求严格的任务"><a href="#对顺序要求严格的任务" class="headerlink" title="对顺序要求严格的任务"></a>对顺序要求严格的任务</h2><p>同步代码中的标准模式是线性顺序：几行代码都必须下一行接上一行来执行，因为每一行代码依赖上一行代码的结果。在下面示例中，代码首先变更了文件的访问模式(比如Unix chmod命令)，对文件更名，然后检查更名后文件是不是符号链接。很显然，该代码无法乱序运行，不然文件在模式变更前就被更名了，或者符号链接检查在文件被更名前就执行了。这两种情况都会导致出错。因而，顺序必须予以保留。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*顺序严格的任务*/</span></div><div class="line"><span class="comment">//任务：1、修改文件的访问权限。2、然后对文件改名。3、然后检查更名后的文件是不是符号链接(symlink也即Linux里的软连接)。</span></div><div class="line"><span class="comment">//对任务的分析：很显然，该任务无法乱序运行，不然文件在访问权限变更前就被改名了，或者对符号链接的检查在文件被更名前就执行了。这两种情况都会导致出错。因而，顺序完成这两任务是必须予以保留的。</span></div><div class="line"><span class="comment">//同步版本</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>), oldFilename, newFilename, isSymLink;</div><div class="line">oldFilename = <span class="string">'./processId.txt'</span>;</div><div class="line">newFilename = <span class="string">'./processIdOld.txt'</span>;</div><div class="line">fs.chmodSync(oldFilename, <span class="number">777</span>);</div><div class="line">fs.renameSync(oldFilename, newFilename);</div><div class="line">isSymLink = fs.lstatSync(newFilename).isSymbolicLink();</div><div class="line"><span class="comment">//异步版本</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>), oldFilename, newFilename, isSymLink;</div><div class="line">oldFilename = <span class="string">'./processId.txt'</span>;</div><div class="line">newFilename = <span class="string">'./processIdOld.txt'</span>;</div><div class="line">fs.chmod(oldFilename, <span class="number">777</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;<span class="comment">//虽然这里是采用了异步处理，但是因为这些任务都是需要顺序处理才不会出错，因为在回调里嵌套回调，这里才能保证异步模式下顺序处理这种顺序任务</span></div><div class="line">    fs.rename(oldFilename, newFilename, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</div><div class="line">        fs.lstat(newFilename, <span class="function"><span class="keyword">function</span>(<span class="params">err, stats</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> isSymLink = stats.isSymbolicLink();</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>在异步代码中，这些顺序变成了嵌套回调。该示例显示了fs.lstat()回调嵌套在fs.rename()回调里面，而fs.rename()回调嵌套在fs.chmod()回调里面。</p>
+<hr>
+<h2 id="并行处理"><a href="#并行处理" class="headerlink" title="并行处理"></a>并行处理</h2><p>异步代码特别适合操作I/O操作的并行处理：代码的执行并不因I/O调用的返回而受阻。多个I/O操作可以并行开始。在下面示例中，某个目录中所有文件的大小都在循环中累加，以获得那些文件占用的总字节数。使用异步代码，循环的每次迭代都必须等到获取单个文件大小的I/O调用返回为止。<br>异步代码允许快速连续地在循环中开始所有I/O调用，不用等结果返回。只要其中一个I/O操作完成，回调函数就被调用，而该文件的大小就可以添加到总字节数中。<br>唯一必不可少的有一个恰当的停止标准，它决定着我们完成处理后，就计算所有文件的总字节数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*并行处理*/</span></div><div class="line"><span class="comment">//任务：1、获取当前目录下所用文件的大小。2、然后统计所有文件的总大小</span></div><div class="line"><span class="comment">//分析：因为需要首先知道每个文件的大小，而对每个文件的大小的获取是独立的，因此可以使用异步模式来同时读取多个文件的大小，最后需要设置一个标志用以告诉所有文件(最后一个文件)的大小都已经获取到并且总大小已经统计完成了，可以输出到控制台。</span></div><div class="line"><span class="comment">//同步版本</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">calculateByteSize</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> totalBytes = <span class="number">0</span>, i, filenames, stats;</div><div class="line">    filenames = fs.readdirSync(<span class="string">'.'</span>);</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;filenames.length;i++) &#123;</div><div class="line">        stat = fs.statSync(<span class="string">'./'</span> + filenames[i]);<span class="comment">//同步，这样下一个文件大小的获取需要等到本轮读取该文件大小完成才能进行。</span></div><div class="line">        totalBytes += stats.size;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(totalBytes);</div><div class="line">&#125;</div><div class="line">calculateByteSize();<span class="comment">//等到里面全部操作(都是同步操作)都执行完毕，函数才返回（结束）【同步】</span></div><div class="line"><span class="comment">//异步版本</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</div><div class="line">totalBytes = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">calculateByteSize</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    fs.readdir(<span class="string">'.'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, filenames</span>) </span>&#123;<span class="comment">//引申出的一个问题，在一个函数内调用一个异步操作，那么是异步操作全部完成后该函数才结束，还是函数先结束，但是异步操作依然还在运行？</span></div><div class="line">        <span class="keyword">var</span> i;</div><div class="line">        count = filenames.length;</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;filenames.length;i++) &#123;</div><div class="line">            fs.stat(<span class="string">'./'</span>+filenames[i], <span class="function"><span class="keyword">function</span> (<span class="params">err, stats</span>) </span>&#123;<span class="comment">//调用fs.stat()了就马上继续下一轮循环，不等待该轮执行完成。这样就可以多个文件同时进行大小的获取。</span></div><div class="line">                totalBytes += stats.size;</div><div class="line">                count--;</div><div class="line">                <span class="keyword">if</span>(count === <span class="number">0</span>) &#123;</div><div class="line">                    <span class="built_in">console</span>.log(totalBytes);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">calculateByteSize();<span class="comment">//就此例而言，该函数被调用后就马上结束了。而里面的操作(都是异步操作)还在运行中【异步】。至于为什么函数结束后，里面的变量还能用，这就涉及到了闭包的知识点了</span></div></pre></td></tr></table></figure></p>
+<p>同步示例简单又直观。在异步版本中，第一个fs.readdir()被调用，以读取目录中的文件名称。在回调函数中，针对每个文件调用fs.stat()，返回该文件的统计信息。这部分不出所料。</p>
+<p>值得关注的方面出现在计算总字节数的fs.stat()回调函数中。所用的停止标准是目录的文件数量。变量count以文件数量来初始化，倒计数回调函数执行的次数。一旦数量为0，所有I/O操作都被回调，所有文件的总字节数被计算出来。计算完毕后，字节数可以记录到控制台。</p>
+<p>异步示例有另一个值得关注的特性：它使用闭包(closure)。闭包是函数里面的函数，内层函数访问外层函数中声明的变量，即便在外层函数已完成之后。fs.stat()回调函数是闭包，因为它早在fs.readdir()回调函数完成后，访问在该函数中声明的count和totalBytes这两个变量。闭包有关于它自己的上下文。在该上下文中，可以放置在函数中访问的变量。</p>
+<p>要是没有闭包，count和totalBytes这两个变量都必须是全局变量。这是由于fs.stat()回调函数没有放置变量的任何上下文。calculateBiteSize()函数早已结束，只有全局上下文仍在那里。这时候闭包就能派得上用场。变量可以放在该上下文中，那样可以从函数里面访问它们。</p>
+<hr>
+<h2 id="代码复用"><a href="#代码复用" class="headerlink" title="代码复用"></a>代码复用</h2><p>代码片段可以在JavaScript中复用，只要把代码片段包在函数里面。然后，可以从程序中的不同位置调用这些函数。如果函数中使用了I/O操作，那么改成异步代码时，就需要某种重构。</p>
+<p>下面的异步示例显示了返回某个目录中文件数量的函数countFiles()。countFiles()使用I/O操作fs.readdirSync() 来确定文件数量。span&gt;countFiles()本身被调用，使用两个不同的输入参数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*代码复用*/</span></div><div class="line"><span class="comment">//任务：1、返回某个目录中文件数量</span></div><div class="line"><span class="comment">//同步版本</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> path1 = <span class="string">'./'</span>, path2 = <span class="string">'.././'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">countFiles</span>(<span class="params">path</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> filenames = fs.readdirSync(path);<span class="comment">//同步方式获取目录下所有文件</span></div><div class="line">    <span class="keyword">return</span> filenames.length;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(countFiles(path1)+<span class="string">'files in '</span> + path1);</div><div class="line"><span class="built_in">console</span>.log(countFiles(path2)+<span class="string">'files in '</span> + path2);</div><div class="line"><span class="comment">//异步</span></div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> path1 = <span class="string">'./'</span>, path2 = <span class="string">'.././'</span>, logCount;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">countFiles</span>(<span class="params">path, callback</span>) </span>&#123;</div><div class="line">    fs.readdir(path, <span class="function"><span class="keyword">function</span> (<span class="params">err, filenames</span>) </span>&#123;</div><div class="line">        callback(err, path, filenames.length);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">logCount = <span class="function"><span class="keyword">function</span>(<span class="params">err, path, count</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(count + <span class="string">'files in '</span>+ path);</div><div class="line">&#125;;</div><div class="line">countFiles(path1, logCount);<span class="comment">//若这里依然是使用console.log去调用countFiles，因为countFiles是异步的，等到countFiles处理完毕返回值的时候，console.log已经结束运行了(因为countFile是异步的，所以console.log调用了countFiles之后就马上结束而不等待countFiles返回结果了)。所以是由conutFiles去调用console.log。于是把log放进异步的回调函数里才可以</span></div><div class="line">countFiles(path2, logCount);</div></pre></td></tr></table></figure></p>
+<p>把fs.readdirSync()换成异步fs.readdir()迫使闭包函数countFiles()也变成异步，因为调用countFiles()的代码依赖该函数的结果。毕竟，只有fs.readdir()返回后，结果才会出现。这导致了countFiles()重构，以便还能接受回调函数。整个控制流程突然倒过来了：不是console.log()调用countiles()，countFiles()再调用fs.readdirSync()，在异步示例中，而是countFiles()调用fs.readdir()，然后countFiles()再调用console.log()。</p>
+<hr>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>本文着重介绍了异步编程的一些基本模式。将思路转变到异步编程绝非易事，需要一段时间来适应。虽然难度增加了，但是获得的回报是显著提高了并发性。</p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; 同步转换异步 &lt;/strong&gt;： 本文介绍了nodejs下的同步模型转换成异步模型（异步代码的设计）&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Javascript" scheme="http://blog.zjien.com/categories/Javascript/"/>
+    
+      <category term="Nodejs" scheme="http://blog.zjien.com/categories/Javascript/Nodejs/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/categories/Javascript/Nodejs/%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="代码设计" scheme="http://blog.zjien.com/categories/Javascript/Nodejs/%E5%9F%BA%E7%A1%80/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="Javascript" scheme="http://blog.zjien.com/tags/Javascript/"/>
+    
+      <category term="Nodejs" scheme="http://blog.zjien.com/tags/Nodejs/"/>
+    
+      <category term="异步编程" scheme="http://blog.zjien.com/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="代码设计" scheme="http://blog.zjien.com/tags/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>push.default的matching和simple</title>
+    <link href="http://blog.zjien.com/2016/05/22/git-push-default/"/>
+    <id>http://blog.zjien.com/2016/05/22/git-push-default/</id>
+    <published>2016-05-22T13:33:44.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> push.default的设置 </strong>：本文介绍push.default的两种设置，因为有两种不同设置是因为Git版本升级，导致默认设置不一样。<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p>因为git的版本升级，导致了<code>push.default</code>的值改变了，因此会询问你，使用<code>matching</code>还是<code>simple</code>，下面讲讲这两者的区别</p>
+<h3 id="Matching"><a href="#Matching" class="headerlink" title="Matching"></a>Matching</h3><p>该参数是 Git 1.*的默认值，意思是如果在执行git push时没有指定分支，那么它将把所有本地的分支push到远程仓库中对应的分支</p>
+<h3 id="Simple"><a href="#Simple" class="headerlink" title="Simple"></a>Simple</h3><p>该参数是 Git 2.*的默认值，意思是如果在执行git push时没有指定分支，那么它只会把当前分支push到你用git pull时指定的那个分支。</p>
+<h3 id="修改默认设置"><a href="#修改默认设置" class="headerlink" title="修改默认设置"></a>修改默认设置</h3><p>通过修改全局配置来隐藏git push时的提示，如果要设置matching模式则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global push.default matching</div></pre></td></tr></table></figure></p>
+<p>设置simple模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global push.default simple</div></pre></td></tr></table></figure></p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; push.default的设置 &lt;/strong&gt;：本文介绍push.default的两种设置，因为有两种不同设置是因为Git版本升级，导致默认设置不一样。&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://blog.zjien.com/categories/Git/"/>
+    
+      <category term="版本管理" scheme="http://blog.zjien.com/categories/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/categories/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="Git" scheme="http://blog.zjien.com/tags/Git/"/>
+    
+      <category term="Git基础" scheme="http://blog.zjien.com/tags/Git%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>标题和段落文字大小以及排版设计</title>
+    <link href="http://blog.zjien.com/2016/05/20/title-paragraph-font-size/"/>
+    <id>http://blog.zjien.com/2016/05/20/title-paragraph-font-size/</id>
+    <published>2016-05-20T03:04:53.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> 标题和段落字体大小 </strong>：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<p><the rest="" of="" contents="" |="" 余下全文=""><br>这一类的排版建议把标题设置为默认字体大小的1.125em，也即1.125倍，而正文字体为0.75em，line-height为相对正文字体大小的1.5em（注意不是相对默认字体16px设定，是相对正文字体大小设定），建议再设置标题块（如h1）和段落块（如p）的margin同为相对正文字体大小的1.5em。下面我们写出具体代码以及解释</the></p>
+<p>假设默认字体大小为16px（事实也确实如此）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>...<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*基本css样式设置*/</span></div><div class="line"><span class="selector-tag">html</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">100%</span>;<span class="comment">/*为了兼容IE*/</span></div><div class="line">&#125;</div><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">1em</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.container</span> &#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">46.25em</span>; <span class="comment">/*740px/16px=46.25em*/</span></div><div class="line">    <span class="attribute">margin</span>: <span class="number">1.5em</span> auto</div><div class="line">    border : <span class="number">0.0625em</span> solid <span class="number">#ccc</span> <span class="comment">/*1px/16px=0.0625em*/</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>给标题设置样式：“18px”的字体，“18px”的行高以及margin值<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h1</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">1.125em</span> <span class="comment">/*先继承它的父元素的默认大小16px，然后换成：18px/16px=1.125em*/</span></div><div class="line">    <span class="comment">/*为了美观，建议加上行高和margin*/</span></div><div class="line">    line-height: <span class="number">1em</span>;<span class="comment">/*也是18px，但是它这里是相对于上面的font-size来说，因此是18px(line-height)÷18px(font-size)=1em*/</span></div><div class="line">    <span class="attribute">margin</span>: <span class="number">1em</span>; <span class="comment">/*18px(margin) ÷ 18px(font-size) = 1em */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>给标题设置样式：“12px”的字体，“18px”的行高以及margin值<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">0.75em</span> <span class="comment">/*先继承它的父元素的默认大小16px，然后换成：12px/16px=0.75em*/</span></div><div class="line">    <span class="comment">/*为了美观，建议加上行高和margin*/</span></div><div class="line">    line-height: <span class="number">1.5em</span>;<span class="comment">/*也是18px，但是它这里是相对于上面的font-size来说，因此是18px(line-height) ÷ 12(font-size) = 1.5em */</span></div><div class="line">    <span class="attribute">margin</span>: <span class="number">1.5em</span>;<span class="comment">/*18px(margin) ÷ 12(font-size) = 1.5em */</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; 标题和段落字体大小 &lt;/strong&gt;：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://blog.zjien.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="CSS" scheme="http://blog.zjien.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://blog.zjien.com/tags/CSS/"/>
+    
+      <category term="布局/排版" scheme="http://blog.zjien.com/tags/%E5%B8%83%E5%B1%80-%E6%8E%92%E7%89%88/"/>
+    
+      <category term="文字布局" scheme="http://blog.zjien.com/tags/%E6%96%87%E5%AD%97%E5%B8%83%E5%B1%80/"/>
+    
+      <category term="字体大小" scheme="http://blog.zjien.com/tags/%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>em/百分比/px/pt 的区别</title>
+    <link href="http://blog.zjien.com/2016/05/19/em-percent-and-px-pt/"/>
+    <id>http://blog.zjien.com/2016/05/19/em-percent-and-px-pt/</id>
+    <published>2016-05-19T13:18:37.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> css中的4种单位的对比 </strong>：当然不只这4种单位，我们这里只是讨论最常用的这4种单位<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="各单位的说明"><a href="#各单位的说明" class="headerlink" title="各单位的说明"></a>各单位的说明</h2><h3 id="em"><a href="#em" class="headerlink" title="em"></a>em</h3><p>一个em等于其父元素的字体大小，如body为16px时，1em=16px。body下的元素的大小为2em时，等于2*16=32px。它是一个对移动设备很有用的单位。</p>
+<h3 id="percent"><a href="#percent" class="headerlink" title="percent %"></a>percent %</h3><p>跟em差不多，也是个相对值单位。但是还是有点区别，稍后我们再讲解</p>
+<h3 id="px"><a href="#px" class="headerlink" title="px"></a>px</h3><p>屏幕上的像素点，一个像素点=1px，一样用于需要在荧幕媒体上显示大小时使用它</p>
+<h3 id="pt"><a href="#pt" class="headerlink" title="pt"></a>pt</h3><p>磅，1磅=1/72英寸。与px类似，也是一种固定的单位，不过一般使用于需要打印出来的内容上面。</p>
+<blockquote>
+<p>它们的关系:默认下（浏览器的字体大小默认为16px）,16px=12pt=1em=100%</p>
+</blockquote>
+<h2 id="各单位的比较"><a href="#各单位的比较" class="headerlink" title="各单位的比较"></a>各单位的比较</h2><h3 id="4种单位比较"><a href="#4种单位比较" class="headerlink" title="4种单位比较"></a>4种单位比较</h3><p>下面放张图片直观点比较<br><img src="/img/em-percent-px-pt-diff1.png" alt="4种单位的比较"><br>可见，em和percent会因为用户使用了网页放大/缩小 而该变内容的大小<br>这里px和pt都差不多，都是一种固定不变的单位</p>
+<h3 id="em与百分比的比较"><a href="#em与百分比的比较" class="headerlink" title="em与百分比的比较"></a>em与百分比的比较</h3><p>下面来看看em和percent有什么不同<br>在浏览器的默认大小值16px也即“medium”情况下，它们是没什么区别的，但是当设置为“Smallest”和“Largest”，情况就不一样了<br><img src="/img/em-percent-diff1.png" alt="em与百分比"><br>可见，使用em，内容大小的变化太唐突，要不就太大直到显示不到，要不就太小连看都看不到。</p>
+<blockquote>
+<p>所以，推荐使用percent（当然，使用em也许更方便，不过这两者都差不多，这里的推荐结果只是就本文讨论而言的最佳结果）</p>
+<p>虽然现在大部分网站内容的大小如字体大小，都使用px作为其单位，但是会导致一些问题比如在一些高分辨率的屏幕下，12px在屏幕上显示出来是非常小到，几乎很难看清（就如原先1英寸显示100px，现在可以显示300px，那么相对来说，显示出来的字体大小就小了很多），因为，现在使用percent作为字体的大小单位还是很推荐的</p>
+</blockquote>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如果想页面元素的大小更加灵活的变化，那么推荐使用%百分比，当然实际上使用em可能比使用百分比的多。</p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; css中的4种单位的对比 &lt;/strong&gt;：当然不只这4种单位，我们这里只是讨论最常用的这4种单位&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前段" scheme="http://blog.zjien.com/categories/%E5%89%8D%E6%AE%B5/"/>
+    
+      <category term="CSS" scheme="http://blog.zjien.com/categories/%E5%89%8D%E6%AE%B5/CSS/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/categories/%E5%89%8D%E6%AE%B5/CSS/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="CSS" scheme="http://blog.zjien.com/tags/CSS/"/>
+    
+      <category term="前段" scheme="http://blog.zjien.com/tags/%E5%89%8D%E6%AE%B5/"/>
+    
+      <category term="单位" scheme="http://blog.zjien.com/tags/%E5%8D%95%E4%BD%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>负值margin</title>
+    <link href="http://blog.zjien.com/2016/05/18/negative-margin/"/>
+    <id>http://blog.zjien.com/2016/05/18/negative-margin/</id>
+    <published>2016-05-18T14:20:52.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> margin </strong>：当margin取负值时，会发生什么有趣的事情呢？<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<p><the rest="" of="" contents="" |="" 余下全文=""><br>我们来谈谈使用负margin的好处以及用法：<code>margin: -100px;</code></the></p>
+<p><strong> 使用负margin时，需要注意的地方 </strong></p>
+<ul>
+<li>负margin是标准的CSS</li>
+<li>负margin不是一种hack方法</li>
+<li>负margin不脱离文档流，不使用float的前提下，有负margin的元素是不会破坏页面的文档流。所以如果你使用 <code>负margin</code>来向上移一个元素，所有跟随的元素都会被向上移动。</li>
+<li>完全兼容任何浏览器</li>
+<li>float会影响负值margin的使用，因此在使用时要注意</li>
+</ul>
+<p><strong> 负值margin也是一种布局方式。 </strong><br>上代码：注意margin-top和margin-bottom、margin-left和margin-right的区别，以及块级元素和行内元素(也即内联元素)使用负值margin时的区别。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>负margin的使用<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line">        <span class="comment">/*把浏览器默认的样式去掉*/</span></div><div class="line">        <span class="selector-tag">body</span> &#123;</div><div class="line">            <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line">            <span class="attribute">padding</span>: <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="selector-class">.kuaiji</span> &#123;</div><div class="line">            <span class="attribute">background-color</span>: blue;</div><div class="line">            <span class="comment">/*元素将被向上拉10px*/</span></div><div class="line">            <span class="comment">/*margin-top: -10px;*/</span></div><div class="line"></div><div class="line">            <span class="comment">/*元素将被向左拉10px*/</span></div><div class="line">            <span class="attribute">margin-left</span>: -<span class="number">10px</span>;</div><div class="line"></div><div class="line">            <span class="comment">/*test元素下面的跟随元素将被向左拉进test元素10px,向左拉进是对于跟随元素是行内元素而言*/</span></div><div class="line">            <span class="attribute">margin-bottom</span>: -<span class="number">5px</span>;</div><div class="line"></div><div class="line">            <span class="comment">/*test元素右面的跟随元素将被向左拉进test元素10px，向上拉进是对于跟随元素是块级元素而言*/</span></div><div class="line">            <span class="attribute">margin-right</span>: -<span class="number">10px</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="selector-class">.toppull</span> &#123;</div><div class="line">            <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(45, 236, 53, .7);</div><div class="line">            <span class="attribute">color</span>: <span class="number">#000</span>;</div><div class="line">            <span class="comment">/*如果没有设置width，那么margin-left和right为负值时，元素会向左/右拖动并且被拉大宽度，此时margin作用效果与padding一样。如果设置了width，元素就只移动，不会被拉大*/</span></div><div class="line">            <span class="comment">/*width: 1366px;*/</span></div><div class="line">            <span class="comment">/*margin-left: -10px;*/</span></div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="selector-class">.hangnei</span> &#123;</div><div class="line">            <span class="attribute">display</span>: inline;</div><div class="line">            <span class="attribute">background-color</span>: red;</div><div class="line"></div><div class="line">            <span class="attribute">margin-left</span>: -<span class="number">10px</span>;</div><div class="line"></div><div class="line">            <span class="comment">/*把跟随的内联元素向左拉进来*/</span></div><div class="line">            <span class="attribute">margin-right</span>: -<span class="number">10px</span>;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="selector-class">.leftpull</span> &#123;</div><div class="line">            <span class="attribute">display</span>: inline;</div><div class="line">            <span class="comment">/*效果同上面margin-right: -10px;一样*/</span></div><div class="line">            <span class="comment">/*margin-left: -10px;*/</span></div><div class="line">            <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(236, 207, 35, .7);</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"kuaiji"</span>&gt;</span></div><div class="line">    块级元素测试</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toppull"</span>&gt;</span></div><div class="line">    块级元素测试——这是第二个元素，会被上一个元素（即蓝色）向上拉进去</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>块级元素测试<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>行内元素测试<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"hangnei"</span>&gt;</span></div><div class="line">    行内元素测试</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"leftpull"</span>&gt;</span></div><div class="line">    行内元素测试——这是第二个元素，会被上一个元素（即红色）向左拉进去</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; margin &lt;/strong&gt;：当margin取负值时，会发生什么有趣的事情呢？&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://blog.zjien.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="CSS" scheme="http://blog.zjien.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://blog.zjien.com/tags/CSS/"/>
+    
+      <category term="Frontend" scheme="http://blog.zjien.com/tags/Frontend/"/>
+    
+      <category term="布局/排版" scheme="http://blog.zjien.com/tags/%E5%B8%83%E5%B1%80-%E6%8E%92%E7%89%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP生成器函数及yield关键字</title>
+    <link href="http://blog.zjien.com/2016/05/16/php-generator-function-and-yield/"/>
+    <id>http://blog.zjien.com/2016/05/16/php-generator-function-and-yield/</id>
+    <published>2016-05-16T13:07:21.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> 生成器函数：本文介绍了PHP的生成器函数和yield关键字的作用以及用法</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
+<h2 id="生成器函数generator-function"><a href="#生成器函数generator-function" class="headerlink" title="生成器函数generator function"></a>生成器函数generator function</h2><p>它很适合用来写迭代器iterator，可以在循环中定义一个可以计算并且返回值的函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//生成器函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">xrange</span><span class="params">($min, $max)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span>($i = $min; $i &lt;= $max; $i++) &#123;</div><div class="line">        <span class="keyword">yield</span> $i;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">foreach</span>(xrange(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">as</span> $key =&gt; $value) &#123;</div><div class="line">    <span class="keyword">echo</span> $key,<span class="string">'=&gt;'</span>,$value,PHP_EOL;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//会输出</span></div><div class="line"><span class="number">0</span>=&gt;<span class="number">1</span></div><div class="line"><span class="number">1</span>=&gt;<span class="number">2</span></div><div class="line">...</div><div class="line"><span class="number">9</span>=&gt;<span class="number">10</span></div></pre></td></tr></table></figure>
+<h2 id="生成器函数和普通函数有什么不同呢？"><a href="#生成器函数和普通函数有什么不同呢？" class="headerlink" title="生成器函数和普通函数有什么不同呢？"></a>生成器函数和普通函数有什么不同呢？</h2><p>就拿上面的例子来说，如果我们是使用了普通的range函数，那么该函数将会在内存生成整个数字数组并且返回整个数组到foreach中，然后foreach再遍历整个数组，range函数和foreach只交互一次，就如同一个快递员把一整个装有东西包裹给你，然后你自己拆开包裹并且从里面一个一个的拿出东西来，这样快递员和你只进行了一次交互/交流。<br>当我们使用了生成器函数时，php会跟踪该函数并且一直执行该函数直到遇到yield关键字或者到函数末尾。当遇到yield关键字时，它会马上返回当前值给foreach处理，然后马上又回到生成器函数里从遇到yield的地方开始再次继续执行，因此本例子在生成器函数里有for循环，因此生成器函数会再次执行下一次for循环并且会再次yield，直到循环条件不满足时结束循环。这就像foreach和生成器函数在大乒乓球一样，一人一次，接着有下一次。</p>
+<h2 id="那么我们为什么需要生成器函数呢？"><a href="#那么我们为什么需要生成器函数呢？" class="headerlink" title="那么我们为什么需要生成器函数呢？"></a>那么我们为什么需要生成器函数呢？</h2><p>生成器函数可以用在内存有限的环境中，如执行一个range(1,1000000)会导致一个Fatal错误，而同样的用生成器函数去做却可以正常工作，因为生成器函数每次执行只占很少的内存。不像是普通函数那样占据一整个很大的内存块。</p>
+<h2 id="生成器函数的其他用处"><a href="#生成器函数的其他用处" class="headerlink" title="生成器函数的其他用处"></a>生成器函数的其他用处</h2><p>生成器函数的其他用处还有：用于 异步协同，关于这方面的使用，可以查阅一下两篇博文：<br><a href="https://medium.com/async-php/co-operative-php-multitasking-ce4ef52858a0#.qmpbrs2h4" target="_blank" rel="external">Co-operative PHP Multitasking</a><br><a href="http://nikic.github.io/2012/12/22/Cooperative-multitasking-using-coroutines-in-PHP.html" target="_blank" rel="external">Cooperative multitasking using coroutines (in PHP!)</a></p>
+<blockquote>
+<p>yield关键字在php5.5才引入</p>
+</blockquote>
+<p><strong>深入阅读：</strong><br><a href="http://blog.ircmaxell.com/2012/07/what-generators-can-do-for-you.html" target="_blank" rel="external">http://blog.ircmaxell.com/2012/07/what-generators-can-do-for-you.html</a><br><a href="http://stackoverflow.com/questions/17223802/what-is-the-difference-between-a-generator-and-an-array" target="_blank" rel="external">http://stackoverflow.com/questions/17223802/what-is-the-difference-between-a-generator-and-an-array</a><br><a href="https://en.wikipedia.org/wiki/Generator_%28computer_programming%29" target="_blank" rel="external">https://en.wikipedia.org/wiki/Generator_%28computer_programming%29</a></p>
+<p><a href="http://stackoverflow.com/questions/17483806/what-does-yield-mean-in-php" target="_blank" rel="external">本文参考：http://stackoverflow.com/questions/17483806/what-does-yield-mean-in-php</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; 生成器函数：本文介绍了PHP的生成器函数和yield关键字的作用以及用法&lt;/strong&gt;&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/categories/PHP/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+    
+      <category term="yield" scheme="http://blog.zjien.com/tags/yield/"/>
+    
+      <category term="迭代器" scheme="http://blog.zjien.com/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8/"/>
+    
+      <category term="生成器函数" scheme="http://blog.zjien.com/tags/%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Composer的脚本/scripts属性</title>
+    <link href="http://blog.zjien.com/2016/05/16/composer-scripts/"/>
+    <id>http://blog.zjien.com/2016/05/16/composer-scripts/</id>
+    <published>2016-05-16T03:25:23.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> Composer.json </strong>：该本文介绍该文件下的相关语法和关键字<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p>我们在项目的根目录创建并定义composer.json文件，该文件里的JSON对象内定义一个<code>&quot;scripts&quot;</code>属性，该属性包含一系列事件对应要执行的回调脚本，一个事件可以用数组定义多个事件脚本。<br>对于同一个事件，多个事件脚本会按照定义的顺序触发。<br><strong> 被执行的php回调脚本一定要定义成静态方法 </strong></p>
+<h2 id="定义脚本"><a href="#定义脚本" class="headerlink" title="定义脚本"></a>定义脚本</h2><p>在项目根目录下的<code>composer.json</code>文件内定义脚本<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">"scripts": &#123;</div><div class="line">    "post-update-cmd": [    //事件</div><div class="line">        "php artisan clear-compiled",   //对应的事件脚本</div><div class="line">        "php artisan ide-helper:generate",</div><div class="line">        "php artisan optimize"</div><div class="line">    ],</div><div class="line">    "post-package-install": [</div><div class="line">        "MyVendor\\MyClass:postPackageInstall"</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用前面定义的例子，这里的<code>MyVendor\MyClass</code>类，就可以被使用来执行 PHP 的回调：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">MyVendor</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Composer</span>\<span class="title">Script</span>\<span class="title">Event</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">postUpdate</span><span class="params">(Event $event)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//getComposer(): 返回当前的 Composer\Composer 对象实例。</span></div><div class="line">        $composer = $event-&gt;getComposer();</div><div class="line">        <span class="comment">// do something</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">postPackageInstall</span><span class="params">(Event $event)</span></span></div><div class="line">    &#123;</div><div class="line">        $installedPackage = $event-&gt;getOperation()-&gt;getPackage();</div><div class="line">        <span class="comment">// do something</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">warmCache</span><span class="params">(Event $event)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// make cache toasty</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当一个事件被触发，Composer 的内部事件处理程序将接收一个<code>Composer\Script\Event</code>对象，这是传递给您的PHP回调函数的第一个参数。这个<code>Event</code>对象拥有一些如<code>getter</code>方法来帮助你取得当前事件的上下文(context)：</p>
+<ul>
+<li>getComposer(): 返回当前的<code>Composer\Composer</code>对象实例。</li>
+<li>getName(): 返回事件名称的字符串。</li>
+<li>getIO(): 返回当前的<code>输入\输出</code>流，它实现了<code>Composer\IO\IOInterface</code>接口，以便在控制台中使用。</li>
+</ul>
+<p>上面是当事件发生时，composer自动调用对应的事件函数。当然我们也可以手动运行这些事件脚本</p>
+<h2 id="手动运行脚本"><a href="#手动运行脚本" class="headerlink" title="手动运行脚本"></a>手动运行脚本</h2><p>使用下面的语法结构：<br><code>composer run-script [--dev] [--no-dev] script</code><br>如：<code>composer run-script post-install-cmd</code>将会按顺序运行所有<code>post-install-cmd</code>事件下定义的脚本。</p>
+<h2 id="事件列表"><a href="#事件列表" class="headerlink" title="事件列表"></a>事件列表</h2><p>在composer运行过程中将会触发下面的事件：(pre为执行前，post为执行后)</p>
+<table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th style="text-align:center">说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pre-install-cmd</td>
+<td style="text-align:center">在install命令执行前触发 </td>
+</tr>
+<tr>
+<td>post-install-cmd</td>
+<td style="text-align:center">在install命令执行后触发 </td>
+</tr>
+<tr>
+<td>pre-update-cmd</td>
+<td style="text-align:center">在update命令执行前触发 </td>
+</tr>
+<tr>
+<td>post-update-cmd</td>
+<td style="text-align:center">在update命令执行后触发 </td>
+</tr>
+<tr>
+<td>pre-status-cmd</td>
+<td style="text-align:center">在status命令执行前触发 </td>
+</tr>
+<tr>
+<td>post-status-cmd</td>
+<td style="text-align:center">在status命令执行后触发 </td>
+</tr>
+<tr>
+<td>pre-archive-cmd</td>
+<td style="text-align:center">在archive命令执行前触发 </td>
+</tr>
+<tr>
+<td>post-archive-cmd</td>
+<td style="text-align:center">在archive命令执行后触发 </td>
+</tr>
+<tr>
+<td>pre-package-install</td>
+<td style="text-align:center">在 资源包/第三方包/库 安装前触发 </td>
+</tr>
+<tr>
+<td>post-package-install</td>
+<td style="text-align:center">在 资源包/第三方包/库 安装后触发 </td>
+</tr>
+<tr>
+<td>pre-package-update</td>
+<td style="text-align:center">在 资源包/第三方包/库 更新前触发 </td>
+</tr>
+<tr>
+<td>post-package-update</td>
+<td style="text-align:center">在 资源包/第三方包/库 更新后触发 </td>
+</tr>
+<tr>
+<td>pre-package-uninstall</td>
+<td style="text-align:center">在 资源包/第三方包/库 卸载前触发 </td>
+</tr>
+<tr>
+<td>post-package-uninstall</td>
+<td style="text-align:center">在 资源包/第三方包/库 卸载后触发 </td>
+</tr>
+<tr>
+<td>pre-autoload-dump</td>
+<td style="text-align:center">在自动加载器被转储前触发，无论是<code>install/update</code>还是<code>dump-autoload</code>命令都会触发 </td>
+</tr>
+<tr>
+<td>post-autoload-dump</td>
+<td style="text-align:center">在自动加载器被转储后触发，无论是<code>install/update</code>还是<code>dump-autoload</code>命令都会触发 </td>
+</tr>
+<tr>
+<td>post-root-package-install</td>
+<td style="text-align:center">在<code>create-project</code>命令期间，根包安装完成后触发 </td>
+</tr>
+<tr>
+<td>post-create-project-cmd</td>
+<td style="text-align:center">在<code>create-project</code>命令执行后触发 </td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：composer自会执行处于项目根目录下的composer.json文件里定义的脚本。不会去执行处于依赖包中的composer.json文件里的<code>install</code>或<code>update</code>定义的脚本。如果需要执行<code>install</code>或<code>update</code>命令的脚本，要确保他们都是在项目根目录下的composer.json中定义</p>
+</blockquote>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; Composer.json &lt;/strong&gt;：该本文介绍该文件下的相关语法和关键字&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Composer" scheme="http://blog.zjien.com/categories/Composer/"/>
+    
+      <category term="PHP" scheme="http://blog.zjien.com/categories/Composer/PHP/"/>
+    
+      <category term="依赖管理" scheme="http://blog.zjien.com/categories/Composer/PHP/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+    
+    
+      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+    
+      <category term="Composer" scheme="http://blog.zjien.com/tags/Composer/"/>
+    
+      <category term="依赖管理" scheme="http://blog.zjien.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="composer基本使用" scheme="http://blog.zjien.com/tags/composer%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP的静/动态——全/局变量</title>
+    <link href="http://blog.zjien.com/2016/05/15/php-variables/"/>
+    <id>http://blog.zjien.com/2016/05/15/php-variables/</id>
+    <published>2016-05-15T06:25:07.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> PHP变量：本文介绍PHP的各种变量，全局静态变量、全局变量、局部静态变量、局部变量</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+<p><code>全局变量/局部变量</code>也即是<code>全局动态变量/局部动态变量</code>=<code>全局普通变量/局部普通变量</code>=<code>外部变量/内部变量</code></p>
+<p>实际上，全局变量(也即全局动态变量/全局普通变量)本身就是静态存储方式，所以全局静态变量也是静态存储方式。全局变量和静态变量都是存储在同一个地方。于是所有全局变量也是静态变量。</p>
+<p>静态变量不可以赋表达式，只可以赋常量或者常量表达式，如果定义时没有初始化，系统会自动初始化为0(int)或者’’(空string)。也即可以定义时不进行初始化。<br>普通变量一定要初始化，如果不进行初始化，那么在定义时它的值是不确定的</p>
+<h2 id="全局变量-全局动态变量"><a href="#全局变量-全局动态变量" class="headerlink" title="全局变量/全局动态变量"></a>全局变量/全局动态变量</h2><p>非全局静态变量（全局动态变量）的作用域是整个源程序，当一个源程序由多个源文件组成时，非静态的全局变量在各个源文件中都是有效的。</p>
+<h2 id="全局静态变量"><a href="#全局静态变量" class="headerlink" title="全局静态变量"></a>全局静态变量</h2><p>全局静态变量则限制了其作用域，只在定义该变量的源文件内有效，在同一源程序(一个源程序由多个源文件组成)的其它源文件中不能使用它。要定义/声明全局静态变量(外部静态变量)可以在前面加上<code>static</code>关键字</p>
+<h2 id="局部变量-局部动态变量"><a href="#局部变量-局部动态变量" class="headerlink" title="局部变量/局部动态变量"></a>局部变量/局部动态变量</h2><p>凡是局部变量（无论是普通变量还是静态变量）的作用域都是局限与某个小区域内（如函数），普通变量在每次函数调用完后，存储的内容都会消失（实际上不一定，这涉及到php的底层内核原理）</p>
+<h2 id="局部静态变量"><a href="#局部静态变量" class="headerlink" title="局部静态变量"></a>局部静态变量</h2><p>局部静态变量的作用域也是局限与某个小区域（如函数），不同的只是函数每次调用结束后，变量的值不会丢失而是依然存在，在下次函数被调用时，该可以从该静态变量获取之前的值。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>把局部变量改变为局部静态变量后是改变了它的存储方式，即改变了它的<code>生存期</code>。<br>把全局变量改变为全局静态变量后是改变了它的<code>作用域</code>，限制了它的使用范围。static静态变量会被放在程序的全局存储区中（即在程序的全局数据区，而不是在栈中分配，所以不会导致栈溢出），这样可以在下一次调用的时候还可以保持原来的赋值。这一点是它与栈变量和堆变量的区别。</p>
+<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">//--------------如何理解static静态变量-----------</span></div><div class="line"></div><div class="line"><span class="comment">/* 普通局部变量 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">local</span><span class="params">()</span> </span>&#123;</div><div class="line">	$loc = <span class="number">0</span>; <span class="comment">//这样，如果直接不给初值0是错误的。</span></div><div class="line">	++$loc;</div><div class="line">	<span class="keyword">echo</span> $loc . <span class="string">'&lt;br&gt;'</span>;</div><div class="line">&#125;</div><div class="line">local(); <span class="comment">//1</span></div><div class="line">local(); <span class="comment">//1</span></div><div class="line">local(); <span class="comment">//1</span></div><div class="line"><span class="keyword">echo</span> <span class="string">'===================================&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line"><span class="comment">/* static静态局部变量 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">static_local</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> $local = <span class="number">0</span> ; <span class="comment">//此处可以不赋0值</span></div><div class="line">	$local++;</div><div class="line">	<span class="keyword">echo</span> $local , <span class="string">'&lt;br&gt;'</span>;</div><div class="line">&#125;</div><div class="line">static_local(); <span class="comment">//1</span></div><div class="line">static_local(); <span class="comment">//2</span></div><div class="line">static_local(); <span class="comment">//3</span></div><div class="line"><span class="comment">//echo $local; 注意虽然静态变量，但是它仍然是局部的，在外不能直接访问的。</span></div><div class="line"><span class="keyword">echo</span> <span class="string">'=======================================&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line"><span class="comment">/* static全局静态变量(实际上:全局变量本身就是静态存储方式,所以所有的全局变量都是静态变量) */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">static_global</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">//global 就是引用外部的全局变量</span></div><div class="line">	<span class="keyword">global</span> $glo; <span class="comment">//此处，可以不赋值0，当然赋值0，后每次调用时其值都为0，每次调用函数得到的值都会是1，但是不能想当然的写上"static"加以修饰，那样是错误的.</span></div><div class="line">	$glo++;</div><div class="line">	<span class="keyword">echo</span> $glo . <span class="string">'&lt;br&gt;'</span>;</div><div class="line">&#125;</div><div class="line">static_global(); <span class="comment">//1</span></div><div class="line">static_global(); <span class="comment">//2</span></div><div class="line">static_global(); <span class="comment">//3</span></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p><a href="http://hao.jser.com/archive/7370/" title="参考" target="_blank" rel="external">本文参考：http://hao.jser.com/archive/7370/</a><br><a href="http://php.net/manual/zh/language.variables.scope.php" title="官方手册" target="_blank" rel="external">【php官方手册】</a></p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; PHP变量：本文介绍PHP的各种变量，全局静态变量、全局变量、局部静态变量、局部变量&lt;/strong&gt;&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/categories/PHP/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+    
+      <category term="变量" scheme="http://blog.zjien.com/tags/%E5%8F%98%E9%87%8F/"/>
+    
+      <category term="静/动态—全/局变量" scheme="http://blog.zjien.com/tags/%E9%9D%99-%E5%8A%A8%E6%80%81%E2%80%94%E5%85%A8-%E5%B1%80%E5%8F%98%E9%87%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP异常处理</title>
+    <link href="http://blog.zjien.com/2016/05/15/php-exception/"/>
+    <id>http://blog.zjien.com/2016/05/15/php-exception/</id>
+    <published>2016-05-15T04:17:46.000Z</published>
+    <updated>2017-02-12T12:23:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> PHP异常处理：异常与错误，以及对应的回调函数</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p><code>error_reporting()</code>；//填写遇到哪些错误/异常 系统才会抛出来，例如 <code>E_CORE_WARNING</code>、<code>E_NOTICE</code>、<code>E_DEPRECATED</code> 是可以忽略的，当设置后，发生这些异常，系统将不会抛出</p>
+<p>先分清error错误与Exception异常的区别</p>
+<h2 id="一、error-reporting"><a href="#一、error-reporting" class="headerlink" title="一、error_reporting"></a>一、error_reporting</h2><p><code>error_reporting()</code>函数可以获取/设置脚本处理哪些异常，该函数将覆盖php.ini中的<code>error_reporting</code>设置<br><code>error_reporting(E_ALL&amp;~E_NOTICE)</code>;//除了E_NOTICE其他异常都会被触发 （E_ALL&amp;~E_NOTICE 的二进制运算结果是：E_NOTICE对应位的值被设置为0,应注意到，错误和日志记录值都是一个二进制数,某一位设置为1）</p>
+<h2 id="二、try-catch、thrown"><a href="#二、try-catch、thrown" class="headerlink" title="二、try-catch、thrown"></a>二、try-catch、thrown</h2><p>注意：<code>try-catch</code>在 自动加载函数<code>__autoload</code>内无效。<br><code>try-catch</code> 用于捕获异常，无法捕获错误，例如 <code>trigger_error()</code> 触发的错误，异常和错误是不一样的。<br>然后一个try下可以跟多个catch，用以捕捉不同的异常类型。<br>若在catch中无法完全处理捕获的异常，可以再次抛出。<br><code>thrown</code> 抛出异常：<code>thrown new Exception(&#39;base Exception&#39;)</code>;</p>
+<h2 id="三、Exception及其子类"><a href="#三、Exception及其子类" class="headerlink" title="三、Exception及其子类"></a>三、Exception及其子类</h2><p>Exception是所有异常类的基类，当然我们可以扩展它<br>在多个catch匹配中，Exception基类应该是放在最后一个的，因为它是基类，如果其他异常类都不匹配，那么将会被最后一个catch的Exception捕获</p>
+<h2 id="四、Exception-异常的回调函数"><a href="#四、Exception-异常的回调函数" class="headerlink" title="四、Exception 异常的回调函数"></a>四、Exception 异常的回调函数</h2><p>在php中，有很多类似的回调函数，如脚本结束回调函数、错误回调函数、异常回调函数等。这里我们先介绍异常回调函数:<code>set_exception_handler($function_name)</code>;如:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">set_exception_handler(<span class="string">'myExceptionHanlderFunc'</span>);<span class="comment">//发生 Exception 或其 子类的 异常是会调用此函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myExceptionHanlderFunc</span><span class="params">($errorObj)</span> </span>&#123;<span class="comment">//Exception 异常的回调函数 只有一个参数，就是抛出的异常对象</span></div><div class="line"><span class="comment">//code goes here</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Exception 异常的回调函数并不能像 <code>set_error_handler</code> 的回调函数那样通过返回 true 来使异常被消除，即使回调函数处理了异常，后继代码也不会被继续执行（注意：抛出的异常即使没有被处理，脚本结束回调函数register_shutdown_function();还是可以被执行。），因此想继续执行后续代码必须使用 <code>try-catch</code>，在 <code>try-catch</code> 内被捕获的异常不会触发 <code>exception_handler</code>。</p>
+<p>脚本结束回调函数：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">register_shutdown_function(<span class="string">'myShutdownFunc'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myShutdownFunc</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="comment">//code goes here</span></div><div class="line"><span class="keyword">echo</span> <span class="string">'script is end'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因为 <code>myShutdownFunc()</code> 在脚本结束时被执行，所以 这个回调函数之内可以调用脚本中任意位置的函数，即使该函数定义在 错误抛出位置之后(函数定义是在 脚本编译期完成的)。</p>
+<h2 id="五、手动触发错误"><a href="#五、手动触发错误" class="headerlink" title="五、手动触发错误"></a>五、手动触发错误</h2><p><code>trigger_error(string errorMsg, [int user_error_type])</code><br>该函数用于主动手动触发一个错误： user_error_type 只能是 E_ALL、E_USER_ERROR、 E_USER_WARNING、 E_USER_NOTICE 或其组合的值。<br>好了，下面介绍下错误处理函数，该函数处理包括系统和用户抛出的Error，并且可以通过 返回true或者无返回值 来消除错误<br>注册错误处理函数：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置一个回调函数来处理错误，包括系统抛出的错误和用户使用 trigger_error() 函数触发的错误。</span></div><div class="line">set_error_handler(<span class="string">'myErrorHanlderFunc'</span>[,user_error_type]);<span class="comment">//可选参数 user_error_type.如果设定此参数，则 trigger_error 抛出的错误类型符合 在user_error_type 的定义范围才能触发回调函数。这个值的设置类似于error_reporting() 函数 。</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myErrorHanlderFunc</span><span class="params">($errType,$errMsg[,$errFile,$errLine,$errContext])</span> </span>&#123;</div><div class="line"><span class="comment">//error hanlder</span></div><div class="line"><span class="keyword">return</span> <span class="keyword">true</span>;<span class="comment">//或者不返回值，则消除错误</span></div><div class="line"><span class="comment">//return false;//返回false，则系统错误处理机制仍然继续抛出该错误，如果不处理，则报错并且终止脚本的运行</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>set_error_handler</code>里的第一个参数是一个函数名，该函数名将有5个参数，前两个是必须的，其他选填，分别为：<br><code>trigger_error</code> 抛出的 <code>user_error_type</code>、<code>trigger_error</code> 抛出的 errorMsg、抛出错误的文件的绝对路劲、抛出错误的行号、抛出错误时的上下文环境 (一个数组，包含了<code>trigger_error()</code> 所在作用域内的所有变量、函数、类等数据 )</p>
+<p>你可以使用 <code>set_error_handler()</code> 来将 PHP 程序 抛出的错误代理给 ErrorException使错误可以类似异常那样显示：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">error_handler</span><span class="params">($errorType, $errorMsg, $errorFile, $errorLine )</span> </span>&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'&lt;div style="color:red;"&gt;error_handler is called!&lt;/div&gt;'</span>;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> ErrorException($errorMsg, <span class="number">0</span>, $errorType, $errorFile, $errorLine);<span class="comment">//继续抛出ErrorException异常，catch可以获取到</span></div><div class="line">&#125;</div><div class="line">set_error_handler(<span class="string">'error_handler'</span>);</div><div class="line">count();</div><div class="line"></div><div class="line"> 用户使用 trigger_error()  触发的错误不会被 <span class="keyword">try</span>-<span class="keyword">catch</span> 异常捕获语句捕获。</div><div class="line"><span class="comment">//设置一个回调函数来处理错误，包括系统抛出的错误和用户使用 trigger_error() 函数触发的错误。</span></div><div class="line">set_error_handler(<span class="string">'myErrorHanlderFunc'</span>[,user_error_type]);<span class="comment">//可选参数 user_error_type.如果设定此参数，则 trigger_error 抛出的错误类型符合 在user_error_type 的定义范围才能触发回调函数。这个值的设置类似于error_reporting() 函数 。</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myErrorHanlderFunc</span><span class="params">($errType,$errMsg[,$errFile,$errLine,$errContext])</span> </span>&#123;</div><div class="line"><span class="comment">//error hanlder</span></div><div class="line"><span class="keyword">return</span> <span class="keyword">true</span>;<span class="comment">//或者不返回值，则消除错误</span></div><div class="line"><span class="comment">//return false;//返回false，则系统错误处理机制仍然继续抛出该错误，如果不处理，则报错并且终止脚本的运行</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; PHP异常处理：异常与错误，以及对应的回调函数&lt;/strong&gt;&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+    
+      <category term="基础" scheme="http://blog.zjien.com/categories/PHP/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+    
+      <category term="异常处理" scheme="http://blog.zjien.com/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+</feed>
