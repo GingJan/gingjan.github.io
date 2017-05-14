@@ -23,11 +23,11 @@ body {
   overflow-x: hidden;
 }
 body .blog {
+  background: url("http://mindstream.dev/user/static/bg_body.jpg");
   max-width: 1170px;
   min-height: 100vh;
   background-color: #fff;
   margin: 0 auto;
-  background: url("http://mindstream.dev/user/static/bg_body.jpg");
 }
 body .blog .content {
   box-sizing: border-box;
