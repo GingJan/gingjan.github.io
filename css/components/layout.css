@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 body .blog {
-  background: url("http://mindstream.dev/user/static/bg_body.jpg");
+  background: url("/img/blog-self/bg_body.jpg");
   max-width: 1170px;
   min-height: 100vh;
   margin: 0 auto;
