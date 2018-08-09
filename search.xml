@@ -4,6 +4,52 @@
   
     
     <entry>
+      <title><![CDATA[Composer常用基本命令]]></title>
+      <url>http://blog.zjien.com/2018/08/09/composer-command/</url>
+      <content type="html"><![CDATA[<p>　　<strong> Composer常用命令 </strong>：本文讲解并且亲测了常用的Composer命令<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>composer required</td>
+<td></td>
+<td>“xxx/xxx:v0.0.1”</td>
+<td>更新包，自动判断包存不存在，不存在就安装，存在就更新</td>
+</tr>
+<tr>
+<td>composer dump-autoload</td>
+<td></td>
+<td></td>
+<td>不更新依赖,只更新autoload文件</td>
+</tr>
+<tr>
+<td>composer install</td>
+<td></td>
+<td></td>
+<td>根据composer.lock 更新/安装依赖</td>
+</tr>
+<tr>
+<td>composer update</td>
+<td></td>
+<td></td>
+<td>根据composer.json 更新/安装依赖 并更新composer.lock文件</td>
+</tr>
+</tbody>
+</table>
+</the>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[如何在mac上解压分离的压缩文件]]></title>
       <url>http://blog.zjien.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</url>
       <content type="html"><![CDATA[<p>　　<strong>解压分离压缩文件</strong>：本篇文章向各位展示如何解压分离的压缩文件<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>

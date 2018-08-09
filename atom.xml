@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.zjien.com/"/>
-  <updated>2017-02-12T14:34:14.000Z</updated>
+  <updated>2018-08-09T09:23:52.000Z</updated>
   <id>http://blog.zjien.com/</id>
   
   <author>
@@ -14,6 +14,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Composer常用基本命令</title>
+    <link href="http://blog.zjien.com/2018/08/09/composer-command/"/>
+    <id>http://blog.zjien.com/2018/08/09/composer-command/</id>
+    <published>2018-08-09T09:18:33.000Z</published>
+    <updated>2018-08-09T09:23:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> Composer常用命令 </strong>：本文讲解并且亲测了常用的Composer命令<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>composer required</td>
+<td></td>
+<td>“xxx/xxx:v0.0.1”</td>
+<td>更新包，自动判断包存不存在，不存在就安装，存在就更新</td>
+</tr>
+<tr>
+<td>composer dump-autoload</td>
+<td></td>
+<td></td>
+<td>不更新依赖,只更新autoload文件</td>
+</tr>
+<tr>
+<td>composer install</td>
+<td></td>
+<td></td>
+<td>根据composer.lock 更新/安装依赖</td>
+</tr>
+<tr>
+<td>composer update</td>
+<td></td>
+<td></td>
+<td>根据composer.json 更新/安装依赖 并更新composer.lock文件</td>
+</tr>
+</tbody>
+</table>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      本文持续更新中…
+    
+    </summary>
+    
+      <category term="Composer" scheme="http://blog.zjien.com/categories/Composer/"/>
+    
+      <category term="Composer命令" scheme="http://blog.zjien.com/categories/Composer/Composer%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+    
+      <category term="Composer" scheme="http://blog.zjien.com/tags/Composer/"/>
+    
+      <category term="依赖管理" scheme="http://blog.zjien.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
   
   <entry>
     <title>如何在mac上解压分离的压缩文件</title>
@@ -1612,48 +1680,6 @@
       <category term="变量" scheme="http://blog.zjien.com/tags/%E5%8F%98%E9%87%8F/"/>
     
       <category term="静/动态—全/局变量" scheme="http://blog.zjien.com/tags/%E9%9D%99-%E5%8A%A8%E6%80%81%E2%80%94%E5%85%A8-%E5%B1%80%E5%8F%98%E9%87%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHP异常处理</title>
-    <link href="http://blog.zjien.com/2016/05/15/php-exception/"/>
-    <id>http://blog.zjien.com/2016/05/15/php-exception/</id>
-    <published>2016-05-15T04:17:46.000Z</published>
-    <updated>2017-02-12T12:23:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>　　<strong> PHP异常处理：异常与错误，以及对应的回调函数</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
-<a id="more"></a>
-<the rest="" of="" contents="" |="" 余下全文="">
-
-<p><code>error_reporting()</code>；//填写遇到哪些错误/异常 系统才会抛出来，例如 <code>E_CORE_WARNING</code>、<code>E_NOTICE</code>、<code>E_DEPRECATED</code> 是可以忽略的，当设置后，发生这些异常，系统将不会抛出</p>
-<p>先分清error错误与Exception异常的区别</p>
-<h2 id="一、error-reporting"><a href="#一、error-reporting" class="headerlink" title="一、error_reporting"></a>一、error_reporting</h2><p><code>error_reporting()</code>函数可以获取/设置脚本处理哪些异常，该函数将覆盖php.ini中的<code>error_reporting</code>设置<br><code>error_reporting(E_ALL&amp;~E_NOTICE)</code>;//除了E_NOTICE其他异常都会被触发 （E_ALL&amp;~E_NOTICE 的二进制运算结果是：E_NOTICE对应位的值被设置为0,应注意到，错误和日志记录值都是一个二进制数,某一位设置为1）</p>
-<h2 id="二、try-catch、thrown"><a href="#二、try-catch、thrown" class="headerlink" title="二、try-catch、thrown"></a>二、try-catch、thrown</h2><p>注意：<code>try-catch</code>在 自动加载函数<code>__autoload</code>内无效。<br><code>try-catch</code> 用于捕获异常，无法捕获错误，例如 <code>trigger_error()</code> 触发的错误，异常和错误是不一样的。<br>然后一个try下可以跟多个catch，用以捕捉不同的异常类型。<br>若在catch中无法完全处理捕获的异常，可以再次抛出。<br><code>thrown</code> 抛出异常：<code>thrown new Exception(&#39;base Exception&#39;)</code>;</p>
-<h2 id="三、Exception及其子类"><a href="#三、Exception及其子类" class="headerlink" title="三、Exception及其子类"></a>三、Exception及其子类</h2><p>Exception是所有异常类的基类，当然我们可以扩展它<br>在多个catch匹配中，Exception基类应该是放在最后一个的，因为它是基类，如果其他异常类都不匹配，那么将会被最后一个catch的Exception捕获</p>
-<h2 id="四、Exception-异常的回调函数"><a href="#四、Exception-异常的回调函数" class="headerlink" title="四、Exception 异常的回调函数"></a>四、Exception 异常的回调函数</h2><p>在php中，有很多类似的回调函数，如脚本结束回调函数、错误回调函数、异常回调函数等。这里我们先介绍异常回调函数:<code>set_exception_handler($function_name)</code>;如:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">set_exception_handler(<span class="string">'myExceptionHanlderFunc'</span>);<span class="comment">//发生 Exception 或其 子类的 异常是会调用此函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myExceptionHanlderFunc</span><span class="params">($errorObj)</span> </span>&#123;<span class="comment">//Exception 异常的回调函数 只有一个参数，就是抛出的异常对象</span></div><div class="line"><span class="comment">//code goes here</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Exception 异常的回调函数并不能像 <code>set_error_handler</code> 的回调函数那样通过返回 true 来使异常被消除，即使回调函数处理了异常，后继代码也不会被继续执行（注意：抛出的异常即使没有被处理，脚本结束回调函数register_shutdown_function();还是可以被执行。），因此想继续执行后续代码必须使用 <code>try-catch</code>，在 <code>try-catch</code> 内被捕获的异常不会触发 <code>exception_handler</code>。</p>
-<p>脚本结束回调函数：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">register_shutdown_function(<span class="string">'myShutdownFunc'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myShutdownFunc</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="comment">//code goes here</span></div><div class="line"><span class="keyword">echo</span> <span class="string">'script is end'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>因为 <code>myShutdownFunc()</code> 在脚本结束时被执行，所以 这个回调函数之内可以调用脚本中任意位置的函数，即使该函数定义在 错误抛出位置之后(函数定义是在 脚本编译期完成的)。</p>
-<h2 id="五、手动触发错误"><a href="#五、手动触发错误" class="headerlink" title="五、手动触发错误"></a>五、手动触发错误</h2><p><code>trigger_error(string errorMsg, [int user_error_type])</code><br>该函数用于主动手动触发一个错误： user_error_type 只能是 E_ALL、E_USER_ERROR、 E_USER_WARNING、 E_USER_NOTICE 或其组合的值。<br>好了，下面介绍下错误处理函数，该函数处理包括系统和用户抛出的Error，并且可以通过 返回true或者无返回值 来消除错误<br>注册错误处理函数：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置一个回调函数来处理错误，包括系统抛出的错误和用户使用 trigger_error() 函数触发的错误。</span></div><div class="line">set_error_handler(<span class="string">'myErrorHanlderFunc'</span>[,user_error_type]);<span class="comment">//可选参数 user_error_type.如果设定此参数，则 trigger_error 抛出的错误类型符合 在user_error_type 的定义范围才能触发回调函数。这个值的设置类似于error_reporting() 函数 。</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myErrorHanlderFunc</span><span class="params">($errType,$errMsg[,$errFile,$errLine,$errContext])</span> </span>&#123;</div><div class="line"><span class="comment">//error hanlder</span></div><div class="line"><span class="keyword">return</span> <span class="keyword">true</span>;<span class="comment">//或者不返回值，则消除错误</span></div><div class="line"><span class="comment">//return false;//返回false，则系统错误处理机制仍然继续抛出该错误，如果不处理，则报错并且终止脚本的运行</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><code>set_error_handler</code>里的第一个参数是一个函数名，该函数名将有5个参数，前两个是必须的，其他选填，分别为：<br><code>trigger_error</code> 抛出的 <code>user_error_type</code>、<code>trigger_error</code> 抛出的 errorMsg、抛出错误的文件的绝对路劲、抛出错误的行号、抛出错误时的上下文环境 (一个数组，包含了<code>trigger_error()</code> 所在作用域内的所有变量、函数、类等数据 )</p>
-<p>你可以使用 <code>set_error_handler()</code> 来将 PHP 程序 抛出的错误代理给 ErrorException使错误可以类似异常那样显示：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">error_handler</span><span class="params">($errorType, $errorMsg, $errorFile, $errorLine )</span> </span>&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">'&lt;div style="color:red;"&gt;error_handler is called!&lt;/div&gt;'</span>;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> ErrorException($errorMsg, <span class="number">0</span>, $errorType, $errorFile, $errorLine);<span class="comment">//继续抛出ErrorException异常，catch可以获取到</span></div><div class="line">&#125;</div><div class="line">set_error_handler(<span class="string">'error_handler'</span>);</div><div class="line">count();</div><div class="line"></div><div class="line"> 用户使用 trigger_error()  触发的错误不会被 <span class="keyword">try</span>-<span class="keyword">catch</span> 异常捕获语句捕获。</div><div class="line"><span class="comment">//设置一个回调函数来处理错误，包括系统抛出的错误和用户使用 trigger_error() 函数触发的错误。</span></div><div class="line">set_error_handler(<span class="string">'myErrorHanlderFunc'</span>[,user_error_type]);<span class="comment">//可选参数 user_error_type.如果设定此参数，则 trigger_error 抛出的错误类型符合 在user_error_type 的定义范围才能触发回调函数。这个值的设置类似于error_reporting() 函数 。</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myErrorHanlderFunc</span><span class="params">($errType,$errMsg[,$errFile,$errLine,$errContext])</span> </span>&#123;</div><div class="line"><span class="comment">//error hanlder</span></div><div class="line"><span class="keyword">return</span> <span class="keyword">true</span>;<span class="comment">//或者不返回值，则消除错误</span></div><div class="line"><span class="comment">//return false;//返回false，则系统错误处理机制仍然继续抛出该错误，如果不处理，则报错并且终止脚本的运行</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-</the>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　　&lt;strong&gt; PHP异常处理：异常与错误，以及对应的回调函数&lt;/strong&gt;&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
-    
-    </summary>
-    
-      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
-    
-      <category term="基础" scheme="http://blog.zjien.com/categories/PHP/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
-    
-      <category term="异常处理" scheme="http://blog.zjien.com/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
