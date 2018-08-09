@@ -50,13 +50,13 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/tags">Tags</a></li>
+        <li><a href="/tags">标签</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -202,6 +202,42 @@
 <td></td>
 <td>v1.0</td>
 <td>显示v1.0的日志</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1 ^branch-2</td>
+<td>查看 branch-1 有，而 branch-2 中没有的 commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-2 ^branch-1</td>
+<td>同理 查看 branch-2 有，而 branch-1 中没有的 commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1..branch-2</td>
+<td>查看 branch-2 中比 branch-1 中多提交了哪些commit，注意，列出来的是两个点后边（此处即branch-2）比前边（此处即branch-1）多提交的内容。</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-2..branch-1</td>
+<td>同理 查看 branch-1 中比 branch-2 中多提交了哪些commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1…branch-2</td>
+<td>不知道谁提交的多谁提交的少，单纯想知道有什么不一样，注意三个点</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>–left-right branch-1…branch-2</td>
+<td>在上述情况下，再显示出每个提交是在哪个分支上，注意 commit 后面的箭头，根据我们在 –left-right branch-1…branch-2 的顺序，左箭头 &lt; 表示是 branch-1 的，右箭头 &gt; 表示是 branch-2的。</td>
 </tr>
 <tr>
 <td>git show</td>
@@ -433,6 +469,72 @@
 </tr>
 </tbody>
 </table>
+<h3 id="分支对比"><a href="#分支对比" class="headerlink" title="分支对比"></a>分支对比</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git diff branch1 branch2</td>
+<td>–stat</td>
+<td></td>
+<td>显示出所有有差异的文件列表</td>
+</tr>
+<tr>
+<td>git diff branch1 branch2</td>
+<td></td>
+<td>文件名(带路径)</td>
+<td>显示指定文件的详细差异</td>
+</tr>
+<tr>
+<td>git diff branch1 branch2</td>
+<td></td>
+<td></td>
+<td>显示出所有有差异的文件的详细差异</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1 ^branch-2</td>
+<td>查看 branch-1 有，而 branch-2 中没有的 commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-2 ^branch-1</td>
+<td>同理 查看 branch-2 有，而 branch-1 中没有的 commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1..branch-2</td>
+<td>查看 branch-2 中比 branch-1 中多提交了哪些commit，注意，列出来的是两个点后边（此处即branch-2）比前边（此处即branch-1）多提交的内容。</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-2..branch-1</td>
+<td>同理 查看 branch-1 中比 branch-2 中多提交了哪些commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1…branch-2</td>
+<td>不知道谁提交的多谁提交的少，单纯想知道有什么不一样，注意三个点</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>–left-right branch-1…branch-2</td>
+<td>在上述情况下，再显示出每个提交是在哪个分支上，注意 commit 后面的箭头，根据我们在 –left-right branch-1…branch-2 的顺序，左箭头 &lt; 表示是 branch-1 的，右箭头 &gt; 表示是 branch-2的。</td>
+</tr>
+</tbody>
+</table>
 <h3 id="修改commit"><a href="#修改commit" class="headerlink" title="修改commit"></a>修改commit</h3><table>
 <thead>
 <tr>
@@ -510,7 +612,7 @@
     Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
     </br>
     
-    &copy; 2017 Zjien
+    &copy; 2018 Zjien
     
   </p>
 </footer>
