@@ -4,6 +4,23 @@
   
     
     <entry>
+      <title><![CDATA[如何选择AES加密模式(CBC ECB CTR OCB CFB)]]></title>
+      <url>http://blog.zjien.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/</url>
+      <content type="html"><![CDATA[<p>　　<strong> AES加密模式的选择 </strong>：<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p>如果加密的数据块超过 1 block则不要选择ECB模式</p>
+<p>CBC, OFB 和 CFB 模式很相似,然而如果你只是要加密而不需要解密,则选择OFB或CFB更合适,因为这两种模式可以节约空间</p>
+<p>如果需要更快的加密速度(并行加密),选择CTR 而不是 CBC/OFB/CFB.</p>
+<p>如果需要 对随机访问介质内的数据(如磁盘或内存中的数据)进行加密,选择XTS模式更合适</p>
+<p>OCB是目前为止最好的模式,因为它可以一次性对数据进行加密和验证,然后在美国该模式是需要专利授权的</p>
+<p>ECB 很少使用到除非只是加密1个数据块.如果是加密磁盘或内存的数据而不是stream(stream是一段一段的),XTS应该更适合你</p>
+<p>每次加密时都要使用唯一且随机的IV(init vector,初始化向量),如果你无法保证随机性,则使用OCB模式,因为它只需要传入nonce而无需传入IV,IV和nonce这两个有点不同,如果被人猜到下一个nonce是不会导致安全问题,而被人猜到下一个IV则会导致安全问题(因为需要保证IV每次是随机的)</p>
+</the>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Composer常用基本命令]]></title>
       <url>http://blog.zjien.com/2018/08/09/composer-command/</url>
       <content type="html"><![CDATA[<p>　　<strong> Composer常用命令 </strong>：本文讲解并且亲测了常用的Composer命令<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>

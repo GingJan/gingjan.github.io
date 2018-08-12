@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.zjien.com/"/>
-  <updated>2018-08-09T09:23:52.000Z</updated>
+  <updated>2018-08-12T09:05:52.000Z</updated>
   <id>http://blog.zjien.com/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何选择AES加密模式(CBC ECB CTR OCB CFB)</title>
+    <link href="http://blog.zjien.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/"/>
+    <id>http://blog.zjien.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/</id>
+    <published>2018-08-12T03:39:41.000Z</published>
+    <updated>2018-08-12T09:05:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　<strong> AES加密模式的选择 </strong>：<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<p>如果加密的数据块超过 1 block则不要选择ECB模式</p>
+<p>CBC, OFB 和 CFB 模式很相似,然而如果你只是要加密而不需要解密,则选择OFB或CFB更合适,因为这两种模式可以节约空间</p>
+<p>如果需要更快的加密速度(并行加密),选择CTR 而不是 CBC/OFB/CFB.</p>
+<p>如果需要 对随机访问介质内的数据(如磁盘或内存中的数据)进行加密,选择XTS模式更合适</p>
+<p>OCB是目前为止最好的模式,因为它可以一次性对数据进行加密和验证,然后在美国该模式是需要专利授权的</p>
+<p>ECB 很少使用到除非只是加密1个数据块.如果是加密磁盘或内存的数据而不是stream(stream是一段一段的),XTS应该更适合你</p>
+<p>每次加密时都要使用唯一且随机的IV(init vector,初始化向量),如果你无法保证随机性,则使用OCB模式,因为它只需要传入nonce而无需传入IV,IV和nonce这两个有点不同,如果被人猜到下一个nonce是不会导致安全问题,而被人猜到下一个IV则会导致安全问题(因为需要保证IV每次是随机的)</p>
+</the>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　&lt;strong&gt; AES加密模式的选择 &lt;/strong&gt;：&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="AES" scheme="http://blog.zjien.com/categories/AES/"/>
+    
+      <category term="加密算法" scheme="http://blog.zjien.com/categories/AES/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="加密" scheme="http://blog.zjien.com/tags/%E5%8A%A0%E5%AF%86/"/>
+    
+      <category term="AES" scheme="http://blog.zjien.com/tags/AES/"/>
+    
+      <category term="算法" scheme="http://blog.zjien.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Composer常用基本命令</title>
@@ -1637,49 +1676,6 @@
       <category term="依赖管理" scheme="http://blog.zjien.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
     
       <category term="composer基本使用" scheme="http://blog.zjien.com/tags/composer%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHP的静/动态——全/局变量</title>
-    <link href="http://blog.zjien.com/2016/05/15/php-variables/"/>
-    <id>http://blog.zjien.com/2016/05/15/php-variables/</id>
-    <published>2016-05-15T06:25:07.000Z</published>
-    <updated>2017-02-12T12:23:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>　　<strong> PHP变量：本文介绍PHP的各种变量，全局静态变量、全局变量、局部静态变量、局部变量</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
-<a id="more"></a>
-<the rest="" of="" contents="" |="" 余下全文="">
-
-
-<p><code>全局变量/局部变量</code>也即是<code>全局动态变量/局部动态变量</code>=<code>全局普通变量/局部普通变量</code>=<code>外部变量/内部变量</code></p>
-<p>实际上，全局变量(也即全局动态变量/全局普通变量)本身就是静态存储方式，所以全局静态变量也是静态存储方式。全局变量和静态变量都是存储在同一个地方。于是所有全局变量也是静态变量。</p>
-<p>静态变量不可以赋表达式，只可以赋常量或者常量表达式，如果定义时没有初始化，系统会自动初始化为0(int)或者’’(空string)。也即可以定义时不进行初始化。<br>普通变量一定要初始化，如果不进行初始化，那么在定义时它的值是不确定的</p>
-<h2 id="全局变量-全局动态变量"><a href="#全局变量-全局动态变量" class="headerlink" title="全局变量/全局动态变量"></a>全局变量/全局动态变量</h2><p>非全局静态变量（全局动态变量）的作用域是整个源程序，当一个源程序由多个源文件组成时，非静态的全局变量在各个源文件中都是有效的。</p>
-<h2 id="全局静态变量"><a href="#全局静态变量" class="headerlink" title="全局静态变量"></a>全局静态变量</h2><p>全局静态变量则限制了其作用域，只在定义该变量的源文件内有效，在同一源程序(一个源程序由多个源文件组成)的其它源文件中不能使用它。要定义/声明全局静态变量(外部静态变量)可以在前面加上<code>static</code>关键字</p>
-<h2 id="局部变量-局部动态变量"><a href="#局部变量-局部动态变量" class="headerlink" title="局部变量/局部动态变量"></a>局部变量/局部动态变量</h2><p>凡是局部变量（无论是普通变量还是静态变量）的作用域都是局限与某个小区域内（如函数），普通变量在每次函数调用完后，存储的内容都会消失（实际上不一定，这涉及到php的底层内核原理）</p>
-<h2 id="局部静态变量"><a href="#局部静态变量" class="headerlink" title="局部静态变量"></a>局部静态变量</h2><p>局部静态变量的作用域也是局限与某个小区域（如函数），不同的只是函数每次调用结束后，变量的值不会丢失而是依然存在，在下次函数被调用时，该可以从该静态变量获取之前的值。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>把局部变量改变为局部静态变量后是改变了它的存储方式，即改变了它的<code>生存期</code>。<br>把全局变量改变为全局静态变量后是改变了它的<code>作用域</code>，限制了它的使用范围。static静态变量会被放在程序的全局存储区中（即在程序的全局数据区，而不是在栈中分配，所以不会导致栈溢出），这样可以在下一次调用的时候还可以保持原来的赋值。这一点是它与栈变量和堆变量的区别。</p>
-<h2 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">//--------------如何理解static静态变量-----------</span></div><div class="line"></div><div class="line"><span class="comment">/* 普通局部变量 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">local</span><span class="params">()</span> </span>&#123;</div><div class="line">	$loc = <span class="number">0</span>; <span class="comment">//这样，如果直接不给初值0是错误的。</span></div><div class="line">	++$loc;</div><div class="line">	<span class="keyword">echo</span> $loc . <span class="string">'&lt;br&gt;'</span>;</div><div class="line">&#125;</div><div class="line">local(); <span class="comment">//1</span></div><div class="line">local(); <span class="comment">//1</span></div><div class="line">local(); <span class="comment">//1</span></div><div class="line"><span class="keyword">echo</span> <span class="string">'===================================&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line"><span class="comment">/* static静态局部变量 */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">static_local</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> $local = <span class="number">0</span> ; <span class="comment">//此处可以不赋0值</span></div><div class="line">	$local++;</div><div class="line">	<span class="keyword">echo</span> $local , <span class="string">'&lt;br&gt;'</span>;</div><div class="line">&#125;</div><div class="line">static_local(); <span class="comment">//1</span></div><div class="line">static_local(); <span class="comment">//2</span></div><div class="line">static_local(); <span class="comment">//3</span></div><div class="line"><span class="comment">//echo $local; 注意虽然静态变量，但是它仍然是局部的，在外不能直接访问的。</span></div><div class="line"><span class="keyword">echo</span> <span class="string">'=======================================&lt;br/&gt;'</span>;</div><div class="line"></div><div class="line"><span class="comment">/* static全局静态变量(实际上:全局变量本身就是静态存储方式,所以所有的全局变量都是静态变量) */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">static_global</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">//global 就是引用外部的全局变量</span></div><div class="line">	<span class="keyword">global</span> $glo; <span class="comment">//此处，可以不赋值0，当然赋值0，后每次调用时其值都为0，每次调用函数得到的值都会是1，但是不能想当然的写上"static"加以修饰，那样是错误的.</span></div><div class="line">	$glo++;</div><div class="line">	<span class="keyword">echo</span> $glo . <span class="string">'&lt;br&gt;'</span>;</div><div class="line">&#125;</div><div class="line">static_global(); <span class="comment">//1</span></div><div class="line">static_global(); <span class="comment">//2</span></div><div class="line">static_global(); <span class="comment">//3</span></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
-<p><a href="http://hao.jser.com/archive/7370/" title="参考" target="_blank" rel="external">本文参考：http://hao.jser.com/archive/7370/</a><br><a href="http://php.net/manual/zh/language.variables.scope.php" title="官方手册" target="_blank" rel="external">【php官方手册】</a></p>
-</the>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　　&lt;strong&gt; PHP变量：本文介绍PHP的各种变量，全局静态变量、全局变量、局部静态变量、局部变量&lt;/strong&gt;&lt;br&gt;    &lt;Excerpt in index | 首页摘要&gt; &lt;/p&gt;
-    
-    </summary>
-    
-      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
-    
-      <category term="基础" scheme="http://blog.zjien.com/categories/PHP/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
-    
-      <category term="变量" scheme="http://blog.zjien.com/tags/%E5%8F%98%E9%87%8F/"/>
-    
-      <category term="静/动态—全/局变量" scheme="http://blog.zjien.com/tags/%E9%9D%99-%E5%8A%A8%E6%80%81%E2%80%94%E5%85%A8-%E5%B1%80%E5%8F%98%E9%87%8F/"/>
     
   </entry>
   
