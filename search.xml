@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[如何选择AES加密模式(CBC ECB CTR OCB CFB)]]></title>
-      <url>http://blog.zjien.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/</url>
+      <url>http://gingjan.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/</url>
       <content type="html"><![CDATA[<p>　　<strong> AES加密模式的选择 </strong>：<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -22,7 +22,7 @@
     
     <entry>
       <title><![CDATA[Composer常用基本命令]]></title>
-      <url>http://blog.zjien.com/2018/08/09/composer-command/</url>
+      <url>http://gingjan.com/2018/08/09/composer-command/</url>
       <content type="html"><![CDATA[<p>　　<strong> Composer常用命令 </strong>：本文讲解并且亲测了常用的Composer命令<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -68,7 +68,7 @@
     
     <entry>
       <title><![CDATA[如何在mac上解压分离的压缩文件]]></title>
-      <url>http://blog.zjien.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</url>
+      <url>http://gingjan.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</url>
       <content type="html"><![CDATA[<p>　　<strong>解压分离压缩文件</strong>：本篇文章向各位展示如何解压分离的压缩文件<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""><br>首先，目前据我所知，有两种不同类型的分离压缩文件</the></p>
@@ -91,7 +91,7 @@
     
     <entry>
       <title><![CDATA[Linux-让耗时任务在后台运行]]></title>
-      <url>http://blog.zjien.com/2016/09/01/Linux-run-in-background/</url>
+      <url>http://gingjan.com/2016/09/01/Linux-run-in-background/</url>
       <content type="html"><![CDATA[<p>　　<strong> 让终端的任务/耗时任务在后台运行 </strong>：我们在终端中打开耗时任务时，无法进行其他操作或者当网络端口时，任务未执行完毕就终止了。有什么办法令任务在后台运行呢？<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -114,7 +114,7 @@
     
     <entry>
       <title><![CDATA[查看一次SQL的执行时间与相关参数]]></title>
-      <url>http://blog.zjien.com/2016/07/03/mysql-sql-execution-check-out/</url>
+      <url>http://gingjan.com/2016/07/03/mysql-sql-execution-check-out/</url>
       <content type="html"><![CDATA[<p>　　<strong> mysql之sql执行过程窥探 </strong>：本文讲解如何窥探sql执行过程的相关参数<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -131,7 +131,7 @@
     
     <entry>
       <title><![CDATA[REST API 响应状态码]]></title>
-      <url>http://blog.zjien.com/2016/06/21/rest-status-code-setting/</url>
+      <url>http://gingjan.com/2016/06/21/rest-status-code-setting/</url>
       <content type="html"><![CDATA[<p>　　<strong> 响应状态码 </strong>：本文简单介绍了设计REST API时，返回的响应应该设置什么样的状态码<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -360,7 +360,7 @@
     
     <entry>
       <title><![CDATA[Yii的redirect()方法无法终止执行代码]]></title>
-      <url>http://blog.zjien.com/2016/06/16/yii-redirect-cannot-stop-execution/</url>
+      <url>http://gingjan.com/2016/06/16/yii-redirect-cannot-stop-execution/</url>
       <content type="html"><![CDATA[<p>　　<strong> 坑爹的redirect() </strong>：在controller里的redirect方法在跳转后，无法终止后续代码的执行。特别在init方法中更棘手。<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -378,7 +378,7 @@
     
     <entry>
       <title><![CDATA[在Yii中如何处理级联删除]]></title>
-      <url>http://blog.zjien.com/2016/06/13/cascade-delete-in-yii/</url>
+      <url>http://gingjan.com/2016/06/13/cascade-delete-in-yii/</url>
       <content type="html"><![CDATA[<p>　　<strong> Yii的级联删除 </strong>：本文讲解通过Yii在代码层进行级联删除<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""><br>数据库表里使用了外键并且使用了Restrict模式，导致删除一张表的记录时，因为外键和其他表关联起来了，导致无法删除，需要把关联表的记录同时也删除了才可以操作目标表记录的删除操作。</the></p>
@@ -388,7 +388,7 @@
     
     <entry>
       <title><![CDATA[访问修饰符的意义]]></title>
-      <url>http://blog.zjien.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</url>
+      <url>http://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</url>
       <content type="html"><![CDATA[<p>　　<strong> 访问修饰符和访问控制的意义 </strong>：本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法<strong>get()和</strong>set()的使用<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -420,7 +420,7 @@
     
     <entry>
       <title><![CDATA[Yii框架的服务定位器]]></title>
-      <url>http://blog.zjien.com/2016/06/02/yii-service-locator/</url>
+      <url>http://gingjan.com/2016/06/02/yii-service-locator/</url>
       <content type="html"><![CDATA[<p>　　<strong> Yii——组件注册 </strong>：Yii的组件相当于Laravel的服务，同样需要注册到一个IOC容器中，以便在应用其他地方使用这些组件/服务<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -441,7 +441,7 @@
     
     <entry>
       <title><![CDATA[Javascript的单线程和异步之间的关系]]></title>
-      <url>http://blog.zjien.com/2016/06/01/js-async-singleThread-queue/</url>
+      <url>http://gingjan.com/2016/06/01/js-async-singleThread-queue/</url>
       <content type="html"><![CDATA[<p>　　<strong> js的异步、线程、队列 </strong>：本文介绍javascript的异步和单线程的关系，以及简单解释了单线程的js怎么异步处理。<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
@@ -460,7 +460,7 @@
     
     <entry>
       <title><![CDATA[超时调用和循环调用]]></title>
-      <url>http://blog.zjien.com/2016/05/25/settimeout-and-setintervel/</url>
+      <url>http://gingjan.com/2016/05/25/settimeout-and-setintervel/</url>
       <content type="html"><![CDATA[<p>　　<strong> setTimeout和setInterval </strong>：本文介绍这两个浏览器提供的api及其底层的原理<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -479,7 +479,7 @@
     
     <entry>
       <title><![CDATA[Git常用基本命令]]></title>
-      <url>http://blog.zjien.com/2016/05/24/git-command/</url>
+      <url>http://gingjan.com/2016/05/24/git-command/</url>
       <content type="html"><![CDATA[<p>　　<strong> Git常用命令 </strong>：本文讲解并且亲测了常用的Git命令<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -696,7 +696,19 @@
 <td>git push</td>
 <td>–tags</td>
 <td></td>
-<td>把标签推送到远程仓库，不加–tags参数默认是不会把标签推送到远程的</td>
+<td>把本地全部标签推送到远程仓库，不加–tags参数默认是不会把标签推送到远程的</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>remote_host</td>
+<td>v1.0.1</td>
+<td>推送本地指定标签到远程</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>remote_host –delete tag</td>
+<td>v1.0.1</td>
+<td>删除远程指定标签</td>
 </tr>
 <tr>
 <td>git clone</td>
@@ -968,7 +980,7 @@
     
     <entry>
       <title><![CDATA[同步编程与异步编程的转换和对比]]></title>
-      <url>http://blog.zjien.com/2016/05/24/sync-vs-async-and-they-transfers/</url>
+      <url>http://gingjan.com/2016/05/24/sync-vs-async-and-they-transfers/</url>
       <content type="html"><![CDATA[<p>　　<strong> 同步转换异步 </strong>： 本文介绍了nodejs下的同步模型转换成异步模型（异步代码的设计）<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -997,7 +1009,7 @@
     
     <entry>
       <title><![CDATA[push.default的matching和simple]]></title>
-      <url>http://blog.zjien.com/2016/05/22/git-push-default/</url>
+      <url>http://gingjan.com/2016/05/22/git-push-default/</url>
       <content type="html"><![CDATA[<p>　　<strong> push.default的设置 </strong>：本文介绍push.default的两种设置，因为有两种不同设置是因为Git版本升级，导致默认设置不一样。<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -1012,7 +1024,7 @@
     
     <entry>
       <title><![CDATA[标题和段落文字大小以及排版设计]]></title>
-      <url>http://blog.zjien.com/2016/05/20/title-paragraph-font-size/</url>
+      <url>http://gingjan.com/2016/05/20/title-paragraph-font-size/</url>
       <content type="html"><![CDATA[<p>　　<strong> 标题和段落字体大小 </strong>：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""><br>这一类的排版建议把标题设置为默认字体大小的1.125em，也即1.125倍，而正文字体为0.75em，line-height为相对正文字体大小的1.5em（注意不是相对默认字体16px设定，是相对正文字体大小设定），建议再设置标题块（如h1）和段落块（如p）的margin同为相对正文字体大小的1.5em。下面我们写出具体代码以及解释</the></p>
@@ -1027,7 +1039,7 @@
     
     <entry>
       <title><![CDATA[em/百分比/px/pt 的区别]]></title>
-      <url>http://blog.zjien.com/2016/05/19/em-percent-and-px-pt/</url>
+      <url>http://gingjan.com/2016/05/19/em-percent-and-px-pt/</url>
       <content type="html"><![CDATA[<p>　　<strong> css中的4种单位的对比 </strong>：当然不只这4种单位，我们这里只是讨论最常用的这4种单位<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -1051,7 +1063,7 @@
     
     <entry>
       <title><![CDATA[负值margin]]></title>
-      <url>http://blog.zjien.com/2016/05/18/negative-margin/</url>
+      <url>http://gingjan.com/2016/05/18/negative-margin/</url>
       <content type="html"><![CDATA[<p>　　<strong> margin </strong>：当margin取负值时，会发生什么有趣的事情呢？<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""><br>我们来谈谈使用负margin的好处以及用法：<code>margin: -100px;</code></the></p>
@@ -1069,7 +1081,7 @@
     
     <entry>
       <title><![CDATA[PHP生成器函数及yield关键字]]></title>
-      <url>http://blog.zjien.com/2016/05/16/php-generator-function-and-yield/</url>
+      <url>http://gingjan.com/2016/05/16/php-generator-function-and-yield/</url>
       <content type="html"><![CDATA[<p>　　<strong> 生成器函数：本文介绍了PHP的生成器函数和yield关键字的作用以及用法</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
@@ -1088,7 +1100,7 @@
     
     <entry>
       <title><![CDATA[使用Composer的脚本/scripts属性]]></title>
-      <url>http://blog.zjien.com/2016/05/16/composer-scripts/</url>
+      <url>http://gingjan.com/2016/05/16/composer-scripts/</url>
       <content type="html"><![CDATA[<p>　　<strong> Composer.json </strong>：该本文介绍该文件下的相关语法和关键字<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -1195,7 +1207,7 @@
     
     <entry>
       <title><![CDATA[PHP的静/动态——全/局变量]]></title>
-      <url>http://blog.zjien.com/2016/05/15/php-variables/</url>
+      <url>http://gingjan.com/2016/05/15/php-variables/</url>
       <content type="html"><![CDATA[<p>　　<strong> PHP变量：本文介绍PHP的各种变量，全局静态变量、全局变量、局部静态变量、局部变量</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -1216,7 +1228,7 @@
     
     <entry>
       <title><![CDATA[PHP异常处理]]></title>
-      <url>http://blog.zjien.com/2016/05/15/php-exception/</url>
+      <url>http://gingjan.com/2016/05/15/php-exception/</url>
       <content type="html"><![CDATA[<p>　　<strong> PHP异常处理：异常与错误，以及对应的回调函数</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -1238,7 +1250,7 @@
     
     <entry>
       <title><![CDATA[require/include的区别]]></title>
-      <url>http://blog.zjien.com/2016/05/12/require-and-include/</url>
+      <url>http://gingjan.com/2016/05/12/require-and-include/</url>
       <content type="html"><![CDATA[<p>　　<strong> 引入文件：引入文件有4种方式，require、include、require_once/include_once</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -1262,7 +1274,7 @@
     
     <entry>
       <title><![CDATA[CSS响应式网页布局]]></title>
-      <url>http://blog.zjien.com/2016/05/05/css-responsive-layout/</url>
+      <url>http://gingjan.com/2016/05/05/css-responsive-layout/</url>
       <content type="html"><![CDATA[<p>　　<strong> CSS响应式网页布局：目前，响应式网页布局有5种模式：mostly fluid , column drop , layout shifter , tiny tweaks , off canvas</strong><br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">

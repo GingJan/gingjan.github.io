@@ -4,12 +4,12 @@
   <subtitle>技术令人向往，但更令人向往的是——生活。</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://blog.zjien.com/"/>
+  <link href="http://gingjan.com/"/>
   <updated>2018-08-12T09:05:52.000Z</updated>
-  <id>http://blog.zjien.com/</id>
+  <id>http://gingjan.com/</id>
   
   <author>
-    <name>Zjien</name>
+    <name>GingJan</name>
     
   </author>
   
@@ -17,8 +17,8 @@
   
   <entry>
     <title>如何选择AES加密模式(CBC ECB CTR OCB CFB)</title>
-    <link href="http://blog.zjien.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/"/>
-    <id>http://blog.zjien.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/</id>
+    <link href="http://gingjan.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/"/>
+    <id>http://gingjan.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/</id>
     <published>2018-08-12T03:39:41.000Z</published>
     <updated>2018-08-12T09:05:52.000Z</updated>
     
@@ -41,23 +41,23 @@
     
     </summary>
     
-      <category term="AES" scheme="http://blog.zjien.com/categories/AES/"/>
+      <category term="AES" scheme="http://gingjan.com/categories/AES/"/>
     
-      <category term="加密算法" scheme="http://blog.zjien.com/categories/AES/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
+      <category term="加密算法" scheme="http://gingjan.com/categories/AES/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="加密" scheme="http://blog.zjien.com/tags/%E5%8A%A0%E5%AF%86/"/>
+      <category term="加密" scheme="http://gingjan.com/tags/%E5%8A%A0%E5%AF%86/"/>
     
-      <category term="AES" scheme="http://blog.zjien.com/tags/AES/"/>
+      <category term="AES" scheme="http://gingjan.com/tags/AES/"/>
     
-      <category term="算法" scheme="http://blog.zjien.com/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="http://gingjan.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>Composer常用基本命令</title>
-    <link href="http://blog.zjien.com/2018/08/09/composer-command/"/>
-    <id>http://blog.zjien.com/2018/08/09/composer-command/</id>
+    <link href="http://gingjan.com/2018/08/09/composer-command/"/>
+    <id>http://gingjan.com/2018/08/09/composer-command/</id>
     <published>2018-08-09T09:18:33.000Z</published>
     <updated>2018-08-09T09:23:52.000Z</updated>
     
@@ -109,23 +109,23 @@
     
     </summary>
     
-      <category term="Composer" scheme="http://blog.zjien.com/categories/Composer/"/>
+      <category term="Composer" scheme="http://gingjan.com/categories/Composer/"/>
     
-      <category term="Composer命令" scheme="http://blog.zjien.com/categories/Composer/Composer%E5%91%BD%E4%BB%A4/"/>
+      <category term="Composer命令" scheme="http://gingjan.com/categories/Composer/Composer%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/tags/PHP/"/>
     
-      <category term="Composer" scheme="http://blog.zjien.com/tags/Composer/"/>
+      <category term="Composer" scheme="http://gingjan.com/tags/Composer/"/>
     
-      <category term="依赖管理" scheme="http://blog.zjien.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+      <category term="依赖管理" scheme="http://gingjan.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>如何在mac上解压分离的压缩文件</title>
-    <link href="http://blog.zjien.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/"/>
-    <id>http://blog.zjien.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</id>
+    <link href="http://gingjan.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/"/>
+    <id>http://gingjan.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</id>
     <published>2017-02-12T14:04:40.000Z</published>
     <updated>2017-02-12T14:34:14.000Z</updated>
     
@@ -154,23 +154,23 @@
     
     </summary>
     
-      <category term="Mac" scheme="http://blog.zjien.com/categories/Mac/"/>
+      <category term="Mac" scheme="http://gingjan.com/categories/Mac/"/>
     
-      <category term="OS X" scheme="http://blog.zjien.com/categories/Mac/OS-X/"/>
+      <category term="OS X" scheme="http://gingjan.com/categories/Mac/OS-X/"/>
     
-      <category term="Commonly Command" scheme="http://blog.zjien.com/categories/Mac/OS-X/Commonly-Command/"/>
+      <category term="Commonly Command" scheme="http://gingjan.com/categories/Mac/OS-X/Commonly-Command/"/>
     
     
-      <category term="Mac" scheme="http://blog.zjien.com/tags/Mac/"/>
+      <category term="Mac" scheme="http://gingjan.com/tags/Mac/"/>
     
-      <category term="Command" scheme="http://blog.zjien.com/tags/Command/"/>
+      <category term="Command" scheme="http://gingjan.com/tags/Command/"/>
     
   </entry>
   
   <entry>
     <title>Linux-让耗时任务在后台运行</title>
-    <link href="http://blog.zjien.com/2016/09/01/Linux-run-in-background/"/>
-    <id>http://blog.zjien.com/2016/09/01/Linux-run-in-background/</id>
+    <link href="http://gingjan.com/2016/09/01/Linux-run-in-background/"/>
+    <id>http://gingjan.com/2016/09/01/Linux-run-in-background/</id>
     <published>2016-09-01T04:10:41.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -199,21 +199,21 @@
     
     </summary>
     
-      <category term="Linux命令" scheme="http://blog.zjien.com/categories/Linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="Linux命令" scheme="http://gingjan.com/categories/Linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="Linux" scheme="http://blog.zjien.com/tags/Linux/"/>
+      <category term="Linux" scheme="http://gingjan.com/tags/Linux/"/>
     
-      <category term="Linux命令" scheme="http://blog.zjien.com/tags/Linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="Linux命令" scheme="http://gingjan.com/tags/Linux%E5%91%BD%E4%BB%A4/"/>
     
-      <category term="耗时任务" scheme="http://blog.zjien.com/tags/%E8%80%97%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
+      <category term="耗时任务" scheme="http://gingjan.com/tags/%E8%80%97%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
     
   </entry>
   
   <entry>
     <title>查看一次SQL的执行时间与相关参数</title>
-    <link href="http://blog.zjien.com/2016/07/03/mysql-sql-execution-check-out/"/>
-    <id>http://blog.zjien.com/2016/07/03/mysql-sql-execution-check-out/</id>
+    <link href="http://gingjan.com/2016/07/03/mysql-sql-execution-check-out/"/>
+    <id>http://gingjan.com/2016/07/03/mysql-sql-execution-check-out/</id>
     <published>2016-07-03T09:02:47.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -236,31 +236,31 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://blog.zjien.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="Database" scheme="http://blog.zjien.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Database/"/>
+      <category term="Database" scheme="http://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Database/"/>
     
-      <category term="Mysql" scheme="http://blog.zjien.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Database/Mysql/"/>
+      <category term="Mysql" scheme="http://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Database/Mysql/"/>
     
     
-      <category term="数据库优化" scheme="http://blog.zjien.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/"/>
+      <category term="数据库优化" scheme="http://gingjan.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8C%96/"/>
     
-      <category term="查询优化" scheme="http://blog.zjien.com/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
+      <category term="查询优化" scheme="http://gingjan.com/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/"/>
     
-      <category term="性能优化" scheme="http://blog.zjien.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+      <category term="性能优化" scheme="http://gingjan.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-      <category term="mysql" scheme="http://blog.zjien.com/tags/mysql/"/>
+      <category term="mysql" scheme="http://gingjan.com/tags/mysql/"/>
     
-      <category term="SQL" scheme="http://blog.zjien.com/tags/SQL/"/>
+      <category term="SQL" scheme="http://gingjan.com/tags/SQL/"/>
     
-      <category term="SQL执行" scheme="http://blog.zjien.com/tags/SQL%E6%89%A7%E8%A1%8C/"/>
+      <category term="SQL执行" scheme="http://gingjan.com/tags/SQL%E6%89%A7%E8%A1%8C/"/>
     
   </entry>
   
   <entry>
     <title>REST API 响应状态码</title>
-    <link href="http://blog.zjien.com/2016/06/21/rest-status-code-setting/"/>
-    <id>http://blog.zjien.com/2016/06/21/rest-status-code-setting/</id>
+    <link href="http://gingjan.com/2016/06/21/rest-status-code-setting/"/>
+    <id>http://gingjan.com/2016/06/21/rest-status-code-setting/</id>
     <published>2016-06-21T11:18:08.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -495,23 +495,23 @@
     
     </summary>
     
-      <category term="REST" scheme="http://blog.zjien.com/categories/REST/"/>
+      <category term="REST" scheme="http://gingjan.com/categories/REST/"/>
     
-      <category term="设计" scheme="http://blog.zjien.com/categories/REST/%E8%AE%BE%E8%AE%A1/"/>
+      <category term="设计" scheme="http://gingjan.com/categories/REST/%E8%AE%BE%E8%AE%A1/"/>
     
     
-      <category term="架构" scheme="http://blog.zjien.com/tags/%E6%9E%B6%E6%9E%84/"/>
+      <category term="架构" scheme="http://gingjan.com/tags/%E6%9E%B6%E6%9E%84/"/>
     
-      <category term="API设计" scheme="http://blog.zjien.com/tags/API%E8%AE%BE%E8%AE%A1/"/>
+      <category term="API设计" scheme="http://gingjan.com/tags/API%E8%AE%BE%E8%AE%A1/"/>
     
-      <category term="接口设计" scheme="http://blog.zjien.com/tags/%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
+      <category term="接口设计" scheme="http://gingjan.com/tags/%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   
   <entry>
     <title>Yii的redirect()方法无法终止执行代码</title>
-    <link href="http://blog.zjien.com/2016/06/16/yii-redirect-cannot-stop-execution/"/>
-    <id>http://blog.zjien.com/2016/06/16/yii-redirect-cannot-stop-execution/</id>
+    <link href="http://gingjan.com/2016/06/16/yii-redirect-cannot-stop-execution/"/>
+    <id>http://gingjan.com/2016/06/16/yii-redirect-cannot-stop-execution/</id>
     <published>2016-06-16T02:55:54.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -535,23 +535,23 @@
     
     </summary>
     
-      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/categories/PHP/"/>
     
-      <category term="Yii" scheme="http://blog.zjien.com/categories/PHP/Yii/"/>
+      <category term="Yii" scheme="http://gingjan.com/categories/PHP/Yii/"/>
     
     
-      <category term="框架" scheme="http://blog.zjien.com/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="http://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="基础" scheme="http://blog.zjien.com/tags/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://gingjan.com/tags/%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="php" scheme="http://blog.zjien.com/tags/php/"/>
+      <category term="php" scheme="http://gingjan.com/tags/php/"/>
     
   </entry>
   
   <entry>
     <title>在Yii中如何处理级联删除</title>
-    <link href="http://blog.zjien.com/2016/06/13/cascade-delete-in-yii/"/>
-    <id>http://blog.zjien.com/2016/06/13/cascade-delete-in-yii/</id>
+    <link href="http://gingjan.com/2016/06/13/cascade-delete-in-yii/"/>
+    <id>http://gingjan.com/2016/06/13/cascade-delete-in-yii/</id>
     <published>2016-06-13T03:39:41.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -567,23 +567,23 @@
     
     </summary>
     
-      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/categories/PHP/"/>
     
-      <category term="Yii" scheme="http://blog.zjien.com/categories/PHP/Yii/"/>
+      <category term="Yii" scheme="http://gingjan.com/categories/PHP/Yii/"/>
     
     
-      <category term="框架" scheme="http://blog.zjien.com/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="http://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="级联" scheme="http://blog.zjien.com/tags/%E7%BA%A7%E8%81%94/"/>
+      <category term="级联" scheme="http://gingjan.com/tags/%E7%BA%A7%E8%81%94/"/>
     
-      <category term="数据库操作" scheme="http://blog.zjien.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/"/>
+      <category term="数据库操作" scheme="http://gingjan.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/"/>
     
   </entry>
   
   <entry>
     <title>访问修饰符的意义</title>
-    <link href="http://blog.zjien.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/"/>
-    <id>http://blog.zjien.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</id>
+    <link href="http://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/"/>
+    <id>http://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</id>
     <published>2016-06-06T14:45:07.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -621,27 +621,27 @@
     
     </summary>
     
-      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/categories/PHP/"/>
     
-      <category term="代码之上" scheme="http://blog.zjien.com/categories/PHP/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
+      <category term="代码之上" scheme="http://gingjan.com/categories/PHP/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
     
-      <category term="OOP" scheme="http://blog.zjien.com/categories/PHP/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/OOP/"/>
+      <category term="OOP" scheme="http://gingjan.com/categories/PHP/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/OOP/"/>
     
     
-      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/tags/PHP/"/>
     
-      <category term="OOP基础" scheme="http://blog.zjien.com/tags/OOP%E5%9F%BA%E7%A1%80/"/>
+      <category term="OOP基础" scheme="http://gingjan.com/tags/OOP%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="魔术方法" scheme="http://blog.zjien.com/tags/%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/"/>
+      <category term="魔术方法" scheme="http://gingjan.com/tags/%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/"/>
     
-      <category term="访问控制" scheme="http://blog.zjien.com/tags/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/"/>
+      <category term="访问控制" scheme="http://gingjan.com/tags/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/"/>
     
   </entry>
   
   <entry>
     <title>Yii框架的服务定位器</title>
-    <link href="http://blog.zjien.com/2016/06/02/yii-service-locator/"/>
-    <id>http://blog.zjien.com/2016/06/02/yii-service-locator/</id>
+    <link href="http://gingjan.com/2016/06/02/yii-service-locator/"/>
+    <id>http://gingjan.com/2016/06/02/yii-service-locator/</id>
     <published>2016-06-02T12:02:51.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -668,27 +668,27 @@
     
     </summary>
     
-      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/categories/PHP/"/>
     
-      <category term="Yii" scheme="http://blog.zjien.com/categories/PHP/Yii/"/>
+      <category term="Yii" scheme="http://gingjan.com/categories/PHP/Yii/"/>
     
-      <category term="framework" scheme="http://blog.zjien.com/categories/PHP/Yii/framework/"/>
+      <category term="framework" scheme="http://gingjan.com/categories/PHP/Yii/framework/"/>
     
     
-      <category term="框架" scheme="http://blog.zjien.com/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="http://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/tags/PHP/"/>
     
-      <category term="基础" scheme="http://blog.zjien.com/tags/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://gingjan.com/tags/%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="framework" scheme="http://blog.zjien.com/tags/framework/"/>
+      <category term="framework" scheme="http://gingjan.com/tags/framework/"/>
     
   </entry>
   
   <entry>
     <title>Javascript的单线程和异步之间的关系</title>
-    <link href="http://blog.zjien.com/2016/06/01/js-async-singleThread-queue/"/>
-    <id>http://blog.zjien.com/2016/06/01/js-async-singleThread-queue/</id>
+    <link href="http://gingjan.com/2016/06/01/js-async-singleThread-queue/"/>
+    <id>http://gingjan.com/2016/06/01/js-async-singleThread-queue/</id>
     <published>2016-06-01T03:26:32.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -713,27 +713,27 @@
     
     </summary>
     
-      <category term="Javascript" scheme="http://blog.zjien.com/categories/Javascript/"/>
+      <category term="Javascript" scheme="http://gingjan.com/categories/Javascript/"/>
     
-      <category term="基础" scheme="http://blog.zjien.com/categories/Javascript/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://gingjan.com/categories/Javascript/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="js" scheme="http://blog.zjien.com/tags/js/"/>
+      <category term="js" scheme="http://gingjan.com/tags/js/"/>
     
-      <category term="异步" scheme="http://blog.zjien.com/tags/%E5%BC%82%E6%AD%A5/"/>
+      <category term="异步" scheme="http://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
     
-      <category term="单线程" scheme="http://blog.zjien.com/tags/%E5%8D%95%E7%BA%BF%E7%A8%8B/"/>
+      <category term="单线程" scheme="http://gingjan.com/tags/%E5%8D%95%E7%BA%BF%E7%A8%8B/"/>
     
-      <category term="线程" scheme="http://blog.zjien.com/tags/%E7%BA%BF%E7%A8%8B/"/>
+      <category term="线程" scheme="http://gingjan.com/tags/%E7%BA%BF%E7%A8%8B/"/>
     
-      <category term="队列" scheme="http://blog.zjien.com/tags/%E9%98%9F%E5%88%97/"/>
+      <category term="队列" scheme="http://gingjan.com/tags/%E9%98%9F%E5%88%97/"/>
     
   </entry>
   
   <entry>
     <title>超时调用和循环调用</title>
-    <link href="http://blog.zjien.com/2016/05/25/settimeout-and-setintervel/"/>
-    <id>http://blog.zjien.com/2016/05/25/settimeout-and-setintervel/</id>
+    <link href="http://gingjan.com/2016/05/25/settimeout-and-setintervel/"/>
+    <id>http://gingjan.com/2016/05/25/settimeout-and-setintervel/</id>
     <published>2016-05-25T15:36:28.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -758,27 +758,27 @@
     
     </summary>
     
-      <category term="Javascript" scheme="http://blog.zjien.com/categories/Javascript/"/>
+      <category term="Javascript" scheme="http://gingjan.com/categories/Javascript/"/>
     
-      <category term="前端" scheme="http://blog.zjien.com/categories/Javascript/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://gingjan.com/categories/Javascript/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="基础" scheme="http://blog.zjien.com/categories/Javascript/%E5%89%8D%E7%AB%AF/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://gingjan.com/categories/Javascript/%E5%89%8D%E7%AB%AF/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="异步" scheme="http://blog.zjien.com/tags/%E5%BC%82%E6%AD%A5/"/>
+      <category term="异步" scheme="http://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
     
-      <category term="Javascript" scheme="http://blog.zjien.com/tags/Javascript/"/>
+      <category term="Javascript" scheme="http://gingjan.com/tags/Javascript/"/>
     
-      <category term="回调" scheme="http://blog.zjien.com/tags/%E5%9B%9E%E8%B0%83/"/>
+      <category term="回调" scheme="http://gingjan.com/tags/%E5%9B%9E%E8%B0%83/"/>
     
   </entry>
   
   <entry>
     <title>Git常用基本命令</title>
-    <link href="http://blog.zjien.com/2016/05/24/git-command/"/>
-    <id>http://blog.zjien.com/2016/05/24/git-command/</id>
+    <link href="http://gingjan.com/2016/05/24/git-command/"/>
+    <id>http://gingjan.com/2016/05/24/git-command/</id>
     <published>2016-05-24T09:08:33.000Z</published>
-    <updated>2018-08-09T09:01:03.000Z</updated>
+    <updated>2019-01-22T06:34:20.000Z</updated>
     
     <content type="html"><![CDATA[<p>　　<strong> Git常用命令 </strong>：本文讲解并且亲测了常用的Git命令<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
@@ -996,7 +996,19 @@
 <td>git push</td>
 <td>–tags</td>
 <td></td>
-<td>把标签推送到远程仓库，不加–tags参数默认是不会把标签推送到远程的</td>
+<td>把本地全部标签推送到远程仓库，不加–tags参数默认是不会把标签推送到远程的</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>remote_host</td>
+<td>v1.0.1</td>
+<td>推送本地指定标签到远程</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>remote_host –delete tag</td>
+<td>v1.0.1</td>
+<td>删除远程指定标签</td>
 </tr>
 <tr>
 <td>git clone</td>
@@ -1271,21 +1283,21 @@
     
     </summary>
     
-      <category term="Git" scheme="http://blog.zjien.com/categories/Git/"/>
+      <category term="Git" scheme="http://gingjan.com/categories/Git/"/>
     
-      <category term="Git命令" scheme="http://blog.zjien.com/categories/Git/Git%E5%91%BD%E4%BB%A4/"/>
+      <category term="Git命令" scheme="http://gingjan.com/categories/Git/Git%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="Git" scheme="http://blog.zjien.com/tags/Git/"/>
+      <category term="Git" scheme="http://gingjan.com/tags/Git/"/>
     
-      <category term="版本管理" scheme="http://blog.zjien.com/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
+      <category term="版本管理" scheme="http://gingjan.com/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>同步编程与异步编程的转换和对比</title>
-    <link href="http://blog.zjien.com/2016/05/24/sync-vs-async-and-they-transfers/"/>
-    <id>http://blog.zjien.com/2016/05/24/sync-vs-async-and-they-transfers/</id>
+    <link href="http://gingjan.com/2016/05/24/sync-vs-async-and-they-transfers/"/>
+    <id>http://gingjan.com/2016/05/24/sync-vs-async-and-they-transfers/</id>
     <published>2016-05-23T18:38:42.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -1320,29 +1332,29 @@
     
     </summary>
     
-      <category term="Javascript" scheme="http://blog.zjien.com/categories/Javascript/"/>
+      <category term="Javascript" scheme="http://gingjan.com/categories/Javascript/"/>
     
-      <category term="Nodejs" scheme="http://blog.zjien.com/categories/Javascript/Nodejs/"/>
+      <category term="Nodejs" scheme="http://gingjan.com/categories/Javascript/Nodejs/"/>
     
-      <category term="基础" scheme="http://blog.zjien.com/categories/Javascript/Nodejs/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://gingjan.com/categories/Javascript/Nodejs/%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="代码设计" scheme="http://blog.zjien.com/categories/Javascript/Nodejs/%E5%9F%BA%E7%A1%80/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/"/>
+      <category term="代码设计" scheme="http://gingjan.com/categories/Javascript/Nodejs/%E5%9F%BA%E7%A1%80/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/"/>
     
     
-      <category term="Javascript" scheme="http://blog.zjien.com/tags/Javascript/"/>
+      <category term="Javascript" scheme="http://gingjan.com/tags/Javascript/"/>
     
-      <category term="Nodejs" scheme="http://blog.zjien.com/tags/Nodejs/"/>
+      <category term="Nodejs" scheme="http://gingjan.com/tags/Nodejs/"/>
     
-      <category term="异步编程" scheme="http://blog.zjien.com/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
+      <category term="异步编程" scheme="http://gingjan.com/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
-      <category term="代码设计" scheme="http://blog.zjien.com/tags/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/"/>
+      <category term="代码设计" scheme="http://gingjan.com/tags/%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   
   <entry>
     <title>push.default的matching和simple</title>
-    <link href="http://blog.zjien.com/2016/05/22/git-push-default/"/>
-    <id>http://blog.zjien.com/2016/05/22/git-push-default/</id>
+    <link href="http://gingjan.com/2016/05/22/git-push-default/"/>
+    <id>http://gingjan.com/2016/05/22/git-push-default/</id>
     <published>2016-05-22T13:33:44.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -1363,23 +1375,23 @@
     
     </summary>
     
-      <category term="Git" scheme="http://blog.zjien.com/categories/Git/"/>
+      <category term="Git" scheme="http://gingjan.com/categories/Git/"/>
     
-      <category term="版本管理" scheme="http://blog.zjien.com/categories/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
+      <category term="版本管理" scheme="http://gingjan.com/categories/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
     
-      <category term="基础" scheme="http://blog.zjien.com/categories/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://gingjan.com/categories/Git/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="Git" scheme="http://blog.zjien.com/tags/Git/"/>
+      <category term="Git" scheme="http://gingjan.com/tags/Git/"/>
     
-      <category term="Git基础" scheme="http://blog.zjien.com/tags/Git%E5%9F%BA%E7%A1%80/"/>
+      <category term="Git基础" scheme="http://gingjan.com/tags/Git%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
   <entry>
     <title>标题和段落文字大小以及排版设计</title>
-    <link href="http://blog.zjien.com/2016/05/20/title-paragraph-font-size/"/>
-    <id>http://blog.zjien.com/2016/05/20/title-paragraph-font-size/</id>
+    <link href="http://gingjan.com/2016/05/20/title-paragraph-font-size/"/>
+    <id>http://gingjan.com/2016/05/20/title-paragraph-font-size/</id>
     <published>2016-05-20T03:04:53.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -1400,25 +1412,25 @@
     
     </summary>
     
-      <category term="前端" scheme="http://blog.zjien.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="CSS" scheme="http://blog.zjien.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
+      <category term="CSS" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
     
     
-      <category term="CSS" scheme="http://blog.zjien.com/tags/CSS/"/>
+      <category term="CSS" scheme="http://gingjan.com/tags/CSS/"/>
     
-      <category term="布局/排版" scheme="http://blog.zjien.com/tags/%E5%B8%83%E5%B1%80-%E6%8E%92%E7%89%88/"/>
+      <category term="布局/排版" scheme="http://gingjan.com/tags/%E5%B8%83%E5%B1%80-%E6%8E%92%E7%89%88/"/>
     
-      <category term="文字布局" scheme="http://blog.zjien.com/tags/%E6%96%87%E5%AD%97%E5%B8%83%E5%B1%80/"/>
+      <category term="文字布局" scheme="http://gingjan.com/tags/%E6%96%87%E5%AD%97%E5%B8%83%E5%B1%80/"/>
     
-      <category term="字体大小" scheme="http://blog.zjien.com/tags/%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F/"/>
+      <category term="字体大小" scheme="http://gingjan.com/tags/%E5%AD%97%E4%BD%93%E5%A4%A7%E5%B0%8F/"/>
     
   </entry>
   
   <entry>
     <title>em/百分比/px/pt 的区别</title>
-    <link href="http://blog.zjien.com/2016/05/19/em-percent-and-px-pt/"/>
-    <id>http://blog.zjien.com/2016/05/19/em-percent-and-px-pt/</id>
+    <link href="http://gingjan.com/2016/05/19/em-percent-and-px-pt/"/>
+    <id>http://gingjan.com/2016/05/19/em-percent-and-px-pt/</id>
     <published>2016-05-19T13:18:37.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -1448,25 +1460,25 @@
     
     </summary>
     
-      <category term="前段" scheme="http://blog.zjien.com/categories/%E5%89%8D%E6%AE%B5/"/>
+      <category term="前段" scheme="http://gingjan.com/categories/%E5%89%8D%E6%AE%B5/"/>
     
-      <category term="CSS" scheme="http://blog.zjien.com/categories/%E5%89%8D%E6%AE%B5/CSS/"/>
+      <category term="CSS" scheme="http://gingjan.com/categories/%E5%89%8D%E6%AE%B5/CSS/"/>
     
-      <category term="基础" scheme="http://blog.zjien.com/categories/%E5%89%8D%E6%AE%B5/CSS/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://gingjan.com/categories/%E5%89%8D%E6%AE%B5/CSS/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="前段" scheme="http://blog.zjien.com/tags/%E5%89%8D%E6%AE%B5/"/>
+      <category term="前段" scheme="http://gingjan.com/tags/%E5%89%8D%E6%AE%B5/"/>
     
-      <category term="CSS" scheme="http://blog.zjien.com/tags/CSS/"/>
+      <category term="CSS" scheme="http://gingjan.com/tags/CSS/"/>
     
-      <category term="单位" scheme="http://blog.zjien.com/tags/%E5%8D%95%E4%BD%8D/"/>
+      <category term="单位" scheme="http://gingjan.com/tags/%E5%8D%95%E4%BD%8D/"/>
     
   </entry>
   
   <entry>
     <title>负值margin</title>
-    <link href="http://blog.zjien.com/2016/05/18/negative-margin/"/>
-    <id>http://blog.zjien.com/2016/05/18/negative-margin/</id>
+    <link href="http://gingjan.com/2016/05/18/negative-margin/"/>
+    <id>http://gingjan.com/2016/05/18/negative-margin/</id>
     <published>2016-05-18T14:20:52.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -1490,23 +1502,23 @@
     
     </summary>
     
-      <category term="前端" scheme="http://blog.zjien.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="CSS" scheme="http://blog.zjien.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
+      <category term="CSS" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
     
     
-      <category term="CSS" scheme="http://blog.zjien.com/tags/CSS/"/>
+      <category term="CSS" scheme="http://gingjan.com/tags/CSS/"/>
     
-      <category term="Frontend" scheme="http://blog.zjien.com/tags/Frontend/"/>
+      <category term="Frontend" scheme="http://gingjan.com/tags/Frontend/"/>
     
-      <category term="布局/排版" scheme="http://blog.zjien.com/tags/%E5%B8%83%E5%B1%80-%E6%8E%92%E7%89%88/"/>
+      <category term="布局/排版" scheme="http://gingjan.com/tags/%E5%B8%83%E5%B1%80-%E6%8E%92%E7%89%88/"/>
     
   </entry>
   
   <entry>
     <title>PHP生成器函数及yield关键字</title>
-    <link href="http://blog.zjien.com/2016/05/16/php-generator-function-and-yield/"/>
-    <id>http://blog.zjien.com/2016/05/16/php-generator-function-and-yield/</id>
+    <link href="http://gingjan.com/2016/05/16/php-generator-function-and-yield/"/>
+    <id>http://gingjan.com/2016/05/16/php-generator-function-and-yield/</id>
     <published>2016-05-16T13:07:21.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -1531,25 +1543,25 @@
     
     </summary>
     
-      <category term="PHP" scheme="http://blog.zjien.com/categories/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/categories/PHP/"/>
     
-      <category term="基础" scheme="http://blog.zjien.com/categories/PHP/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://gingjan.com/categories/PHP/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/tags/PHP/"/>
     
-      <category term="yield" scheme="http://blog.zjien.com/tags/yield/"/>
+      <category term="yield" scheme="http://gingjan.com/tags/yield/"/>
     
-      <category term="迭代器" scheme="http://blog.zjien.com/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8/"/>
+      <category term="迭代器" scheme="http://gingjan.com/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8/"/>
     
-      <category term="生成器函数" scheme="http://blog.zjien.com/tags/%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0/"/>
+      <category term="生成器函数" scheme="http://gingjan.com/tags/%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>使用Composer的脚本/scripts属性</title>
-    <link href="http://blog.zjien.com/2016/05/16/composer-scripts/"/>
-    <id>http://blog.zjien.com/2016/05/16/composer-scripts/</id>
+    <link href="http://gingjan.com/2016/05/16/composer-scripts/"/>
+    <id>http://gingjan.com/2016/05/16/composer-scripts/</id>
     <published>2016-05-16T03:25:23.000Z</published>
     <updated>2017-02-12T12:23:30.000Z</updated>
     
@@ -1662,20 +1674,20 @@
     
     </summary>
     
-      <category term="Composer" scheme="http://blog.zjien.com/categories/Composer/"/>
+      <category term="Composer" scheme="http://gingjan.com/categories/Composer/"/>
     
-      <category term="PHP" scheme="http://blog.zjien.com/categories/Composer/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/categories/Composer/PHP/"/>
     
-      <category term="依赖管理" scheme="http://blog.zjien.com/categories/Composer/PHP/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+      <category term="依赖管理" scheme="http://gingjan.com/categories/Composer/PHP/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
     
     
-      <category term="PHP" scheme="http://blog.zjien.com/tags/PHP/"/>
+      <category term="PHP" scheme="http://gingjan.com/tags/PHP/"/>
     
-      <category term="Composer" scheme="http://blog.zjien.com/tags/Composer/"/>
+      <category term="Composer" scheme="http://gingjan.com/tags/Composer/"/>
     
-      <category term="依赖管理" scheme="http://blog.zjien.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+      <category term="依赖管理" scheme="http://gingjan.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
     
-      <category term="composer基本使用" scheme="http://blog.zjien.com/tags/composer%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+      <category term="composer基本使用" scheme="http://gingjan.com/tags/composer%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
     
   </entry>
   
