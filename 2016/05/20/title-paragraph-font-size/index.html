@@ -1,93 +1,65 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  
-  <title>标题和段落文字大小以及排版设计 | Zjien&#39;s blog | 技术令人向往，但更令人向往的是——生活。</title>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>标题和段落文字大小以及排版设计 | Zjien&#39;s blog</title>
+  <meta name="description" content="技术令人向往，但更令人向往的是——生活。" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+
+  <meta name="generator" content="Zjien's blog">
 
   
-  <meta name="author" content="GingJan">
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
   
 
   
-  <meta name="description" content="记录学习上问题，思想上的闪光点">
-  
-
-  
-  
-  <meta name="keywords" content="CSS,布局/排版,文字布局,字体大小">
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta property="og:title" content="标题和段落文字大小以及排版设计"/>
-
-  <meta property="og:site_name" content="Zjien&#39;s blog"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Zjien&#39;s blog" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
 
 
-<body>
-<div class="blog">
-  <div class="content">
+<body class="post-template">
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Zjien&#39;s blog</a>
-    </h1>
-    <p class="site-description">技术令人向往，但更令人向往的是——生活。</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/tags">Tags</a></li>
-      
-        <li><a href="/about">About</a></li>
-      
-    </ul>
-  </nav>
+  <header class="site-head"  style="background-image: url(/img/blog-self/cover.jpg)" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="/img/blog-self/avatar.jpeg" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Zjien's blog</h1>
+            <h2 class="blog-description">技术令人向往，但更令人向往的是——生活。</h2>
+        </div>
+    </div>
 </header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>标题和段落文字大小以及排版设计</span></h3>
-    
   
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2016/05/20/title-paragraph-font-size/" rel="bookmark">
-        <time class="entry-date published" datetime="2016-05-20T03:04:53.000Z">
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2016-05-20T03:04:53.000Z" itemprop="datePublished">
           2016-05-20
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>　　<strong> 标题和段落字体大小 </strong>：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+      </time>
+    
+    
+    | 
+    <a href='/tags/CSS/'>CSS</a>,
+    
+    <a href='/tags/布局-排版/'>布局/排版</a>,
+    
+    <a href='/tags/文字布局/'>文字布局</a>,
+    
+    <a href='/tags/字体大小/'>字体大小</a>
+    
+    
+</span>
+    <h1 class="post-title">标题和段落文字大小以及排版设计</h1>
+    <section class="post-content">
+      <p>　　<strong> 标题和段落字体大小 </strong>：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""><br>这一类的排版建议把标题设置为默认字体大小的1.125em，也即1.125倍，而正文字体为0.75em，line-height为相对正文字体大小的1.5em（注意不是相对默认字体16px设定，是相对正文字体大小设定），建议再设置标题块（如h1）和段落块（如p）的margin同为相对正文字体大小的1.5em。下面我们写出具体代码以及解释</the></p>
 <p>假设默认字体大小为16px（事实也确实如此）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>...<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
@@ -97,64 +69,70 @@
 <hr>
 <p>给标题设置样式：“12px”的字体，“18px”的行高以及margin值<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">0.75em</span> <span class="comment">/*先继承它的父元素的默认大小16px，然后换成：12px/16px=0.75em*/</span></div><div class="line">    <span class="comment">/*为了美观，建议加上行高和margin*/</span></div><div class="line">    line-height: <span class="number">1.5em</span>;<span class="comment">/*也是18px，但是它这里是相对于上面的font-size来说，因此是18px(line-height) ÷ 12(font-size) = 1.5em */</span></div><div class="line">    <span class="attribute">margin</span>: <span class="number">1.5em</span>;<span class="comment">/*18px(margin) ÷ 12(font-size) = 1.5em */</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>GingJan</h4>
+    <p>唯一不会背叛你的，只有你的知识。</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://gingjan.com/2016/05/20/title-paragraph-font-size/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://gingjan.com/2016/05/20/title-paragraph-font-size/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://gingjan.com/2016/05/20/title-paragraph-font-size/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2016/05/22/git-push-default/">
+        ← push.default的matching和simple
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2016/05/19/em-percent-and-px-pt/">
+        em/百分比/px/pt 的区别 →
+    </a>
+    
+</nav>
+  <div id="comment" class="comments-area">
+    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
 
     
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/前端/">前端</a>, <a href="/categories/前端/CSS/">CSS</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/CSS/">CSS</a><a href="/tags/布局-排版/">布局/排版</a><a href="/tags/文字布局/">文字布局</a><a href="/tags/字体大小/">字体大小</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2019 GingJan
-    
-  </p>
-</footer>
-    
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-99144700-1', 'auto');
-    ga('send', 'pageview');
-
-</script>
-
-  </div>
 </div>
+</main>
+
+
+  
+<footer class="site-footer">
+  
+  <a class="subscribe icon-feed" href="atom.xml"><span class="tooltip">Subscribe!</span></a>
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Zjien's blog</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+
 </body>
 </html>
