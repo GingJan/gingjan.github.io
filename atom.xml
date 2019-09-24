@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://gingjan.com/"/>
-  <updated>2019-09-24T06:40:45.000Z</updated>
+  <updated>2019-09-24T06:46:12.000Z</updated>
   <id>http://gingjan.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://gingjan.com/2019/09/24/laravels-package-auto-discovery/"/>
     <id>http://gingjan.com/2019/09/24/laravels-package-auto-discovery/</id>
     <published>2019-09-23T16:00:00.000Z</published>
-    <updated>2019-09-24T06:40:45.000Z</updated>
+    <updated>2019-09-24T06:46:12.000Z</updated>
     
     <content type="html"><![CDATA[<p>　　<strong> Laravel-自动发现扩展包 </strong>：本文主要讲解Laravel如果基于Composer实现自动发现扩展包<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
 <a id="more"></a>
@@ -50,7 +50,7 @@
 <p>如上所示,<code>config/app.php</code> 里配置的 <code>aliases</code> 和 <code>PackageManifest类</code> 的 <code>aliases</code> 合并到一起.</p>
 <p>相似地,<code>Service Provider</code> 也是这样注册. <code>RegisterProviders</code> 启动器调用 <code>Foundation\Application::registerConfiguredProviders()</code> 把Laravel从所有扩展包中收集的 <code>Service Provider</code> 注册入容器<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$providers = Collection::make(<span class="keyword">$this</span>-&gt;config[<span class="string">'app.providers'</span>])</div><div class="line">                -&gt;partition(<span class="function"><span class="keyword">function</span> <span class="params">($provider)</span> </span>&#123;</div><div class="line">                    <span class="keyword">return</span> Str::startsWith($provider, <span class="string">'Illuminate\\'</span>);</div><div class="line">                &#125;);</div><div class="line"></div><div class="line">$providers-&gt;splice(<span class="number">1</span>, <span class="number">0</span>, [<span class="keyword">$this</span>-&gt;make(PackageManifest::class)-&gt;providers()]);</div></pre></td></tr></table></figure></p>
 <p>欢迎转载但请附上链接，谢谢。</p>
-<p>[原文：<a href="https://divinglaravel.com/laravels-package-auto-discovery" target="_blank" rel="external">https://divinglaravel.com/laravels-package-auto-discovery</a>)</p>
+<p><a href="https://divinglaravel.com/laravels-package-auto-discovery" target="_blank" rel="external">原文：laravels-package-auto-discovery</a></p>
 <p>如有什么错误，欢迎提出、讨论，大家共同进步 ^_^</p>
 </the>]]></content>
     
