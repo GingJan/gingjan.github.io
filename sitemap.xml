@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://gingjan.com/2019/09/24/laravels-package-auto-discovery/</loc>
+    
+    <lastmod>2019-09-24T06:40:45.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://gingjan.com/about/index.html</loc>
     
     <lastmod>2019-06-23T16:13:26.000Z</lastmod>
@@ -37,14 +44,7 @@
   </url>
   
   <url>
-    <loc>http://gingjan.com/2016/05/16/php-generator-function-and-yield/</loc>
-    
-    <lastmod>2017-02-12T12:23:30.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://gingjan.com/2016/09/01/Linux-run-in-background/</loc>
+    <loc>http://gingjan.com/2016/05/15/php-variables/</loc>
     
     <lastmod>2017-02-12T12:23:30.000Z</lastmod>
     
@@ -93,14 +93,14 @@
   </url>
   
   <url>
-    <loc>http://gingjan.com/2016/06/13/cascade-delete-in-yii/</loc>
+    <loc>http://gingjan.com/2016/05/16/php-generator-function-and-yield/</loc>
     
     <lastmod>2017-02-12T12:23:30.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://gingjan.com/2016/05/15/php-variables/</loc>
+    <loc>http://gingjan.com/2016/06/13/cascade-delete-in-yii/</loc>
     
     <lastmod>2017-02-12T12:23:30.000Z</lastmod>
     
@@ -170,6 +170,13 @@
   </url>
   
   <url>
+    <loc>http://gingjan.com/2016/05/05/css-responsive-layout/</loc>
+    
+    <lastmod>2017-02-12T12:23:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://gingjan.com/categories/index.html</loc>
     
     <lastmod>2017-02-12T12:23:30.000Z</lastmod>
@@ -177,7 +184,7 @@
   </url>
   
   <url>
-    <loc>http://gingjan.com/2016/05/05/css-responsive-layout/</loc>
+    <loc>http://gingjan.com/2016/09/01/Linux-run-in-background/</loc>
     
     <lastmod>2017-02-12T12:23:30.000Z</lastmod>
     
