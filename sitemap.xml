@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://gingjan.com/about/index.html</loc>
+    
+    <lastmod>2020-05-04T15:55:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://gingjan.com/2020/04/30/clockwise-rule/</loc>
     
     <lastmod>2020-05-04T12:11:37.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://gingjan.com/2019/09/24/laravels-package-auto-discovery/</loc>
     
     <lastmod>2019-09-24T06:46:12.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://gingjan.com/about/index.html</loc>
-    
-    <lastmod>2019-06-23T16:13:26.000Z</lastmod>
     
   </url>
   
