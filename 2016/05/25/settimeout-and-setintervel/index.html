@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>超时调用和循环调用 | Zjien&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="setTimeout和setInterval ：本文介绍这两个浏览器提供的api及其底层的原理">
+<meta name="keywords" content="异步,Javascript,回调">
 <meta property="og:type" content="article">
 <meta property="og:title" content="超时调用和循环调用">
 <meta property="og:url" content="http://gingjan.com/2016/05/25/settimeout-and-setintervel/index.html">
-<meta property="og:site_name" content="Zjien's blog">
+<meta property="og:site_name" content="Zjien&#39;s blog">
 <meta property="og:description" content="setTimeout和setInterval ：本文介绍这两个浏览器提供的api及其底层的原理">
+<meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://gingjan.com/img/js-called-stack1.png">
 <meta property="og:image" content="http://gingjan.com/img/js-called-stack2.png">
 <meta property="og:updated_time" content="2017-02-12T12:23:30.000Z">
@@ -42,7 +44,7 @@ ga('send', 'pageview');
 
 
 </head>
-
+</html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -177,15 +179,15 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>　　<strong> setTimeout和setInterval </strong>：本文介绍这两个浏览器提供的api及其底层的原理<br>    <excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+        <p>　　<strong> setTimeout和setInterval </strong>：本文介绍这两个浏览器提供的api及其底层的原理<br>    <excerpt in index | 首页摘要> </excerpt></p>
 <a id="more"></a>
-<the rest="" of="" contents="" |="" 余下全文="">
+<the rest of contents | 余下全文>
 
 <h3 id="超时调用就是setTimeout-function-delay"><a href="#超时调用就是setTimeout-function-delay" class="headerlink" title="超时调用就是setTimeout(function(){}, delay);"></a>超时调用就是setTimeout(function(){}, delay);</h3><p>第一参数：要执行的回调函数<br>第二参数：延迟多少毫秒，表示在指定时间之后添加回调函数到执行队列中，如果指定时间之后队列中没有其他要执行的代码，那么被添加的代码（即回调函数）会被立即执行。如果队列中有其他代码，那么回调函数会在队列里的代码执行完毕之后才执行。</p>
-<p>可以使用<code>clearTimeout()；</code>来清楚 未执行 的任务<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;, <span class="number">1000</span>);</div><div class="line">clearTimeout(a);</div></pre></td></tr></table></figure></p>
+<p>可以使用<code>clearTimeout()；</code>来清楚 未执行 的任务<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;, <span class="number">1000</span>);</span><br><span class="line">clearTimeout(a);</span><br></pre></td></tr></table></figure></p>
 <hr>
 <h3 id="循环调用就是setInterval"><a href="#循环调用就是setInterval" class="headerlink" title="循环调用就是setInterval();"></a>循环调用就是setInterval();</h3><p>第一参数：要执行的回调函数<br>第二参数：延迟多少毫秒，表示定期添加回调函数到执行队列中，如果指定时间之后队列中没有其他要执行的代码，那么被添加的代码（即回调函数）会被立即执行。如果队列中有其他代码，那么回调函数会在队列里的代码执行完毕之后才执行。注意，这个函数会定期不停的添加回调函数到执行队列的。</p>
-<p>清除同上，使用<code>clearInterval(a);</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;, <span class="number">1000</span>);</div><div class="line">clearInterval(a);</div></pre></td></tr></table></figure></p>
+<p>清除同上，使用<code>clearInterval(a);</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;, <span class="number">1000</span>);</span><br><span class="line">clearInterval(a);</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>以上两个函数都不一定会严格按照指定的时间间隔执行，这主要看执行队列中是否还有其他待执行的代码（也因为JS是单线程的）</p>
 <p>注意,setTimeout和setInterval都是浏览器的api（由浏览器提供的内置函数），是一种异步函数。上面所说的队列是准确来说是指 异步任务队列 ，而js在执行着的代码是处于js调用栈里的代码<br><img src="/img/js-called-stack1.png" alt="js调用栈和异步队列1"><br><img src="/img/js-called-stack2.png" alt="js调用栈和异步队列2"></p>
@@ -301,7 +303,7 @@ ga('send', 'pageview');
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 GingJan
+    		&copy; 2020 GingJan
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -353,7 +355,7 @@ ga('send', 'pageview');
     
     	<section class="tools-section tools-section-tag">
     			<div class="widget tagcloud" id="js-tagcloud">
-    				<a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/API设计/" style="font-size: 10px;">API设计</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/CSS布局/" style="font-size: 10px;">CSS布局</a> <a href="/tags/Command/" style="font-size: 10px;">Command</a> <a href="/tags/Composer/" style="font-size: 12.5px;">Composer</a> <a href="/tags/Frontend/" style="font-size: 10px;">Frontend</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/Git基础/" style="font-size: 10px;">Git基础</a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Linux命令/" style="font-size: 10px;">Linux命令</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/OOP基础/" style="font-size: 10px;">OOP基础</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHP基础/" style="font-size: 10px;">PHP基础</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SQL执行/" style="font-size: 10px;">SQL执行</a> <a href="/tags/composer基本使用/" style="font-size: 10px;">composer基本使用</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/代码设计/" style="font-size: 10px;">代码设计</a> <a href="/tags/依赖管理/" style="font-size: 12.5px;">依赖管理</a> <a href="/tags/前段/" style="font-size: 10px;">前段</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/单位/" style="font-size: 10px;">单位</a> <a href="/tags/单线程/" style="font-size: 10px;">单线程</a> <a href="/tags/变量/" style="font-size: 10px;">变量</a> <a href="/tags/回调/" style="font-size: 10px;">回调</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/字体大小/" style="font-size: 10px;">字体大小</a> <a href="/tags/布局/" style="font-size: 10px;">布局</a> <a href="/tags/布局-排版/" style="font-size: 12.5px;">布局/排版</a> <a href="/tags/异常处理/" style="font-size: 10px;">异常处理</a> <a href="/tags/异步/" style="font-size: 12.5px;">异步</a> <a href="/tags/异步编程/" style="font-size: 10px;">异步编程</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/接口设计/" style="font-size: 10px;">接口设计</a> <a href="/tags/数据库优化/" style="font-size: 10px;">数据库优化</a> <a href="/tags/数据库操作/" style="font-size: 10px;">数据库操作</a> <a href="/tags/文字布局/" style="font-size: 10px;">文字布局</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/查询优化/" style="font-size: 10px;">查询优化</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/版本管理/" style="font-size: 10px;">版本管理</a> <a href="/tags/生成器函数/" style="font-size: 10px;">生成器函数</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/级联/" style="font-size: 10px;">级联</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/耗时任务/" style="font-size: 10px;">耗时任务</a> <a href="/tags/访问控制/" style="font-size: 10px;">访问控制</a> <a href="/tags/迭代器/" style="font-size: 10px;">迭代器</a> <a href="/tags/队列/" style="font-size: 10px;">队列</a> <a href="/tags/静-动态—全-局变量/" style="font-size: 10px;">静/动态—全/局变量</a> <a href="/tags/魔术方法/" style="font-size: 10px;">魔术方法</a>
+    				<a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/API设计/" style="font-size: 10px;">API设计</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/CSS布局/" style="font-size: 10px;">CSS布局</a> <a href="/tags/Command/" style="font-size: 10px;">Command</a> <a href="/tags/Composer/" style="font-size: 12.5px;">Composer</a> <a href="/tags/Frontend/" style="font-size: 10px;">Frontend</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/Git基础/" style="font-size: 10px;">Git基础</a> <a href="/tags/Javascript/" style="font-size: 12.5px;">Javascript</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Linux命令/" style="font-size: 10px;">Linux命令</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Nodejs/" style="font-size: 10px;">Nodejs</a> <a href="/tags/OOP基础/" style="font-size: 10px;">OOP基础</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/PHP基础/" style="font-size: 10px;">PHP基础</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SQL执行/" style="font-size: 10px;">SQL执行</a> <a href="/tags/beyond-the-language/" style="font-size: 10px;">beyond the language</a> <a href="/tags/composer基本使用/" style="font-size: 10px;">composer基本使用</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/yield/" style="font-size: 10px;">yield</a> <a href="/tags/代码设计/" style="font-size: 10px;">代码设计</a> <a href="/tags/依赖管理/" style="font-size: 12.5px;">依赖管理</a> <a href="/tags/前段/" style="font-size: 10px;">前段</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/单位/" style="font-size: 10px;">单位</a> <a href="/tags/单线程/" style="font-size: 10px;">单线程</a> <a href="/tags/变量/" style="font-size: 10px;">变量</a> <a href="/tags/回调/" style="font-size: 10px;">回调</a> <a href="/tags/基础/" style="font-size: 15px;">基础</a> <a href="/tags/字体大小/" style="font-size: 10px;">字体大小</a> <a href="/tags/布局/" style="font-size: 10px;">布局</a> <a href="/tags/布局-排版/" style="font-size: 12.5px;">布局/排版</a> <a href="/tags/异常处理/" style="font-size: 10px;">异常处理</a> <a href="/tags/异步/" style="font-size: 12.5px;">异步</a> <a href="/tags/异步编程/" style="font-size: 10px;">异步编程</a> <a href="/tags/性能优化/" style="font-size: 10px;">性能优化</a> <a href="/tags/接口设计/" style="font-size: 10px;">接口设计</a> <a href="/tags/数据库优化/" style="font-size: 10px;">数据库优化</a> <a href="/tags/数据库操作/" style="font-size: 10px;">数据库操作</a> <a href="/tags/文字布局/" style="font-size: 10px;">文字布局</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/查询优化/" style="font-size: 10px;">查询优化</a> <a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/版本管理/" style="font-size: 10px;">版本管理</a> <a href="/tags/生成器函数/" style="font-size: 10px;">生成器函数</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/级联/" style="font-size: 10px;">级联</a> <a href="/tags/线程/" style="font-size: 10px;">线程</a> <a href="/tags/耗时任务/" style="font-size: 10px;">耗时任务</a> <a href="/tags/访问控制/" style="font-size: 10px;">访问控制</a> <a href="/tags/迭代器/" style="font-size: 10px;">迭代器</a> <a href="/tags/队列/" style="font-size: 10px;">队列</a> <a href="/tags/静-动态—全-局变量/" style="font-size: 10px;">静/动态—全/局变量</a> <a href="/tags/魔术方法/" style="font-size: 10px;">魔术方法</a>
     			</div>
     	</section>
     
