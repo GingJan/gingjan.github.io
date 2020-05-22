@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://gingjan.com/about/index.html</loc>
+    
+    <lastmod>2020-05-22T07:53:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://gingjan.com/2020/05/19/difference-between-name-and-hostname-in-docker-run-command/</loc>
+    
+    <lastmod>2020-05-19T09:39:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://gingjan.com/2020/05/06/go-type/</loc>
+    
+    <lastmod>2020-05-19T07:42:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://gingjan.com/2016/06/13/cascade-delete-in-yii/</loc>
     
     <lastmod>2020-05-05T05:25:28.000Z</lastmod>
@@ -180,13 +201,6 @@
     <loc>http://gingjan.com/2016/05/18/negative-margin/</loc>
     
     <lastmod>2020-05-05T04:57:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://gingjan.com/about/index.html</loc>
-    
-    <lastmod>2020-05-04T15:55:28.000Z</lastmod>
     
   </url>
   
