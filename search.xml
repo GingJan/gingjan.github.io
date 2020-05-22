@@ -4,45 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Docker run命令里 --name 和 --hostname的区别]]></title>
-      <url>http://gingjan.com/2020/05/19/difference-between-name-and-hostname-in-docker-run-command/</url>
-      <content type="html"><![CDATA[<p>　　都是name,乱得一批<br>    <Excerpt in index | 首页摘要> </p>
-<a id="more"></a>
-<The rest of contents | 余下全文>
-
-<p>在使用<code>docker run</code>命令创建容器时,会分配一个UUID作为容器的id,但是这个id太长而且太难记忆,于是可以使用<code>--name</code>参数指定一个名字给该容器.<br>同样,当容器创建后,hostname默认也为该UUID,但可以使用<code>--hostname</code>将它重写为更好记的名字</p>
-<p>现在考虑以下场景,在代码里,你要访问docker的某个容器,但因为容器的id是在创建容器时生成的并且很难使用,因此为该容器指定了一个name以便外界调用该容器.<br>那么hostname是在什么场景使用呢?<br>当你容器内的应用需要指定的hostname时,此时<code>--hostname</code>就派上用场,它只会更改容器内部的hostname,但不会更该docker容器外的DNS,也不会更改网络隔离的信息,所以外部是无法使用hostname访问该容器</p>
-<p>所以,当有两个在同一网络下(且该网络是非默认bridge模式的),要使用name或id在docker内嵌的DNS下访问对方.</p>
-<p>总结:容器与容器之间的访问要用name或id,而容器内部应用之间的访问,需要再带上hostname(即在单个容器内部,应用之间使用hostname访问.那多个容器之间,各容器之间的内部应用需要访问是否将name和hostname带上就能了呢?有待验证)</p>
-<p>hostname的作用还有待进一步探讨</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Go之类型与传递]]></title>
-      <url>http://gingjan.com/2020/05/06/go-type/</url>
-      <content type="html"><![CDATA[<p>　　Go各类型在传递时的区别<br>    <Excerpt in index | 首页摘要> </p>
-<a id="more"></a>
-<The rest of contents | 余下全文>
-
-<p>首先从两个角度方向思考,类型和传递</p>
-<p>从类型角度，类型可分为值类型和引用类型，一般而言，我们说到引用，强调的都是类型。</p>
-<p>从传递角度，有值传递、址传递、引用传递，传递是在函数调用时才会提到的概念，用于表明实参与形参的关系。</p>
-<p>在程序运行的时候，操作系统会为每个变量分配一块内存放变量内容，而这块内存有一个编号，即内存地址，也就是变量的地址。现在 CPU 一般都是 64 位，因而，这个地址的长度一般也就是 8 个字节。</p>
-<p>谈到引用就得说指针，指针即地址。引用，某块内存的别名。引用代指某个内存地址</p>
-<p>除了指针和引用，还有另外一个更广泛的概念，值。</p>
-<p>谈变量传递时，常会提到值传递、址传递和引用传递。从广义上看，对大部分的语言而言，指针和引用都属于值。而从狭义角度来说，则可分为值、址和引用。</p>
-<p>小结:<br>类型: 引用类型、指针类型、值类型【Go总共就两种类型，引用类型和值类型，这里为了讨论才把指针类型挑出来】<br>引用类型是某种结构体,该结构体里有指针类型的字段,属于复合类型<br>指针类型是存其他变量地址的「特殊值类型」,属于复合类型<br>值类型是最广泛的概念<br>ps：值类型有：int、float、bool、string等基础类型【使用这些类型的变量直接指向存在内存中的值：】，array、struct复合类型<br>引用类型有：指针、slice、map、channel</p>
-<p>传递: 引用传递、址传递、值传递<br>引用传递是实参与形参的地址都一致<br>址传递是特殊的值传递,即传的是地址<br>ps:Go中无论什么类型,一切传递都是值传递(即复制一个副本给形参)</p>
-<p>slice、map、chan都是引用类型,因为在Go里一切传递都是值传递,因此它们都是值传递(这可通过判断实参形参地址是否一致来判定,若是实参形参的地址一致即为引用传递)<br>其实就是传递的时候全部类型都是copy一份，就算传递的是指针(地址)，那也是把这个指针(地址)copy了，但是指针指向的对象是同一个，所以形参的修改是有效的<br>ps: C++ 传递的引用其实就是指针的拷贝，而 go 传递的是指针上层结构体的拷贝(如slice)。</p>
-<p>引用类型、指针类型、值类型<br>值类型:布尔型、整型、浮点型、字符型、字符串型、数组、结构体【常会通过「&amp;」取地址，在方法函数间传递可以避免拷贝,使用new创建+初始化,返回的是对应类型的指针】<br>引用类型:slice、channel、接口、map、函数、指针(特殊)【其实所谓的引用类型本质就是结构体构建的数据类型】【一般不涉及取址操作，当然，它们本质是一个结构体，其中的指针类型成员指向了真正的内容，使用make创建+初始化,返回的是make时指定的类型实例】<br>值类型的特点是：变量直接存储值，内存通常在栈中分配<br>引用类型的特点是：变量存储的是一个地址，这个地址指向的内存里才是真正存储的值，内存通常在堆中分配</p>
-<p>基础类型:布尔型、整型、浮点型、复数型【complex128(2+3i)】、字符型、字符串型、错误类型<br>复合类型/派生类型:指针、数组、slice、map、channel、struct、接口、函数<br>Go的复合类型是基础类型的组合</p>
-<p>传入map、chan到函数里<br>func modify(m map)这样的函数，等价于func modify(p <em>hmap)<br>func modify(c chan)这样的函数，等价于func modify(p </em>hchan)<br>特殊的slice<br>当把slice传入函数时，对形参slice的修改只能修改到与实参slice的同一指向的底层数组，而无法修改len和cap（因为形参只是实参的副本），若要修改len和cap，则需要把slice的指针传入函数<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">5</span>, <span class="number">10</span>)  <span class="comment">//第一个参数表示存储类型,第二个表示存储数组长度,第三个是指如果数组最大长度,如果长度超出10,他就会翻倍,分配一个长度20的内存块,如果不设置,最大容量就是数组长度</span></span><br><span class="line">	fmt.Println(s)</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(s))</span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(s))</span><br><span class="line">	test(s)</span><br><span class="line">	fmt.Println(s)</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(s))</span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(s))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">(s []<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"%p"</span>, &amp;s)</span><br><span class="line">	fmt.Println()</span><br><span class="line">	s = <span class="built_in">append</span>(s, <span class="number">2</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"%p"</span>, &amp;s)</span><br><span class="line">	fmt.Println()</span><br><span class="line">	s[<span class="number">1</span>]=<span class="number">2</span></span><br><span class="line">	fmt.Println(s)</span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(s))</span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(s))</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>参考文章:<br>《一文理清 Go 引用的常见疑惑》<a href="https://juejin.im/post/5d8f05b55188254a371f1a77">https://juejin.im/post/5d8f05b55188254a371f1a77</a><br>《Go语言参数传递是传值还是传引用》<a href="https://www.flysnow.org/2018/02/24/golang-function-parameters-passed-by-value.html">https://www.flysnow.org/2018/02/24/golang-function-parameters-passed-by-value.html</a></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[顺时针螺旋原则]]></title>
       <url>http://gingjan.com/2020/05/01/clockwise-rule/</url>
       <content type="html"><![CDATA[<p>　　本文主要讲解何为顺时针螺旋原则<br>    <Excerpt in index | 首页摘要></p>
