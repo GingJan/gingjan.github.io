@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="乐观的虚无主义者，早年Google粉，现狂热SpaceX粉，未来业余天文物理科幻小说家~"><title>Git常用命令 | GingJan's Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = 'https://hm.baidu.com/hm.js?' + 'b246df6d9567916a7164206e06ed7b9d';
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Git常用命令</h1><a id="logo" href="/.">GingJan's Blog</a><p class="description">放弃幻想 准备斗争</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Git常用命令</h1><div class="post-meta">2016-05-24<span> | </span><span class="category"><a href="/categories/CVS/">CVS</a><a href="/categories/CVS/Git/">Git</a><a href="/categories/CVS/Git/Git%E5%91%BD%E4%BB%A4/">Git命令</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">1.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支命令"><span class="toc-number">2.</span> <span class="toc-text">分支命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支对比"><span class="toc-number">3.</span> <span class="toc-text">分支对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改commit"><span class="toc-number">4.</span> <span class="toc-text">修改commit</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#按功能排序"><span class="toc-number"></span> <span class="toc-text">按功能排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#取消修改-恢复版本"><span class="toc-number">1.</span> <span class="toc-text">取消修改,恢复版本</span></a></li></ol></div></div><div class="post-content"><p>　　本文讲解并且亲测了常用的Git命令<br>    <Excerpt in index | 首页摘要> </p>
+<a id="more"></a>
+<The rest of contents | 余下全文>
+
+<table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git init</td>
+<td></td>
+<td></td>
+<td>初始化/新建 当前目录为本地git仓库</td>
+</tr>
+<tr>
+<td>git add</td>
+<td>-A或-add</td>
+<td></td>
+<td>添加当前目录下所有未被tracking以及被修改的文件到index中</td>
+</tr>
+<tr>
+<td>git add</td>
+<td></td>
+<td>file</td>
+<td>添加 file文件/指定文件 到index中</td>
+</tr>
+<tr>
+<td>git add</td>
+<td></td>
+<td>.</td>
+<td>递归添加当前目录下的所有文件(包含目录)到index中</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>–cached</td>
+<td>file</td>
+<td>只删除index中指定的文件，而处于工作目录（也即文件目录）中的文件不会受到影响（不会被删除）</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>-f或–force</td>
+<td>file</td>
+<td>同时删除index和工作目录中指定的文件</td>
+</tr>
+<tr>
+<td>git rm</td>
+<td>-r</td>
+<td>*</td>
+<td>删除index暂存区里的全部文件 </td>
+</tr>
+<tr>
+<td>git status</td>
+<td></td>
+<td></td>
+<td>查看整个项目已经初始化的目录下所有文件的状态(处于 .gitignore 文件里的文件会被)</td>
+</tr>
+<tr>
+<td>git status</td>
+<td></td>
+<td>.</td>
+<td>查看当前目录下所有文件和目录的状态(非递归,也即当前目录内的子目录内的文件无法查看)</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>-m</td>
+<td>‘message’</td>
+<td>提交当前index中的文件到仓库repo中，并且附上提交说明/信息</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>-am</td>
+<td>‘message’</td>
+<td>git add 和 git commit 的组合</td>
+</tr>
+<tr>
+<td>git commit</td>
+<td>–amend -m</td>
+<td>‘this is amend command’</td>
+<td>当index没有新文件/修改的文件的前提下，该参数可以用来修改上一次commit的说明。当index中有新的文件或者修改的文件，该参数就会把这次index里的文件追加到上一次的commit中，而不会产生一次新的commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td></td>
+<td>显示所有的commit记录</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>-1</td>
+<td></td>
+<td>显示1行日志 -n为n行</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>–stat</td>
+<td></td>
+<td>显示每个文件的变动信息</td>
+</tr>
+<tr>
+<td>git log</td>
+<td>-p -m</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>v1.0</td>
+<td>显示v1.0的日志</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1 ^branch-2</td>
+<td>查看 branch-1 有，而 branch-2 中没有的 commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-2 ^branch-1</td>
+<td>同理 查看 branch-2 有，而 branch-1 中没有的 commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1..branch-2</td>
+<td>查看 branch-2 中比 branch-1 中多提交了哪些commit，注意，列出来的是两个点后边（此处即branch-2）比前边（此处即branch-1）多提交的内容。</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-2..branch-1</td>
+<td>同理 查看 branch-1 中比 branch-2 中多提交了哪些commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1…branch-2</td>
+<td>不知道谁提交的多谁提交的少，单纯想知道有什么不一样，注意三个点</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>–left-right branch-1…branch-2</td>
+<td>在上述情况下，再显示出每个提交是在哪个分支上，注意 commit 后面的箭头，根据我们在 –left-right branch-1…branch-2 的顺序，左箭头 &lt; 表示是 branch-1 的，右箭头 &gt; 表示是 branch-2的。</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>fjf01</td>
+<td>显示某个commit的详细内容</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD</td>
+<td>显示HEAD指向的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^</td>
+<td>显示HEAD的父(上一个版本)的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^^</td>
+<td>显示HEAD的上两个版本的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>HEAD^5</td>
+<td>显示HEAD的上5个版本的commit的提交日志</td>
+</tr>
+<tr>
+<td>git show</td>
+<td></td>
+<td>v1.0</td>
+<td>显示v1.0标签的版本信息</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td></td>
+<td></td>
+<td>显示已存在的tag</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-l</td>
+<td></td>
+<td>显示已存在的tag</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-a v3.0 -m ‘new version’</td>
+<td></td>
+<td>给当前HEAD指向的commit打上标签(tag)，每次打tag都需要加上说明-m</td>
+</tr>
+<tr>
+<td>git tag</td>
+<td>-a v3.1 eci3t8 -m ‘new version’</td>
+<td></td>
+<td>给以前的某个历史提交打上标签(tag)，并附加上说明-m</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>–tags</td>
+<td></td>
+<td>把本地全部标签推送到远程仓库，不加–tags参数默认是不会把标签推送到远程的</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>remote_host</td>
+<td>v1.0.1</td>
+<td>推送本地指定标签到远程</td>
+</tr>
+<tr>
+<td>git push</td>
+<td>remote_host –delete tag</td>
+<td>v1.0.1</td>
+<td>删除远程指定标签</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td></td>
+<td>xxx.git</td>
+<td>克隆远程仓库到本地</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td></td>
+<td>xxx.git local_dir</td>
+<td>克隆远程仓库到本地指定目录下</td>
+</tr>
+<tr>
+<td>git clone</td>
+<td>-b</td>
+<td>new_branch_name <a href="https://xxxxx.git" target="_blank" rel="noopener">https://xxxxx.git</a></td>
+<td>clone时创建新的分支替代默认Origin HEAD（master）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git config</td>
+<td>–system</td>
+<td>user.name “your name”</td>
+<td>该系统下，所有用户使用的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–global</td>
+<td>user.name “your name”</td>
+<td>该用户下的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–local</td>
+<td>user.name “your name”</td>
+<td>该 项目project/仓库repository 下的配置</td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–system</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–global</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–local</td>
+<td>user.email myemail@gmail.com</td>
+<td></td>
+</tr>
+<tr>
+<td>git config</td>
+<td>–list</td>
+<td></td>
+<td>查看配置，注意，所处的目录不同，显示的配置信息也不同哦</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分支命令"><a href="#分支命令" class="headerlink" title="分支命令"></a>分支命令</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>dev</td>
+<td>切换到dev分支上，也是把dev分支的代码检出到工作区（working tree）</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value</td>
+<td>把指定历史版本的代码完整检出到工作区</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value /path/to/file</td>
+<td>将指定文件的某个历史版本检出到工作区</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td></td>
+<td>sha1-value:/path/to/file new-name</td>
+<td>将指定文件的某个历史版本检出到工作区并且修改该文件名</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-t</td>
+<td>origin/dev</td>
+<td>创建本地dev分支(与远程对应分支同名)并换到该分支上，并且设置新分支dev的upstream信息</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-b</td>
+<td>dev origin/dev</td>
+<td>等同于上面命令。从当前分支创建并检出（切换到）新分支的命令。实际上是git checkout -b new-branch-name current-branch 的简写形式，即默认从当前HEAD分支创建新新分支</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>-b</td>
+<td>new-branch-name 172je2</td>
+<td>从历史版本为 172je2 上创建新分支并且切换到该分之上</td>
+</tr>
+<tr>
+<td>git checkout</td>
+<td>–</td>
+<td><file-name></td>
+<td>取消对文件的修改,还原到最近的版本,废弃本地做的修改</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>new-branch-name</td>
+<td>172je2</td>
+<td>从历史版本为 172je2 上创建新分支，但不会切换到该分之上</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>-a</td>
+<td></td>
+<td>查看所有分支</td>
+</tr>
+<tr>
+<td>git branch</td>
+<td>-d</td>
+<td>branch_name</td>
+<td>删除branch_name分支</td>
+</tr>
+<tr>
+<td>git merge</td>
+<td></td>
+<td>branch_name</td>
+<td>把branch_name分支合并到本分支中（fast-forward模式）</td>
+</tr>
+<tr>
+<td>git merge</td>
+<td>–no-ff</td>
+<td>branch_name</td>
+<td>把branch_name分支合并到本分支中，非fast-forward模式，即会创建一个合并的提交</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分支对比"><a href="#分支对比" class="headerlink" title="分支对比"></a>分支对比</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git diff branch1 branch2</td>
+<td>–stat</td>
+<td></td>
+<td>显示出所有有差异的文件列表</td>
+</tr>
+<tr>
+<td>git diff branch1 branch2</td>
+<td></td>
+<td>文件名(带路径)</td>
+<td>显示指定文件的详细差异</td>
+</tr>
+<tr>
+<td>git diff branch1 branch2</td>
+<td></td>
+<td></td>
+<td>显示出所有有差异的文件的详细差异</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1 ^branch-2</td>
+<td>查看 branch-1 有，而 branch-2 中没有的 commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-2 ^branch-1</td>
+<td>同理 查看 branch-2 有，而 branch-1 中没有的 commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1..branch-2</td>
+<td>查看 branch-2 中比 branch-1 中多提交了哪些commit，注意，列出来的是两个点后边（此处即branch-2）比前边（此处即branch-1）多提交的内容。</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-2..branch-1</td>
+<td>同理 查看 branch-1 中比 branch-2 中多提交了哪些commit</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>branch-1…branch-2</td>
+<td>不知道谁提交的多谁提交的少，单纯想知道有什么不一样，注意三个点</td>
+</tr>
+<tr>
+<td>git log</td>
+<td></td>
+<td>–left-right branch-1…branch-2</td>
+<td>在上述情况下，再显示出每个提交是在哪个分支上，注意 commit 后面的箭头，根据我们在 –left-right branch-1…branch-2 的顺序，左箭头 &lt; 表示是 branch-1 的，右箭头 &gt; 表示是 branch-2的。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="修改commit"><a href="#修改commit" class="headerlink" title="修改commit"></a>修改commit</h3><table>
+<thead>
+<tr>
+<th>Git命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>git rebase</td>
+<td>-i</td>
+<td>到哪个旧commit的hash值</td>
+<td>注意，该commit是不会被合并的。接着进入交互模式，排第一行的是最旧的commit，除了这一个外，把每个commit前的pick改成squash，就相当于合并到第一行的commit上，接着修改commit信息。 </td>
+</tr>
+</tbody>
+</table>
+<h2 id="按功能排序"><a href="#按功能排序" class="headerlink" title="按功能排序"></a>按功能排序</h2><h3 id="取消修改-恢复版本"><a href="#取消修改-恢复版本" class="headerlink" title="取消修改,恢复版本"></a>取消修改,恢复版本</h3><p><strong>取消对文件的修改。还原到最近的版本，废弃本地做的修改。</strong><br><code>git checkout -- &lt;file&gt;</code></p>
+<p><strong>取消已经暂存的文件。即，撤销先前”git add”的操作</strong><br><code>git reset HEAD &lt;file&gt;...</code></p>
+<p><strong>修改最后一次提交。用于修改上一次的提交信息，或漏提交文件等情况。</strong><br><code>git commit --amend</code></p>
+<p><strong>回退所有内容到上一个版本</strong><br><code>git reset HEAD^</code></p>
+<p><strong>回退a.py这个文件的版本到上一个版本</strong><br><code>git reset HEAD^ a.py</code></p>
+<p><strong>向前回退到第3个版本</strong><br><code>git reset –soft HEAD~3</code></p>
+<p><strong>将本地的状态回退到和远程的一样</strong><br><code>git reset –hard origin/master</code></p>
+<p><strong>回退到某个版本</strong><br><code>git reset 057d</code></p>
+<p><strong>回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit.(代码回滚到上个版本，并提交git)</strong><br><code>git revert HEAD</code></p>
+<p><strong>回滚单个文件</strong><br><code>git reset sha-1 path/to/file</code><br><code>git commit path/to/file -m &#39;message&#39;</code><br><code>git checkout path/to/file</code></p>
+<blockquote>
+<p>几点说明：</p>
+<ul>
+<li>一次commit是指当你输入git log是，看到的一串码，如commit e7d1b777de790970af704dbeac8c0ef3d21335b4，这算一次commit</li>
+</ul>
+</blockquote>
+<p>[<a href="https://www.pureweber.com/article/git-pretty-output/" target="_blank" rel="noopener">https://www.pureweber.com/article/git-pretty-output/</a>]</p>
+</div><div class="tags"><a href="/tags/Git/"><i class="fa fa-tag"></i>Git</a><a href="/tags/CVS/"><i class="fa fa-tag"></i>CVS</a></div><div class="post-nav"><a class="pre" href="/2016/05/25/settimeout-and-setintervel/">超时调用和循环调用</a><a class="next" href="/2016/05/24/sync-vs-async-and-they-transfers/">同步编程与异步编程的转换和对比</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
+  clientID: '64e3f7607740e36708b5',
+  clientSecret: 'c5384565b3a1e5a44a3d61b4dd307e69a78cf966',
+  repo: 'gingjan.github.io',
+  owner: 'GingJan',
+  admin: ['GingJan'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://gingjan.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CVS/">CVS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CVS/Git/">Git</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CVS/Git/Git%E5%91%BD%E4%BB%A4/">Git命令</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CVS/Git/%E5%9F%BA%E7%A1%80/">基础</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/">代码之上</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/">API接口设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/REST/">REST</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/OOP/">OOP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/%E5%8E%9F%E5%88%99/">原则</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">依赖管理</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/PHP/">PHP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/CSS/">CSS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/CSS/%E5%9F%BA%E7%A1%80/">基础</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Javascript/">Javascript</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/Javascript/%E5%9F%BA%E7%A1%80/">基础</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/NodeJS/">NodeJS</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/NodeJS/%E5%9F%BA%E7%A1%80/">基础</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80/">后端语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80/PHP/">PHP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80/PHP/%E5%9F%BA%E7%A1%80/">基础</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/%E7%AE%97%E6%B3%95/">算法</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%85%A8/%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">加密算法</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/">Linux</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">常用命令</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Mac/">Mac</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL/">SQL</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL/MySQL/">MySQL</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/">框架</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/PHP/">PHP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/PHP/Laravel/">Laravel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A1%86%E6%9E%B6/PHP/Yii/">Yii</a></li></ul></li></ul></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/PHP/" style="font-size: 15px;">PHP</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 15px;">框架</a> <a href="/tags/Composer/" style="font-size: 15px;">Composer</a> <a href="/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/" style="font-size: 15px;">依赖管理</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">前端</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/%E5%BC%82%E6%AD%A5/" style="font-size: 15px;">异步</a> <a href="/tags/%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">线程</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 15px;">队列</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 15px;">性能优化</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/%E5%9B%9E%E8%B0%83/" style="font-size: 15px;">回调</a> <a href="/tags/%E5%8E%9F%E5%88%99/" style="font-size: 15px;">原则</a> <a href="/tags/Yii/" style="font-size: 15px;">Yii</a> <a href="/tags/CVS/" style="font-size: 15px;">CVS</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 15px;">安全</a> <a href="/tags/Laravel/" style="font-size: 15px;">Laravel</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 15px;">命令</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/REST/" style="font-size: 15px;">REST</a> <a href="/tags/API%E6%8E%A5%E5%8F%A3/" style="font-size: 15px;">API接口</a> <a href="/tags/NodeJS/" style="font-size: 15px;">NodeJS</a> <a href="/tags/OOP/" style="font-size: 15px;">OOP</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/01/clockwise-rule/">顺时针螺旋原则</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/24/laravels-package-auto-discovery/">Laravel-自动发现扩展包</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/">如何选择AES加密模式(CBC、ECB、CTR、OCB、CFB)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/09/composer-command/">Composer常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/">如何在mac上解压分离的压缩文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/09/01/Linux-run-in-background/">Linux-让耗时任务在后台运行</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/03/mysql-sql-execution-check-out/">查看一次SQL的执行时间与相关参数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/21/rest-status-code-setting/">REST API 响应状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/yii-redirect-cannot-stop-execution/">Yii的redirect()方法无法终止执行代码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/cascade-delete-in-yii/">在Yii中如何处理级联删除</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://xiaobawang.club/" title="王公子的乐园" target="_blank">王公子的乐园</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">GingJan's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
