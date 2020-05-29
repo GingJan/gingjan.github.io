@@ -63,9 +63,9 @@
 <p>示例6:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatile char * const chptr;</span><br></pre></td></tr></table></figure><br>chptr是什么? <code>chptr is a constant pointer to a char volatile. chptr是一个常量指针,指向char volatile</code></p>
 <p>欢迎转载但请附上原文链接，谢谢。</p>
 <p>参考:</p>
-<p><a href="http://c-faq.com/decl/spiral.anderson.html">The Clockwise/Spiral Rule 顺时针螺旋原则</a></p>
+<p><a href="http://c-faq.com/decl/spiral.anderson.html" target="_blank" rel="noopener">The Clockwise/Spiral Rule 顺时针螺旋原则</a></p>
 <p>搭配食用:</p>
-<p><a href="https://blog.go-zh.org/gos-declaration-syntax">Go’s Declaration Syntax</a></p>
+<p><a href="https://blog.go-zh.org/gos-declaration-syntax" target="_blank" rel="noopener">Go’s Declaration Syntax</a></p>
 <p>如有错误，欢迎指出、讨论，大家共同进步 ^_^</p>
 ]]></content>
     
@@ -118,7 +118,7 @@
 <p>如上所示,<code>config/app.php</code> 里配置的 <code>aliases</code> 和 <code>PackageManifest类</code> 的 <code>aliases</code> 合并到一起.</p>
 <p>相似地,<code>Service Provider</code> 也是这样注册. <code>RegisterProviders</code> 启动器调用 <code>Foundation\Application::registerConfiguredProviders()</code> 把Laravel从所有扩展包中收集的 <code>Service Provider</code> 注册入容器<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$providers = Collection::make(<span class="keyword">$this</span>-&gt;config[<span class="string">'app.providers'</span>])</span><br><span class="line">                -&gt;partition(<span class="function"><span class="keyword">function</span> <span class="params">($provider)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> Str::startsWith($provider, <span class="string">'Illuminate\\'</span>);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">$providers-&gt;splice(<span class="number">1</span>, <span class="number">0</span>, [<span class="keyword">$this</span>-&gt;make(PackageManifest::class)-&gt;providers()]);</span><br></pre></td></tr></table></figure></p>
 <p>欢迎转载但请附上链接，谢谢。</p>
-<p><a href="https://divinglaravel.com/laravels-package-auto-discovery">原文：laravels-package-auto-discovery</a></p>
+<p><a href="https://divinglaravel.com/laravels-package-auto-discovery" target="_blank" rel="noopener">原文：laravels-package-auto-discovery</a></p>
 <p>如有什么错误，欢迎提出、讨论，大家共同进步 ^_^</p>
 ]]></content>
     
@@ -135,9 +135,9 @@
       <category term="Laravel" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Laravel/"/>
     
     
-      <category term="PHP" scheme="http://gingjan.com/tags/PHP/"/>
-    
       <category term="框架" scheme="http://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="PHP" scheme="http://gingjan.com/tags/PHP/"/>
     
       <category term="Laravel" scheme="http://gingjan.com/tags/Laravel/"/>
     
@@ -176,9 +176,9 @@
       <category term="加密算法" scheme="http://gingjan.com/categories/%E5%AE%89%E5%85%A8/%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="算法" scheme="http://gingjan.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="安全" scheme="http://gingjan.com/tags/%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="算法" scheme="http://gingjan.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -242,9 +242,9 @@
       <category term="PHP" scheme="http://gingjan.com/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/PHP/"/>
     
     
-      <category term="Composer" scheme="http://gingjan.com/tags/Composer/"/>
-    
       <category term="依赖管理" scheme="http://gingjan.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="Composer" scheme="http://gingjan.com/tags/Composer/"/>
     
   </entry>
   
@@ -312,7 +312,7 @@
 <hr>
 <h2 id="三、一步完成"><a href="#三、一步完成" class="headerlink" title="三、一步完成"></a>三、一步完成</h2><p>当有很多耗时任务，而我们又不想一个一个去加nohup ,setsid时，怎么办？</p>
 <h3 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h3><p><code>screen -dmS session_name</code></p>
-<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/">参考：https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/" target="_blank" rel="noopener">参考：https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/</a></p>
 ]]></content>
     
     <summary type="html">
@@ -328,9 +328,9 @@
       <category term="常用命令" scheme="http://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="Linux" scheme="http://gingjan.com/tags/Linux/"/>
-    
       <category term="命令" scheme="http://gingjan.com/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="Linux" scheme="http://gingjan.com/tags/Linux/"/>
     
   </entry>
   
@@ -351,7 +351,7 @@
 <p>4.查看所有已执行的sql的profile<br><code>show profiles</code><br><img src="/img/mysql-sql-execution-check-out/mysql4.png" alt="profiles"></p>
 <p>5.看看刚才某条sql执行的具体时间拆分，2是个某次查询的id<br><code>show profile for query id</code><br><img src="/img/mysql-sql-execution-check-out/mysql5.png" alt="profile for query 2"></p>
 <p>6.看看刚才某条sql执行的具体时间拆分，并加上相应的cpu信息 (cpu也可以换成all，以查看更多系统指标)<br><code>show profile cpu for query id</code><br><img src="/img/mysql-sql-execution-check-out/mysql6.png" alt="profile cpu for query 2"></p>
-<p>整理自：<a href="http://itindex.net/detail/51526-mysql-sql-%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4">http://itindex.net/detail/51526-mysql-sql-%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4</a></p>
+<p>整理自：<a href="http://itindex.net/detail/51526-mysql-sql-%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4" target="_blank" rel="noopener">http://itindex.net/detail/51526-mysql-sql-%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4</a></p>
 ]]></content>
     
     <summary type="html">
@@ -367,13 +367,13 @@
       <category term="MySQL" scheme="http://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL/MySQL/"/>
     
     
-      <category term="性能优化" scheme="http://gingjan.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
-      <category term="SQL" scheme="http://gingjan.com/tags/SQL/"/>
-    
       <category term="数据库" scheme="http://gingjan.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
       <category term="MySQL" scheme="http://gingjan.com/tags/MySQL/"/>
+    
+      <category term="SQL" scheme="http://gingjan.com/tags/SQL/"/>
+    
+      <category term="性能优化" scheme="http://gingjan.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
@@ -606,7 +606,7 @@
 <li>筛选使用查询键值对的形式，即?key=value，articles?title=first_api</li>
 </ul>
 <h2 id="关于各种框架对REST的支持与实现"><a href="#关于各种框架对REST的支持与实现" class="headerlink" title="关于各种框架对REST的支持与实现"></a>关于各种框架对REST的支持与实现</h2><p>本节内容打算放到另一篇文章讲<br>未完待续…</p>
-<p><a href="http://www.cnblogs.com/cathsfz/archive/2012/06/19/2553431.html">整理自</a><br><a href="http://www.bkjia.com/headlines/491296.html">整理自</a><br><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">整理自</a><br><a href="http://www.cnblogs.com/cathsfz/archive/2012/06/19/2553431.html">整理自</a></p>
+<p><a href="http://www.cnblogs.com/cathsfz/archive/2012/06/19/2553431.html" target="_blank" rel="noopener">整理自</a><br><a href="http://www.bkjia.com/headlines/491296.html" target="_blank" rel="noopener">整理自</a><br><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="noopener">整理自</a><br><a href="http://www.cnblogs.com/cathsfz/archive/2012/06/19/2553431.html" target="_blank" rel="noopener">整理自</a></p>
 ]]></content>
     
     <summary type="html">
@@ -731,7 +731,7 @@
 <p>上面的代码中，与非门类有两个成员变量， <code>$_k1</code> 和 <code>$_k2</code> 。<strong>但是有3个属性</strong>，表示2个输入的 <code>key1</code> 和 <code>key2</code> ，以及表示输出的 <code>output</code>。<br>由于我们知道，属性一般是通过<code>$obj-&gt;property</code>方式来访问的，但是这里根本没有<code>output</code>这个成员变量呀？那还怎么访问呢？<br>没错，这时候就要靠我们的<code>魔术方法__get()</code>来配合<code>getter</code>了，上<code>__get()</code>的代码：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span> </span>&#123;</span><br><span class="line">    $getter = <span class="string">'get'</span> . $name;<span class="comment">//如此，当调用$obj-&gt;output属性时，就会去调用getOutput()，以达到具有output属性的效果</span></span><br><span class="line">    <span class="keyword">if</span> (method_exists(<span class="keyword">$this</span>, $getter)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$getter();</span><br><span class="line">    &#125; <span class="keyword">elseif</span> (method_exists(<span class="keyword">$this</span>, <span class="string">'set'</span>.$name)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'只存在setter，也即该属性为只写'</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'无'</span> , $name , <span class="string">'属性'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>欢迎转载但请附上链接，谢谢。</p>
-<p><a href="http://www.digpage.com/property.html">参考：http://www.digpage.com/property.html</a></p>
+<p><a href="http://www.digpage.com/property.html" target="_blank" rel="noopener">参考：http://www.digpage.com/property.html</a></p>
 <p>如有什么错误，欢迎提出、讨论，大家共同进步 ^_^</p>
 ]]></content>
     
@@ -827,13 +827,13 @@
     
       <category term="js" scheme="http://gingjan.com/tags/js/"/>
     
+      <category term="Javascript" scheme="http://gingjan.com/tags/Javascript/"/>
+    
       <category term="异步" scheme="http://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
     
       <category term="线程" scheme="http://gingjan.com/tags/%E7%BA%BF%E7%A8%8B/"/>
     
       <category term="队列" scheme="http://gingjan.com/tags/%E9%98%9F%E5%88%97/"/>
-    
-      <category term="Javascript" scheme="http://gingjan.com/tags/Javascript/"/>
     
   </entry>
   
@@ -872,9 +872,9 @@
       <category term="基础" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="异步" scheme="http://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
-    
       <category term="Javascript" scheme="http://gingjan.com/tags/Javascript/"/>
+    
+      <category term="异步" scheme="http://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
     
       <category term="回调" scheme="http://gingjan.com/tags/%E5%9B%9E%E8%B0%83/"/>
     
@@ -1132,7 +1132,7 @@
 <tr>
 <td>git clone</td>
 <td>-b</td>
-<td>new_branch_name <a href="https://xxxxx.git">https://xxxxx.git</a></td>
+<td>new_branch_name <a href="https://xxxxx.git" target="_blank" rel="noopener">https://xxxxx.git</a></td>
 <td>clone时创建新的分支替代默认Origin HEAD（master）</td>
 </tr>
 </tbody>
@@ -1381,7 +1381,7 @@
 <li>一次commit是指当你输入git log是，看到的一串码，如commit e7d1b777de790970af704dbeac8c0ef3d21335b4，这算一次commit</li>
 </ul>
 </blockquote>
-<p>[<a href="https://www.pureweber.com/article/git-pretty-output/">https://www.pureweber.com/article/git-pretty-output/</a>]</p>
+<p>[<a href="https://www.pureweber.com/article/git-pretty-output/" target="_blank" rel="noopener">https://www.pureweber.com/article/git-pretty-output/</a>]</p>
 ]]></content>
     
     <summary type="html">
@@ -1594,9 +1594,9 @@
       <category term="CSS" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
     
     
-      <category term="前端" scheme="http://gingjan.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="CSS" scheme="http://gingjan.com/tags/CSS/"/>
+    
+      <category term="前端" scheme="http://gingjan.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
