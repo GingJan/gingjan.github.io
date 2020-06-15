@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>GingJan&#39;s Blog</title>
-  <subtitle>放弃幻想 准备斗争</subtitle>
+  <subtitle>Life Feeds On Negentropy</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://gingjan.com/"/>
+  <link href="https://gingjan.com/"/>
   <updated>2020-05-05T05:25:28.000Z</updated>
-  <id>http://gingjan.com/</id>
+  <id>https://gingjan.com/</id>
   
   <author>
     <name>GingJan</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>顺时针螺旋原则</title>
-    <link href="http://gingjan.com/2020/05/01/clockwise-rule/"/>
-    <id>http://gingjan.com/2020/05/01/clockwise-rule/</id>
+    <link href="https://gingjan.com/2020/05/01/clockwise-rule/"/>
+    <id>https://gingjan.com/2020/05/01/clockwise-rule/</id>
     <published>2020-05-01T02:00:00.000Z</published>
     <updated>2020-05-05T05:25:28.000Z</updated>
     
@@ -75,19 +75,19 @@
     
     </summary>
     
-      <category term="代码之上" scheme="http://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
+      <category term="代码之上" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
     
-      <category term="原则" scheme="http://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/%E5%8E%9F%E5%88%99/"/>
+      <category term="原则" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/%E5%8E%9F%E5%88%99/"/>
     
     
-      <category term="原则" scheme="http://gingjan.com/tags/%E5%8E%9F%E5%88%99/"/>
+      <category term="原则" scheme="https://gingjan.com/tags/%E5%8E%9F%E5%88%99/"/>
     
   </entry>
   
   <entry>
     <title>Laravel-自动发现扩展包</title>
-    <link href="http://gingjan.com/2019/09/24/laravels-package-auto-discovery/"/>
-    <id>http://gingjan.com/2019/09/24/laravels-package-auto-discovery/</id>
+    <link href="https://gingjan.com/2019/09/24/laravels-package-auto-discovery/"/>
+    <id>https://gingjan.com/2019/09/24/laravels-package-auto-discovery/</id>
     <published>2019-09-23T16:00:00.000Z</published>
     <updated>2020-05-05T05:25:28.000Z</updated>
     
@@ -128,25 +128,25 @@
     
     </summary>
     
-      <category term="框架" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="PHP" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
+      <category term="PHP" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
     
-      <category term="Laravel" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Laravel/"/>
+      <category term="Laravel" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Laravel/"/>
     
     
-      <category term="框架" scheme="http://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="PHP" scheme="http://gingjan.com/tags/PHP/"/>
+      <category term="PHP" scheme="https://gingjan.com/tags/PHP/"/>
     
-      <category term="Laravel" scheme="http://gingjan.com/tags/Laravel/"/>
+      <category term="Laravel" scheme="https://gingjan.com/tags/Laravel/"/>
     
   </entry>
   
   <entry>
     <title>如何选择AES加密模式(CBC、ECB、CTR、OCB、CFB)</title>
-    <link href="http://gingjan.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/"/>
-    <id>http://gingjan.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/</id>
+    <link href="https://gingjan.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/"/>
+    <id>https://gingjan.com/2018/08/12/how-to-choose-an-aes-encryption-mode-cbc-ecb-ctr-ocb-cfb/</id>
     <published>2018-08-12T03:39:41.000Z</published>
     <updated>2020-05-05T05:25:28.000Z</updated>
     
@@ -169,23 +169,23 @@
     
     </summary>
     
-      <category term="安全" scheme="http://gingjan.com/categories/%E5%AE%89%E5%85%A8/"/>
+      <category term="安全" scheme="https://gingjan.com/categories/%E5%AE%89%E5%85%A8/"/>
     
-      <category term="算法" scheme="http://gingjan.com/categories/%E5%AE%89%E5%85%A8/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://gingjan.com/categories/%E5%AE%89%E5%85%A8/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="加密算法" scheme="http://gingjan.com/categories/%E5%AE%89%E5%85%A8/%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
+      <category term="加密算法" scheme="https://gingjan.com/categories/%E5%AE%89%E5%85%A8/%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="安全" scheme="http://gingjan.com/tags/%E5%AE%89%E5%85%A8/"/>
+      <category term="安全" scheme="https://gingjan.com/tags/%E5%AE%89%E5%85%A8/"/>
     
-      <category term="算法" scheme="http://gingjan.com/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://gingjan.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>Composer常用命令</title>
-    <link href="http://gingjan.com/2018/08/09/composer-command/"/>
-    <id>http://gingjan.com/2018/08/09/composer-command/</id>
+    <link href="https://gingjan.com/2018/08/09/composer-command/"/>
+    <id>https://gingjan.com/2018/08/09/composer-command/</id>
     <published>2018-08-09T09:18:33.000Z</published>
     <updated>2020-05-05T05:25:28.000Z</updated>
     
@@ -237,21 +237,21 @@
     
     </summary>
     
-      <category term="依赖管理" scheme="http://gingjan.com/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+      <category term="依赖管理" scheme="https://gingjan.com/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
     
-      <category term="PHP" scheme="http://gingjan.com/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/PHP/"/>
+      <category term="PHP" scheme="https://gingjan.com/categories/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/PHP/"/>
     
     
-      <category term="依赖管理" scheme="http://gingjan.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+      <category term="依赖管理" scheme="https://gingjan.com/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
     
-      <category term="Composer" scheme="http://gingjan.com/tags/Composer/"/>
+      <category term="Composer" scheme="https://gingjan.com/tags/Composer/"/>
     
   </entry>
   
   <entry>
     <title>如何在mac上解压分离的压缩文件</title>
-    <link href="http://gingjan.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/"/>
-    <id>http://gingjan.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</id>
+    <link href="https://gingjan.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/"/>
+    <id>https://gingjan.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</id>
     <published>2017-02-12T14:04:40.000Z</published>
     <updated>2020-05-05T05:25:28.000Z</updated>
     
@@ -280,19 +280,19 @@
     
     </summary>
     
-      <category term="操作系统" scheme="http://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="Mac" scheme="http://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Mac/"/>
+      <category term="Mac" scheme="https://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Mac/"/>
     
     
-      <category term="Mac" scheme="http://gingjan.com/tags/Mac/"/>
+      <category term="Mac" scheme="https://gingjan.com/tags/Mac/"/>
     
   </entry>
   
   <entry>
     <title>Linux-让耗时任务在后台运行</title>
-    <link href="http://gingjan.com/2016/09/01/Linux-run-in-background/"/>
-    <id>http://gingjan.com/2016/09/01/Linux-run-in-background/</id>
+    <link href="https://gingjan.com/2016/09/01/Linux-run-in-background/"/>
+    <id>https://gingjan.com/2016/09/01/Linux-run-in-background/</id>
     <published>2016-09-01T04:10:41.000Z</published>
     <updated>2020-05-05T05:10:56.000Z</updated>
     
@@ -321,23 +321,23 @@
     
     </summary>
     
-      <category term="操作系统" scheme="http://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="Linux" scheme="http://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/"/>
+      <category term="Linux" scheme="https://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/"/>
     
-      <category term="常用命令" scheme="http://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <category term="常用命令" scheme="https://gingjan.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="命令" scheme="http://gingjan.com/tags/%E5%91%BD%E4%BB%A4/"/>
+      <category term="命令" scheme="https://gingjan.com/tags/%E5%91%BD%E4%BB%A4/"/>
     
-      <category term="Linux" scheme="http://gingjan.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://gingjan.com/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>查看一次SQL的执行时间与相关参数</title>
-    <link href="http://gingjan.com/2016/07/03/mysql-sql-execution-check-out/"/>
-    <id>http://gingjan.com/2016/07/03/mysql-sql-execution-check-out/</id>
+    <link href="https://gingjan.com/2016/07/03/mysql-sql-execution-check-out/"/>
+    <id>https://gingjan.com/2016/07/03/mysql-sql-execution-check-out/</id>
     <published>2016-07-03T09:02:47.000Z</published>
     <updated>2020-05-05T05:06:56.000Z</updated>
     
@@ -360,27 +360,27 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="SQL" scheme="http://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL/"/>
+      <category term="SQL" scheme="https://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL/"/>
     
-      <category term="MySQL" scheme="http://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL/MySQL/"/>
+      <category term="MySQL" scheme="https://gingjan.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL/MySQL/"/>
     
     
-      <category term="数据库" scheme="http://gingjan.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://gingjan.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="MySQL" scheme="http://gingjan.com/tags/MySQL/"/>
+      <category term="MySQL" scheme="https://gingjan.com/tags/MySQL/"/>
     
-      <category term="SQL" scheme="http://gingjan.com/tags/SQL/"/>
+      <category term="SQL" scheme="https://gingjan.com/tags/SQL/"/>
     
-      <category term="性能优化" scheme="http://gingjan.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+      <category term="性能优化" scheme="https://gingjan.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>REST API 响应状态码</title>
-    <link href="http://gingjan.com/2016/06/21/rest-status-code-setting/"/>
-    <id>http://gingjan.com/2016/06/21/rest-status-code-setting/</id>
+    <link href="https://gingjan.com/2016/06/21/rest-status-code-setting/"/>
+    <id>https://gingjan.com/2016/06/21/rest-status-code-setting/</id>
     <published>2016-06-21T11:18:08.000Z</published>
     <updated>2020-05-05T05:25:28.000Z</updated>
     
@@ -615,23 +615,23 @@
     
     </summary>
     
-      <category term="代码之上" scheme="http://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
+      <category term="代码之上" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
     
-      <category term="API接口设计" scheme="http://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
+      <category term="API接口设计" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
     
-      <category term="REST" scheme="http://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/REST/"/>
+      <category term="REST" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/API%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/REST/"/>
     
     
-      <category term="REST" scheme="http://gingjan.com/tags/REST/"/>
+      <category term="REST" scheme="https://gingjan.com/tags/REST/"/>
     
-      <category term="API接口" scheme="http://gingjan.com/tags/API%E6%8E%A5%E5%8F%A3/"/>
+      <category term="API接口" scheme="https://gingjan.com/tags/API%E6%8E%A5%E5%8F%A3/"/>
     
   </entry>
   
   <entry>
     <title>Yii的redirect()方法无法终止执行代码</title>
-    <link href="http://gingjan.com/2016/06/16/yii-redirect-cannot-stop-execution/"/>
-    <id>http://gingjan.com/2016/06/16/yii-redirect-cannot-stop-execution/</id>
+    <link href="https://gingjan.com/2016/06/16/yii-redirect-cannot-stop-execution/"/>
+    <id>https://gingjan.com/2016/06/16/yii-redirect-cannot-stop-execution/</id>
     <published>2016-06-16T02:55:54.000Z</published>
     <updated>2020-05-05T05:01:45.000Z</updated>
     
@@ -655,23 +655,23 @@
     
     </summary>
     
-      <category term="框架" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="PHP" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
+      <category term="PHP" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
     
-      <category term="Yii" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Yii/"/>
+      <category term="Yii" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Yii/"/>
     
     
-      <category term="框架" scheme="http://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="Yii" scheme="http://gingjan.com/tags/Yii/"/>
+      <category term="Yii" scheme="https://gingjan.com/tags/Yii/"/>
     
   </entry>
   
   <entry>
     <title>在Yii中如何处理级联删除</title>
-    <link href="http://gingjan.com/2016/06/13/cascade-delete-in-yii/"/>
-    <id>http://gingjan.com/2016/06/13/cascade-delete-in-yii/</id>
+    <link href="https://gingjan.com/2016/06/13/cascade-delete-in-yii/"/>
+    <id>https://gingjan.com/2016/06/13/cascade-delete-in-yii/</id>
     <published>2016-06-13T03:39:41.000Z</published>
     <updated>2020-05-05T05:25:28.000Z</updated>
     
@@ -687,23 +687,23 @@
     
     </summary>
     
-      <category term="框架" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="PHP" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
+      <category term="PHP" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
     
-      <category term="Yii" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Yii/"/>
+      <category term="Yii" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Yii/"/>
     
     
-      <category term="框架" scheme="http://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="Yii" scheme="http://gingjan.com/tags/Yii/"/>
+      <category term="Yii" scheme="https://gingjan.com/tags/Yii/"/>
     
   </entry>
   
   <entry>
     <title>访问修饰符的意义</title>
-    <link href="http://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/"/>
-    <id>http://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</id>
+    <link href="https://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/"/>
+    <id>https://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</id>
     <published>2016-06-06T14:45:07.000Z</published>
     <updated>2020-05-05T05:23:47.000Z</updated>
     
@@ -741,19 +741,19 @@
     
     </summary>
     
-      <category term="代码之上" scheme="http://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
+      <category term="代码之上" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
     
-      <category term="OOP" scheme="http://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/OOP/"/>
+      <category term="OOP" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/OOP/"/>
     
     
-      <category term="OOP" scheme="http://gingjan.com/tags/OOP/"/>
+      <category term="OOP" scheme="https://gingjan.com/tags/OOP/"/>
     
   </entry>
   
   <entry>
     <title>Yii框架的服务定位器</title>
-    <link href="http://gingjan.com/2016/06/02/yii-service-locator/"/>
-    <id>http://gingjan.com/2016/06/02/yii-service-locator/</id>
+    <link href="https://gingjan.com/2016/06/02/yii-service-locator/"/>
+    <id>https://gingjan.com/2016/06/02/yii-service-locator/</id>
     <published>2016-06-02T12:02:51.000Z</published>
     <updated>2020-05-05T05:02:16.000Z</updated>
     
@@ -780,23 +780,23 @@
     
     </summary>
     
-      <category term="框架" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="PHP" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
+      <category term="PHP" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
     
-      <category term="Yii" scheme="http://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Yii/"/>
+      <category term="Yii" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Yii/"/>
     
     
-      <category term="框架" scheme="http://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="Yii" scheme="http://gingjan.com/tags/Yii/"/>
+      <category term="Yii" scheme="https://gingjan.com/tags/Yii/"/>
     
   </entry>
   
   <entry>
     <title>Javascript的单线程和异步之间的关系</title>
-    <link href="http://gingjan.com/2016/06/01/js-async-single-thread-queue/"/>
-    <id>http://gingjan.com/2016/06/01/js-async-single-thread-queue/</id>
+    <link href="https://gingjan.com/2016/06/01/js-async-single-thread-queue/"/>
+    <id>https://gingjan.com/2016/06/01/js-async-single-thread-queue/</id>
     <published>2016-06-01T03:26:32.000Z</published>
     <updated>2020-05-05T05:25:28.000Z</updated>
     
@@ -818,29 +818,29 @@
     
     </summary>
     
-      <category term="前端" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="Javascript" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/"/>
+      <category term="Javascript" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/"/>
     
-      <category term="基础" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="js" scheme="http://gingjan.com/tags/js/"/>
+      <category term="js" scheme="https://gingjan.com/tags/js/"/>
     
-      <category term="Javascript" scheme="http://gingjan.com/tags/Javascript/"/>
+      <category term="Javascript" scheme="https://gingjan.com/tags/Javascript/"/>
     
-      <category term="异步" scheme="http://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
+      <category term="异步" scheme="https://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
     
-      <category term="线程" scheme="http://gingjan.com/tags/%E7%BA%BF%E7%A8%8B/"/>
+      <category term="线程" scheme="https://gingjan.com/tags/%E7%BA%BF%E7%A8%8B/"/>
     
-      <category term="队列" scheme="http://gingjan.com/tags/%E9%98%9F%E5%88%97/"/>
+      <category term="队列" scheme="https://gingjan.com/tags/%E9%98%9F%E5%88%97/"/>
     
   </entry>
   
   <entry>
     <title>超时调用和循环调用</title>
-    <link href="http://gingjan.com/2016/05/25/settimeout-and-setintervel/"/>
-    <id>http://gingjan.com/2016/05/25/settimeout-and-setintervel/</id>
+    <link href="https://gingjan.com/2016/05/25/settimeout-and-setintervel/"/>
+    <id>https://gingjan.com/2016/05/25/settimeout-and-setintervel/</id>
     <published>2016-05-25T15:36:28.000Z</published>
     <updated>2020-05-05T04:59:27.000Z</updated>
     
@@ -865,25 +865,25 @@
     
     </summary>
     
-      <category term="前端" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="Javascript" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/"/>
+      <category term="Javascript" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/"/>
     
-      <category term="基础" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="Javascript" scheme="http://gingjan.com/tags/Javascript/"/>
+      <category term="Javascript" scheme="https://gingjan.com/tags/Javascript/"/>
     
-      <category term="异步" scheme="http://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
+      <category term="异步" scheme="https://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
     
-      <category term="回调" scheme="http://gingjan.com/tags/%E5%9B%9E%E8%B0%83/"/>
+      <category term="回调" scheme="https://gingjan.com/tags/%E5%9B%9E%E8%B0%83/"/>
     
   </entry>
   
   <entry>
     <title>Git常用命令</title>
-    <link href="http://gingjan.com/2016/05/24/git-command/"/>
-    <id>http://gingjan.com/2016/05/24/git-command/</id>
+    <link href="https://gingjan.com/2016/05/24/git-command/"/>
+    <id>https://gingjan.com/2016/05/24/git-command/</id>
     <published>2016-05-24T09:08:33.000Z</published>
     <updated>2020-05-05T05:20:43.000Z</updated>
     
@@ -1390,23 +1390,23 @@
     
     </summary>
     
-      <category term="CVS" scheme="http://gingjan.com/categories/CVS/"/>
+      <category term="CVS" scheme="https://gingjan.com/categories/CVS/"/>
     
-      <category term="Git" scheme="http://gingjan.com/categories/CVS/Git/"/>
+      <category term="Git" scheme="https://gingjan.com/categories/CVS/Git/"/>
     
-      <category term="Git命令" scheme="http://gingjan.com/categories/CVS/Git/Git%E5%91%BD%E4%BB%A4/"/>
+      <category term="Git命令" scheme="https://gingjan.com/categories/CVS/Git/Git%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="Git" scheme="http://gingjan.com/tags/Git/"/>
+      <category term="Git" scheme="https://gingjan.com/tags/Git/"/>
     
-      <category term="CVS" scheme="http://gingjan.com/tags/CVS/"/>
+      <category term="CVS" scheme="https://gingjan.com/tags/CVS/"/>
     
   </entry>
   
   <entry>
     <title>同步编程与异步编程的转换和对比</title>
-    <link href="http://gingjan.com/2016/05/24/sync-vs-async-and-they-transfers/"/>
-    <id>http://gingjan.com/2016/05/24/sync-vs-async-and-they-transfers/</id>
+    <link href="https://gingjan.com/2016/05/24/sync-vs-async-and-they-transfers/"/>
+    <id>https://gingjan.com/2016/05/24/sync-vs-async-and-they-transfers/</id>
     <published>2016-05-23T18:38:42.000Z</published>
     <updated>2020-05-05T05:01:23.000Z</updated>
     
@@ -1437,21 +1437,21 @@
     
     </summary>
     
-      <category term="前端" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="NodeJS" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/NodeJS/"/>
+      <category term="NodeJS" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/NodeJS/"/>
     
-      <category term="基础" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/NodeJS/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/NodeJS/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="NodeJS" scheme="http://gingjan.com/tags/NodeJS/"/>
+      <category term="NodeJS" scheme="https://gingjan.com/tags/NodeJS/"/>
     
   </entry>
   
   <entry>
     <title>push.default的 matching和simple</title>
-    <link href="http://gingjan.com/2016/05/22/git-push-default/"/>
-    <id>http://gingjan.com/2016/05/22/git-push-default/</id>
+    <link href="https://gingjan.com/2016/05/22/git-push-default/"/>
+    <id>https://gingjan.com/2016/05/22/git-push-default/</id>
     <published>2016-05-22T13:33:44.000Z</published>
     <updated>2020-05-05T05:06:03.000Z</updated>
     
@@ -1472,23 +1472,23 @@
     
     </summary>
     
-      <category term="CVS" scheme="http://gingjan.com/categories/CVS/"/>
+      <category term="CVS" scheme="https://gingjan.com/categories/CVS/"/>
     
-      <category term="Git" scheme="http://gingjan.com/categories/CVS/Git/"/>
+      <category term="Git" scheme="https://gingjan.com/categories/CVS/Git/"/>
     
-      <category term="基础" scheme="http://gingjan.com/categories/CVS/Git/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="https://gingjan.com/categories/CVS/Git/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="Git" scheme="http://gingjan.com/tags/Git/"/>
+      <category term="Git" scheme="https://gingjan.com/tags/Git/"/>
     
-      <category term="CVS" scheme="http://gingjan.com/tags/CVS/"/>
+      <category term="CVS" scheme="https://gingjan.com/tags/CVS/"/>
     
   </entry>
   
   <entry>
     <title>标题和段落文字大小以及排版设计</title>
-    <link href="http://gingjan.com/2016/05/20/title-paragraph-font-size/"/>
-    <id>http://gingjan.com/2016/05/20/title-paragraph-font-size/</id>
+    <link href="https://gingjan.com/2016/05/20/title-paragraph-font-size/"/>
+    <id>https://gingjan.com/2016/05/20/title-paragraph-font-size/</id>
     <published>2016-05-20T03:04:53.000Z</published>
     <updated>2020-05-05T05:12:58.000Z</updated>
     
@@ -1507,21 +1507,21 @@
     
     </summary>
     
-      <category term="前端" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="CSS" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
+      <category term="CSS" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
     
-      <category term="基础" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="CSS" scheme="http://gingjan.com/tags/CSS/"/>
+      <category term="CSS" scheme="https://gingjan.com/tags/CSS/"/>
     
   </entry>
   
   <entry>
     <title>em、百分比、px、pt 的区别</title>
-    <link href="http://gingjan.com/2016/05/19/em-percent-and-px-pt/"/>
-    <id>http://gingjan.com/2016/05/19/em-percent-and-px-pt/</id>
+    <link href="https://gingjan.com/2016/05/19/em-percent-and-px-pt/"/>
+    <id>https://gingjan.com/2016/05/19/em-percent-and-px-pt/</id>
     <published>2016-05-19T13:18:37.000Z</published>
     <updated>2020-05-05T05:15:00.000Z</updated>
     
@@ -1551,21 +1551,21 @@
     
     </summary>
     
-      <category term="前端" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="CSS" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
+      <category term="CSS" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
     
-      <category term="基础" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/%E5%9F%BA%E7%A1%80/"/>
     
     
-      <category term="CSS" scheme="http://gingjan.com/tags/CSS/"/>
+      <category term="CSS" scheme="https://gingjan.com/tags/CSS/"/>
     
   </entry>
   
   <entry>
     <title>负值margin</title>
-    <link href="http://gingjan.com/2016/05/18/negative-margin/"/>
-    <id>http://gingjan.com/2016/05/18/negative-margin/</id>
+    <link href="https://gingjan.com/2016/05/18/negative-margin/"/>
+    <id>https://gingjan.com/2016/05/18/negative-margin/</id>
     <published>2016-05-18T14:20:52.000Z</published>
     <updated>2020-05-05T04:57:46.000Z</updated>
     
@@ -1589,14 +1589,14 @@
     
     </summary>
     
-      <category term="前端" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="CSS" scheme="http://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
+      <category term="CSS" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
     
     
-      <category term="CSS" scheme="http://gingjan.com/tags/CSS/"/>
+      <category term="CSS" scheme="https://gingjan.com/tags/CSS/"/>
     
-      <category term="前端" scheme="http://gingjan.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://gingjan.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
