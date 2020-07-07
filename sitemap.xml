@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gingjan.com/2020/05/01/clockwise-rule/</loc>
+    
+    <lastmod>2020-07-07T05:25:09.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://gingjan.com/tags/index.html</loc>
     
     <lastmod>2020-05-29T11:19:43.000Z</lastmod>
@@ -24,13 +31,6 @@
   
   <url>
     <loc>https://gingjan.com/2016/06/13/cascade-delete-in-yii/</loc>
-    
-    <lastmod>2020-05-05T05:25:28.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gingjan.com/2020/05/01/clockwise-rule/</loc>
     
     <lastmod>2020-05-05T05:25:28.000Z</lastmod>
     
