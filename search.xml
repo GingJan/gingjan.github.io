@@ -6,8 +6,7 @@
     <entry>
       <title><![CDATA[顺时针螺旋原则]]></title>
       <url>https://gingjan.com/2020/05/01/clockwise-rule/</url>
-      <content type="html"><![CDATA[<p>本文主要讲解何为顺时针螺旋原则</p>
-<h2 id="步骤"><a class="header-anchor" href="#步骤"></a>步骤</h2>
+      <content type="html"><![CDATA[<h2 id="步骤"><a class="header-anchor" href="#步骤"></a>步骤</h2>
 <p>可以根据顺时针螺旋原则，对C的复杂声明进行解读</p>
 <p>按照以下三个步骤:</p>
 <ol>
