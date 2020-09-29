@@ -4,6 +4,113 @@
   
     
     <entry>
+      <title><![CDATA[Linux日志查看常用命令]]></title>
+      <url>https://gingjan.com/2020/09/29/common-command-of-linux-for-log/</url>
+      <content type="html"><![CDATA[<p>收集常用的Linux日志查看命令<br>
+&lt;Excerpt in index | 首页摘要&gt;</p>
+<a id="more"></a>
+<p>&lt;The rest of contents | 余下全文&gt;</p>
+<p>读取日志的命令有三个<code>cat</code>，<code>tail</code>，<code>head</code></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cat</td>
+<td>-n</td>
+<td>[file_name]</td>
+<td>读取file_name数据，并附带上行号</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>-n</td>
+<td>10 [file_name]</td>
+<td>从file_name最后一行开始，往上读取10行</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>-n</td>
+<td>-10 [file_name]</td>
+<td>从file_name最后一行开始，往上读取10行</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>-n</td>
+<td>+10 [file_name]</td>
+<td>从file_name第10行开始，往下读取到最后一行</td>
+</tr>
+<tr>
+<td>head</td>
+<td>-n</td>
+<td>10 [file_name]</td>
+<td>从file_name第1行开始读取10行</td>
+</tr>
+<tr>
+<td>head</td>
+<td>-n</td>
+<td>+10 [file_name]</td>
+<td>从file_name第1行开始读取10行</td>
+</tr>
+<tr>
+<td>grep</td>
+<td>-10n ‘keyword’</td>
+<td>[file_name]</td>
+<td>筛选file_name的keyword，并输出该keyword所在行的前后10行的日志(10+1+10=21行)</td>
+</tr>
+<tr>
+<td>grep</td>
+<td>-10n --color=always ‘keyword’</td>
+<td>[file_name]</td>
+<td>同上，对keyword上色标记输出</td>
+</tr>
+<tr>
+<td>sed</td>
+<td>-n</td>
+<td>‘/2006-01-02 15:04:05/, /2006-01-02 15:04:06/p’ [file_name]</td>
+<td>模式匹配，输出在匹配时间段内的日志</td>
+</tr>
+<tr>
+<td>more</td>
+<td></td>
+<td></td>
+<td>分页显示，空格键翻页</td>
+</tr>
+<tr>
+<td>less</td>
+<td></td>
+<td></td>
+<td>分页显示，空格键翻页</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>-r</td>
+<td></td>
+<td>排序，-r：倒序</td>
+</tr>
+</tbody>
+</table>
+<p><code>tail</code>和<code>head</code> 结合使用<br>
+<code>tail -n +5 [file_name] | head -n 3</code><br>
+从第5行读取[file_name]到最后一行得出结果集1，然后再从第一行读结果集1，读到第3行</p>
+<p><code>cat</code> + <code>gret</code> 结合使用<br>
+<code>cat [file_name] | grep -10n 'keyword'</code><br>
+筛选file_name的keyword，并输出该keyword所在行的前后10行的日志</p>
+<p><code>grep</code> + <code>sort</code> 结合使用<br>
+<code>grep -10n 'keyword' [file_name] | sort -r</code><br>
+筛选file_name的keyword，并输出该keyword所在行的前后10行的日志，并以倒序排序</p>
+<p><code>grep</code> + <code>sort</code> + <code>more</code> 结合使用<br>
+<code>grep -10n 'keyword' [file_name] | sort -r | more</code><br>
+筛选file_name的keyword，并输出该keyword所在行的前后10行的日志，并以倒序排序，再分页处理</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[顺时针螺旋原则]]></title>
       <url>https://gingjan.com/2020/05/01/clockwise-rule/</url>
       <content type="html"><![CDATA[<p>本文主要讲解何为顺时针螺旋原则</p>

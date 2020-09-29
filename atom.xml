@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gingjan.com/"/>
-  <updated>2020-07-10T17:22:02.000Z</updated>
+  <updated>2020-09-29T11:44:09.000Z</updated>
   <id>https://gingjan.com/</id>
   
   <author>
@@ -14,6 +14,134 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux日志查看常用命令</title>
+    <link href="https://gingjan.com/2020/09/29/common-command-of-linux-for-log/"/>
+    <id>https://gingjan.com/2020/09/29/common-command-of-linux-for-log/</id>
+    <published>2020-09-29T11:30:20.000Z</published>
+    <updated>2020-09-29T11:44:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>收集常用的Linux日志查看命令<br>
+&lt;Excerpt in index | 首页摘要&gt;</p>
+<a id="more"></a>
+<p>&lt;The rest of contents | 余下全文&gt;</p>
+<p>读取日志的命令有三个<code>cat</code>，<code>tail</code>，<code>head</code></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>选项</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cat</td>
+<td>-n</td>
+<td>[file_name]</td>
+<td>读取file_name数据，并附带上行号</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>-n</td>
+<td>10 [file_name]</td>
+<td>从file_name最后一行开始，往上读取10行</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>-n</td>
+<td>-10 [file_name]</td>
+<td>从file_name最后一行开始，往上读取10行</td>
+</tr>
+<tr>
+<td>tail</td>
+<td>-n</td>
+<td>+10 [file_name]</td>
+<td>从file_name第10行开始，往下读取到最后一行</td>
+</tr>
+<tr>
+<td>head</td>
+<td>-n</td>
+<td>10 [file_name]</td>
+<td>从file_name第1行开始读取10行</td>
+</tr>
+<tr>
+<td>head</td>
+<td>-n</td>
+<td>+10 [file_name]</td>
+<td>从file_name第1行开始读取10行</td>
+</tr>
+<tr>
+<td>grep</td>
+<td>-10n ‘keyword’</td>
+<td>[file_name]</td>
+<td>筛选file_name的keyword，并输出该keyword所在行的前后10行的日志(10+1+10=21行)</td>
+</tr>
+<tr>
+<td>grep</td>
+<td>-10n --color=always ‘keyword’</td>
+<td>[file_name]</td>
+<td>同上，对keyword上色标记输出</td>
+</tr>
+<tr>
+<td>sed</td>
+<td>-n</td>
+<td>‘/2006-01-02 15:04:05/, /2006-01-02 15:04:06/p’ [file_name]</td>
+<td>模式匹配，输出在匹配时间段内的日志</td>
+</tr>
+<tr>
+<td>more</td>
+<td></td>
+<td></td>
+<td>分页显示，空格键翻页</td>
+</tr>
+<tr>
+<td>less</td>
+<td></td>
+<td></td>
+<td>分页显示，空格键翻页</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>-r</td>
+<td></td>
+<td>排序，-r：倒序</td>
+</tr>
+</tbody>
+</table>
+<p><code>tail</code>和<code>head</code> 结合使用<br>
+<code>tail -n +5 [file_name] | head -n 3</code><br>
+从第5行读取[file_name]到最后一行得出结果集1，然后再从第一行读结果集1，读到第3行</p>
+<p><code>cat</code> + <code>gret</code> 结合使用<br>
+<code>cat [file_name] | grep -10n 'keyword'</code><br>
+筛选file_name的keyword，并输出该keyword所在行的前后10行的日志</p>
+<p><code>grep</code> + <code>sort</code> 结合使用<br>
+<code>grep -10n 'keyword' [file_name] | sort -r</code><br>
+筛选file_name的keyword，并输出该keyword所在行的前后10行的日志，并以倒序排序</p>
+<p><code>grep</code> + <code>sort</code> + <code>more</code> 结合使用<br>
+<code>grep -10n 'keyword' [file_name] | sort -r | more</code><br>
+筛选file_name的keyword，并输出该keyword所在行的前后10行的日志，并以倒序排序，再分页处理</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;收集常用的Linux日志查看命令&lt;br&gt;
+&amp;lt;Excerpt in index | 首页摘要&amp;gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="命令" scheme="https://gingjan.com/categories/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="日志" scheme="https://gingjan.com/categories/%E5%91%BD%E4%BB%A4/%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="命令" scheme="https://gingjan.com/tags/%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="Linux" scheme="https://gingjan.com/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>顺时针螺旋原则</title>
@@ -1701,45 +1829,6 @@ $cache = $locator-&gt;cache;//通过属性</p>
       <category term="Git" scheme="https://gingjan.com/tags/Git/"/>
     
       <category term="CVS" scheme="https://gingjan.com/tags/CVS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>标题和段落文字大小以及排版设计</title>
-    <link href="https://gingjan.com/2016/05/20/title-paragraph-font-size/"/>
-    <id>https://gingjan.com/2016/05/20/title-paragraph-font-size/</id>
-    <published>2016-05-20T03:04:53.000Z</published>
-    <updated>2020-05-05T05:12:58.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>** 标题和段落字体大小 **：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
-<a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;<br>
-这一类的排版建议把标题设置为默认字体大小的1.125em，也即1.125倍，而正文字体为0.75em，line-height为相对正文字体大小的1.5em（注意不是相对默认字体16px设定，是相对正文字体大小设定），建议再设置标题块（如h1）和段落块（如p）的margin同为相对正文字体大小的1.5em。下面我们写出具体代码以及解释</p>
-<p>假设默认字体大小为16px（事实也确实如此）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>...<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="￼1"><a class="header-anchor" href="#￼1"></a><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*基本css样式设置*/</span></span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">100%</span>;<span class="comment">/*为了兼容IE*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">46.25em</span>; <span class="comment">/*740px/16px=46.25em*/</span></span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">1.5em</span> auto</span><br><span class="line">    border : <span class="number">0.0625em</span> solid <span class="number">#ccc</span> <span class="comment">/*1px/16px=0.0625em*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2>
-<p>给标题设置样式：“18px”的字体，“18px”的行高以及margin值</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1.125em</span> <span class="comment">/*先继承它的父元素的默认大小16px，然后换成：18px/16px=1.125em*/</span></span><br><span class="line">    <span class="comment">/*为了美观，建议加上行高和margin*/</span></span><br><span class="line">    line-height: <span class="number">1em</span>;<span class="comment">/*也是18px，但是它这里是相对于上面的font-size来说，因此是18px(line-height)÷18px(font-size)=1em*/</span></span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">1em</span>; <span class="comment">/*18px(margin) ÷ 18px(font-size) = 1em */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>给标题设置样式：“12px”的字体，“18px”的行高以及margin值</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">0.75em</span> <span class="comment">/*先继承它的父元素的默认大小16px，然后换成：12px/16px=0.75em*/</span></span><br><span class="line">    <span class="comment">/*为了美观，建议加上行高和margin*/</span></span><br><span class="line">    line-height: <span class="number">1.5em</span>;<span class="comment">/*也是18px，但是它这里是相对于上面的font-size来说，因此是18px(line-height) ÷ 12(font-size) = 1.5em */</span></span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">1.5em</span>;<span class="comment">/*18px(margin) ÷ 12(font-size) = 1.5em */</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;** 标题和段落字体大小 **：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计&lt;br&gt;
-&amp;lt;Excerpt in index | 首页摘要&amp;gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="CSS" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/"/>
-    
-      <category term="基础" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/CSS/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="CSS" scheme="https://gingjan.com/tags/CSS/"/>
     
   </entry>
   
