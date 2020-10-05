@@ -2,16 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://gingjan.com/2020/09/29/common-command-of-linux-for-log/</loc>
+    <loc>https://gingjan.com/2018/05/21/all-kinds-of-locks-md/</loc>
     
-    <lastmod>2020-09-29T11:44:09.000Z</lastmod>
+    <lastmod>2020-10-05T08:47:35.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://gingjan.com/2018/05/21/all-kinds-of-locks-md/</loc>
+    <loc>https://gingjan.com/2020/05/01/clockwise-rule/</loc>
     
-    <lastmod>2020-07-24T16:27:23.000Z</lastmod>
+    <lastmod>2020-10-05T07:56:36.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gingjan.com/about/index.html</loc>
+    
+    <lastmod>2020-10-05T04:01:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gingjan.com/2020/09/29/common-command-of-linux-for-log/</loc>
+    
+    <lastmod>2020-10-05T03:54:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gingjan.com/tags/index.html</loc>
+    
+    <lastmod>2020-10-05T03:48:41.000Z</lastmod>
     
   </url>
   
@@ -30,30 +51,9 @@
   </url>
   
   <url>
-    <loc>https://gingjan.com/2020/05/01/clockwise-rule/</loc>
-    
-    <lastmod>2020-07-10T17:22:02.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gingjan.com/tags/index.html</loc>
-    
-    <lastmod>2020-05-29T11:19:43.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://gingjan.com/categories/index.html</loc>
     
     <lastmod>2020-05-29T11:19:25.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gingjan.com/about/index.html</loc>
-    
-    <lastmod>2020-05-29T04:48:21.000Z</lastmod>
     
   </url>
   
