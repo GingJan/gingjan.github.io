@@ -219,10 +219,8 @@ chptr是一个指向指向「char volatile」的「常量指针」 (chptr is a c
     <entry>
       <title><![CDATA[Laravel-自动发现扩展包]]></title>
       <url>https://gingjan.com/2019/09/24/laravels-package-auto-discovery/</url>
-      <content type="html"><![CDATA[<p>本文主要讲解Laravel如果基于Composer实现自动发现扩展包<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本文主要讲解Laravel如果基于Composer实现自动发现扩展包</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p>Laravel附带了一个composer.json文件,当一些Laravel包被拉取到本地后,还需要几步手动配置使之能在Laravel项目中使用</p>
 <ul>
 <li>注册 Service Provider</li>
@@ -282,10 +280,8 @@ chptr是一个指向指向「char volatile」的「常量指针」 (chptr is a c
     <entry>
       <title><![CDATA[Composer常用命令]]></title>
       <url>https://gingjan.com/2018/08/09/composer-command/</url>
-      <content type="html"><![CDATA[<p>本文讲解并且亲测了常用的Composer命令<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本文讲解并且亲测了常用的Composer命令</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <table>
 <thead>
 <tr>
@@ -482,11 +478,9 @@ chptr是一个指向指向「char volatile」的「常量指针」 (chptr is a c
     <entry>
       <title><![CDATA[如何在mac上解压分离的压缩文件]]></title>
       <url>https://gingjan.com/2017/02/12/how-to-unzip-a-split-archive-on-mac-osx/</url>
-      <content type="html"><![CDATA[<p>本篇文章向各位展示如何解压分离的压缩文件<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本篇文章向各位展示如何解压分离的压缩文件</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;<br>
-首先，目前据我所知，有两种不同类型的分离压缩文件</p>
+<p>首先，目前据我所知，有两种不同类型的分离压缩文件</p>
 <h3 id="一、xxx-zip-001、xxx-zip-002、xxx-zip003类型"><a class="header-anchor" href="#一、xxx-zip-001、xxx-zip-002、xxx-zip003类型"></a>一、xxx.zip.001、xxx.zip.002、xxx.zip003类型</h3>
 <h4 id="解决方案："><a class="header-anchor" href="#解决方案："></a>解决方案：</h4>
 <p>在终端中输入：</p>
@@ -511,10 +505,8 @@ chptr是一个指向指向「char volatile」的「常量指针」 (chptr is a c
     <entry>
       <title><![CDATA[Linux-让耗时任务在后台运行]]></title>
       <url>https://gingjan.com/2016/09/01/Linux-run-in-background/</url>
-      <content type="html"><![CDATA[<p>** 让终端的任务/耗时任务在后台运行 **：我们在终端中打开耗时任务时，无法进行其他操作或者当网络端口时，任务未执行完毕就终止了。有什么办法令任务在后台运行呢？<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p><strong>让终端的任务/耗时任务在后台运行</strong>：我们在终端中打开耗时任务时，无法进行其他操作或者当网络端口时，任务未执行完毕就终止了。有什么办法令任务在后台运行呢？</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p>涉及命令<br>
 <code>ps -ef</code> 查看进程<br>
 <code>pstree</code> 查看进程树<br>
@@ -558,10 +550,8 @@ chptr是一个指向指向「char volatile」的「常量指针」 (chptr is a c
     <entry>
       <title><![CDATA[查看一次SQL的执行时间与相关参数]]></title>
       <url>https://gingjan.com/2016/07/03/mysql-sql-execution-check-out/</url>
-      <content type="html"><![CDATA[<p>** mysql之sql执行过程窥探 **：本文讲解如何窥探sql执行过程的相关参数<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** mysql之sql执行过程窥探 **：本文讲解如何窥探sql执行过程的相关参数</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p>1.首先查看当前session（会话）的profiling是否打开<br>
 <code>select @@profiling</code><br>
 <img src="/img/mysql-sql-execution-check-out/mysql1.png" alt="profiling=0，未打开"><br>
@@ -587,10 +577,8 @@ chptr是一个指向指向「char volatile」的「常量指针」 (chptr is a c
     <entry>
       <title><![CDATA[REST API 响应状态码]]></title>
       <url>https://gingjan.com/2016/06/21/rest-status-code-setting/</url>
-      <content type="html"><![CDATA[<p>本文简单介绍了设计REST API时，返回的响应应该设置什么样的状态码<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本文简单介绍了设计REST API时，返回的响应应该设置什么样的状态码</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <h2 id="响应状态码"><a class="header-anchor" href="#响应状态码"></a>响应状态码</h2>
 <p>在涉及REST风格的API时，使用适当和Http响应状态码是很重要的，这样可以提高API消费者（客户端）对API响应信息的理解</p>
 <h3 id="状态码分为5大类"><a class="header-anchor" href="#状态码分为5大类"></a>状态码分为5大类</h3>
@@ -684,10 +672,8 @@ PATCH，补丁，碎片，可以知道，使用PATCH更新资源时，只需要�
     <entry>
       <title><![CDATA[Yii的redirect()方法无法终止执行代码]]></title>
       <url>https://gingjan.com/2016/06/16/yii-redirect-cannot-stop-execution/</url>
-      <content type="html"><![CDATA[<p>** 坑爹的redirect() **：在controller里的redirect方法在跳转后，无法终止后续代码的执行。特别在init方法中更棘手。<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** 坑爹的redirect() **：在controller里的redirect方法在跳转后，无法终止后续代码的执行。特别在init方法中更棘手。</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <h3 id="遇到的情况-问题"><a class="header-anchor" href="#遇到的情况-问题"></a>遇到的情况/问题</h3>
 <p>在写权限控制的时候，在BaseController里的init方法设置了权限检测，如果权限不足则跳转并且终止执行后续代码，可是问题来了，使用了redirect()方法后，确实是跳转了，但是后续操作依然可以执行，显然没有做到控制权限的效果。</p>
 <h3 id="问题分析"><a class="header-anchor" href="#问题分析"></a>问题分析</h3>
@@ -706,11 +692,9 @@ PATCH，补丁，碎片，可以知道，使用PATCH更新资源时，只需要�
     <entry>
       <title><![CDATA[在Yii中如何处理级联删除]]></title>
       <url>https://gingjan.com/2016/06/13/cascade-delete-in-yii/</url>
-      <content type="html"><![CDATA[<p>Yii框架在代码层进行级联删除<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>Yii框架在代码层进行级联删除</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;<br>
-数据库表里使用了外键并且使用了Restrict模式，导致删除一张表的记录时，因为外键和其他表关联起来了，导致无法删除，需要把关联表的记录同时也删除了才可以操作目标表记录的删除操作。</p>
+<p>数据库表里使用了外键并且使用了Restrict模式，导致删除一张表的记录时，因为外键和其他表关联起来了，导致无法删除，需要把关联表的记录同时也删除了才可以操作目标表记录的删除操作。</p>
 <p>第一步：重写beforeDelete()<br>
 在Model里，重写beforeDelete()，然后在该方法的最后一行<code>return parent::beforeDelete();</code>即可<br>
 当然与beforeDelete方法对应的afterDelete方法也能做其他事情。<br>
@@ -721,10 +705,8 @@ PATCH，补丁，碎片，可以知道，使用PATCH更新资源时，只需要�
     <entry>
       <title><![CDATA[访问修饰符的意义]]></title>
       <url>https://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</url>
-      <content type="html"><![CDATA[<p>** 访问修饰符和访问控制的意义 **：本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法__get()和__set()的使用<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法__get()和__set()的使用</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p>先上一段代码好说明问题</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_salary;<span class="comment">//私用属性命名加_</span></span><br><span class="line">    <span class="comment">//setter and getter</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSalary</span><span class="params">()</span> </span>&#123;<span class="comment">//如果只有get，那么说明该 属性/成员变量 只是可读，不可写</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_salary;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSalary</span><span class="params">($salary)</span> </span>&#123;<span class="comment">//如果只有set，说明该 属性/成员变量 只是可写，不可读</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;_salary = $salary;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
@@ -758,10 +740,8 @@ PATCH，补丁，碎片，可以知道，使用PATCH更新资源时，只需要�
     <entry>
       <title><![CDATA[Yii框架的服务定位器]]></title>
       <url>https://gingjan.com/2016/06/02/yii-service-locator/</url>
-      <content type="html"><![CDATA[<p>** Yii——组件注册 **：Yii的组件相当于Laravel的服务，同样需要注册到一个IOC容器中，以便在应用其他地方使用这些组件/服务<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** Yii——组件注册 **：Yii的组件相当于Laravel的服务，同样需要注册到一个IOC容器中，以便在应用其他地方使用这些组件/服务</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p>这相当与在laravel中，使用$app应用的register或者singleton方法注册服务，而在Yii中则称为服务定位器Service Locator。</p>
 <h2 id="注册组件"><a class="header-anchor" href="#注册组件"></a>注册组件</h2>
 <p>在Yii中，要注册组件(laravel中称之为服务)可以使用如下方式：</p>
@@ -787,10 +767,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[Javascript的单线程和异步之间的关系]]></title>
       <url>https://gingjan.com/2016/06/01/js-async-single-thread-queue/</url>
-      <content type="html"><![CDATA[<p>本文介绍javascript的异步和单线程的关系，以及简单解释了单线程的js怎么异步处理。<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本文介绍javascript的异步和单线程的关系，以及简单解释了单线程的js怎么异步处理。</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <h2 id="异步计时函数setTimeout"><a class="header-anchor" href="#异步计时函数setTimeout"></a>异步计时函数setTimeout()</h2>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> begin = <span class="keyword">new</span> <span class="built_in">Date</span>();<span class="comment">//代码开始</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    alert(<span class="string">'你好，这个程序已经运行了'</span> + (end - begin) + <span class="string">'毫秒'</span>);</span><br><span class="line">&#125;,<span class="number">3000</span>);<span class="comment">//1秒后弹出对话框</span></span><br><span class="line"><span class="keyword">while</span> ((<span class="keyword">new</span> <span class="built_in">Date</span>() - begin) &lt; <span class="number">6000</span>) &#123;&#125;<span class="comment">//循环代码持续3秒，3秒后，整个js调用栈的程序才执行完毕（在控制台中可以看到3秒后才出现一个响应undefined）</span></span><br></pre></td></tr></table></figure>
 <p>上面的代码跟下面的对比一下：</p>
@@ -815,10 +793,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[超时调用和循环调用]]></title>
       <url>https://gingjan.com/2016/05/25/settimeout-and-setintervel/</url>
-      <content type="html"><![CDATA[<p>** setTimeout和setInterval **：本文介绍这两个浏览器提供的api及其底层的原理<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** setTimeout和setInterval **：本文介绍这两个浏览器提供的api及其底层的原理</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <h3 id="超时调用就是setTimeout-function-delay"><a class="header-anchor" href="#超时调用就是setTimeout-function-delay"></a>超时调用就是setTimeout(function(){}, delay);</h3>
 <p>第一参数：要执行的回调函数<br>
 第二参数：延迟多少毫秒，表示在指定时间之后添加回调函数到执行队列中，如果指定时间之后队列中没有其他要执行的代码，那么被添加的代码（即回调函数）会被立即执行。如果队列中有其他代码，那么回调函数会在队列里的代码执行完毕之后才执行。</p>
@@ -844,10 +820,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[Git常用命令]]></title>
       <url>https://gingjan.com/2016/05/24/git-command/</url>
-      <content type="html"><![CDATA[<p>本文讲解并且亲测了常用的Git命令<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本文讲解并且亲测了常用的Git命令</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <table>
 <thead>
 <tr>
@@ -1363,10 +1337,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[同步编程与异步编程的转换和对比]]></title>
       <url>https://gingjan.com/2016/05/24/sync-vs-async-and-they-transfers/</url>
-      <content type="html"><![CDATA[<p>** 同步转换异步 **： 本文介绍了nodejs下的同步模型转换成异步模型（异步代码的设计）<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** 同步转换异步 **： 本文介绍了nodejs下的同步模型转换成异步模型（异步代码的设计）</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <h2 id="开始转变思路"><a class="header-anchor" href="#开始转变思路"></a>开始转变思路</h2>
 <p>这里转变思路是指由同步模型代码转换成异步模型代码<br>
 要使用Node.js，就有必要了解异步编程的工作原理。异步代码设计并非简单的设计，需要一番学习。本文在同步代码示例旁边给出了异步代码示例，表明如何更改同步代码，才能变成异步代码。这些示例都围绕Node.js的文件系统(fs)模块，因为它是唯一含有同步I/O操作及异步I/O操作的模块。有了这两种示例，你可以开始转变思路了。</p>
@@ -1409,10 +1381,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[push.default的 matching和simple]]></title>
       <url>https://gingjan.com/2016/05/22/git-push-default/</url>
-      <content type="html"><![CDATA[<p>** push.default的设置 **：本文介绍push.default的两种设置，因为有两种不同设置是因为Git版本升级，导致默认设置不一样。<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** push.default的设置 **：本文介绍push.default的两种设置，因为有两种不同设置是因为Git版本升级，导致默认设置不一样。</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p>因为git的版本升级，导致了<code>push.default</code>的值改变了，因此会询问你，使用<code>matching</code>还是<code>simple</code>，下面讲讲这两者的区别</p>
 <h3 id="Matching"><a class="header-anchor" href="#Matching"></a>Matching</h3>
 <p>该参数是 Git 1.*的默认值，意思是如果在执行git push时没有指定分支，那么它将把所有本地的分支push到远程仓库中对应的分支</p>
@@ -1420,19 +1390,17 @@ $cache = $locator-&gt;cache;//通过属性</p>
 <p>该参数是 Git 2.*的默认值，意思是如果在执行git push时没有指定分支，那么它只会把当前分支push到你用git pull时指定的那个分支。</p>
 <h3 id="修改默认设置"><a class="header-anchor" href="#修改默认设置"></a>修改默认设置</h3>
 <p>通过修改全局配置来隐藏git push时的提示，如果要设置matching模式则：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global push.default matching</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global push.default matching</span><br></pre></td></tr></table></figure>
 <p>设置simple模式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global push.default simple</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global push.default simple</span><br></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[标题和段落文字大小以及排版设计]]></title>
       <url>https://gingjan.com/2016/05/20/title-paragraph-font-size/</url>
-      <content type="html"><![CDATA[<p>** 标题和段落字体大小 **：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** 标题和段落字体大小 **：本文我们讨论使用em来设置标题和段落字体大小，并且相关排版的设计</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;<br>
-这一类的排版建议把标题设置为默认字体大小的1.125em，也即1.125倍，而正文字体为0.75em，line-height为相对正文字体大小的1.5em（注意不是相对默认字体16px设定，是相对正文字体大小设定），建议再设置标题块（如h1）和段落块（如p）的margin同为相对正文字体大小的1.5em。下面我们写出具体代码以及解释</p>
+<p>这一类的排版建议把标题设置为默认字体大小的1.125em，也即1.125倍，而正文字体为0.75em，line-height为相对正文字体大小的1.5em（注意不是相对默认字体16px设定，是相对正文字体大小设定），建议再设置标题块（如h1）和段落块（如p）的margin同为相对正文字体大小的1.5em。下面我们写出具体代码以及解释</p>
 <p>假设默认字体大小为16px（事实也确实如此）</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>...<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="￼1"><a class="header-anchor" href="#￼1"></a><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*基本css样式设置*/</span></span><br><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">100%</span>;<span class="comment">/*为了兼容IE*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">46.25em</span>; <span class="comment">/*740px/16px=46.25em*/</span></span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">1.5em</span> auto</span><br><span class="line">    border : <span class="number">0.0625em</span> solid <span class="number">#ccc</span> <span class="comment">/*1px/16px=0.0625em*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2>
@@ -1487,11 +1455,9 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[负值margin]]></title>
       <url>https://gingjan.com/2016/05/18/negative-margin/</url>
-      <content type="html"><![CDATA[<p>** margin **：当margin取负值时，会发生什么有趣的事情呢？<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** margin **：当margin取负值时，会发生什么有趣的事情呢？</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;<br>
-我们来谈谈使用负margin的好处以及用法：<code>margin: -100px;</code></p>
+<p>我们来谈谈使用负margin的好处以及用法：<code>margin: -100px;</code></p>
 <p>** 使用负margin时，需要注意的地方 **</p>
 <ul>
 <li>负margin是标准的CSS</li>
@@ -1509,10 +1475,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[PHP生成器函数及yield关键字]]></title>
       <url>https://gingjan.com/2016/05/16/php-generator-function-and-yield/</url>
-      <content type="html"><![CDATA[<p>** 生成器函数：本文介绍了PHP的生成器函数和yield关键字的作用以及用法**<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** 生成器函数：本文介绍了PHP的生成器函数和yield关键字的作用以及用法**</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <h2 id="生成器函数generator-function"><a class="header-anchor" href="#生成器函数generator-function"></a>生成器函数generator function</h2>
 <p>它很适合用来写迭代器iterator，可以在循环中定义一个可以计算并且返回值的函数</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生成器函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xrange</span><span class="params">($min, $max)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>($i = $min; $i &lt;= $max; $i++) &#123;</span><br><span class="line">        <span class="keyword">yield</span> $i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(xrange(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $key,<span class="string">'=&gt;'</span>,$value,PHP_EOL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会输出</span></span><br><span class="line"><span class="number">0</span>=&gt;<span class="number">1</span></span><br><span class="line"><span class="number">1</span>=&gt;<span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="number">9</span>=&gt;<span class="number">10</span></span><br></pre></td></tr></table></figure>
@@ -1539,10 +1503,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[使用Composer的脚本/scripts属性]]></title>
       <url>https://gingjan.com/2016/05/16/composer-scripts/</url>
-      <content type="html"><![CDATA[<p>本文介绍composer.json文件里的语法和关键字的用处<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本文介绍composer.json文件里的语法和关键字的用处</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p>我们在项目的根目录创建并定义composer.json文件，该文件里的JSON对象内定义一个<code>&quot;scripts&quot;</code>属性，该属性包含一系列事件对应要执行的回调脚本，一个事件可以用数组定义多个事件脚本。<br>
 对于同一个事件，多个事件脚本会按照定义的顺序触发。<br>
 ** 被执行的php回调脚本一定要定义成静态方法 **</p>
@@ -1655,10 +1617,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[PHP的静/动态——全/局变量]]></title>
       <url>https://gingjan.com/2016/05/15/php-variables/</url>
-      <content type="html"><![CDATA[<p>本文介绍PHP的各种变量，全局静态变量、全局变量、局部静态变量、局部变量<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>本文介绍PHP的各种变量，全局静态变量、全局变量、局部静态变量、局部变量</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p><code>全局变量/局部变量</code>也即是<code>全局动态变量/局部动态变量</code>=<code>全局普通变量/局部普通变量</code>=<code>外部变量/内部变量</code></p>
 <p>实际上，全局变量(也即全局动态变量/全局普通变量)本身就是静态存储方式，所以全局静态变量也是静态存储方式。全局变量和静态变量都是存储在同一个地方。于是所有全局变量也是静态变量。</p>
 <p>静态变量不可以赋表达式，只可以赋常量或者常量表达式，如果定义时没有初始化，系统会自动初始化为0(int)或者’’(空string)。也即可以定义时不进行初始化。<br>
@@ -1684,10 +1644,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[PHP异常处理]]></title>
       <url>https://gingjan.com/2016/05/15/php-exception/</url>
-      <content type="html"><![CDATA[<p>** PHP异常处理：异常与错误，以及对应的回调函数**<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>** PHP异常处理：异常与错误，以及对应的回调函数**</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p><code>error_reporting()</code>；//填写遇到哪些错误/异常 系统才会抛出来，例如 <code>E_CORE_WARNING</code>、<code>E_NOTICE</code>、<code>E_DEPRECATED</code> 是可以忽略的，当设置后，发生这些异常，系统将不会抛出</p>
 <p>先分清error错误与Exception异常的区别</p>
 <h2 id="一、error-reporting"><a class="header-anchor" href="#一、error-reporting"></a>一、error_reporting</h2>
@@ -1725,10 +1683,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[require/include的区别]]></title>
       <url>https://gingjan.com/2016/05/12/require-and-include/</url>
-      <content type="html"><![CDATA[<p>引入文件有4种方式，require、include、require_once/include_once**<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
-<a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
+      <content type="html"><![CDATA[<p>引入文件有4种方式，require、include、require_once/include_once**</p>
+<a id="more"></a> 
 <h2 id="require-once-include-once与require-include"><a class="header-anchor" href="#require-once-include-once与require-include"></a>require_once/include_once与require/include</h2>
 <p>Include_once：只引入一次文件，这个方法它在引入前会进行查询已加载文件列表的动作，因此会耗一定的性能，虽然在APC中部分问题已经被解决，但是还有一些小问题依然没有被完美解决，因此，不建议使用_once，（包括require_once，更详细的原因请自行google）</p>
 <h2 id="inculde与require"><a class="header-anchor" href="#inculde与require"></a>inculde与require</h2>
@@ -1760,10 +1716,8 @@ $cache = $locator-&gt;cache;//通过属性</p>
     <entry>
       <title><![CDATA[CSS响应式网页布局]]></title>
       <url>https://gingjan.com/2016/05/05/css-responsive-layout/</url>
-      <content type="html"><![CDATA[<p>目前，响应式网页布局有5种模式：mostly fluid , column drop , layout shifter , tiny tweaks , off canvas<br>
-&lt;Excerpt in index | 首页摘要&gt;</p>
+      <content type="html"><![CDATA[<p>目前，响应式网页布局有5种模式：mostly fluid , column drop , layout shifter , tiny tweaks , off canvas</p>
 <a id="more"></a>
-<p>&lt;The rest of contents | 余下全文&gt;</p>
 <p>目前，响应式网页布局有5种模式：</p>
 <ol>
 <li>mostly fluid</li>
