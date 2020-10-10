@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gingjan.com/"/>
-  <updated>2020-10-05T03:54:55.000Z</updated>
+  <updated>2020-10-10T04:22:51.000Z</updated>
   <id>https://gingjan.com/</id>
   
   <author>
@@ -14,6 +14,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Go最佳实践：如何选择「指针接收器」、「值接收器」</title>
+    <link href="https://gingjan.com/2020/10/10/go-best-practices-pointer-or-value-receivers/"/>
+    <id>https://gingjan.com/2020/10/10/go-best-practices-pointer-or-value-receivers/</id>
+    <published>2020-10-10T04:16:43.000Z</published>
+    <updated>2020-10-10T04:22:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h2 id="概念定义"><a class="header-anchor" href="#概念定义"></a>概念定义</h2>
+<ul>
+<li>指针接收器</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Type)</span> <span class="title">Method</span><span class="params">()</span></span> &#123;&#125; <span class="comment">//pointer receiver 指针接收器</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>值接收器</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Type)</span> <span class="title">Method</span><span class="params">()</span></span> &#123;&#125; <span class="comment">//value receiver 值接收器</span></span><br></pre></td></tr></table></figure>
+<h2 id="何时使用何者"><a class="header-anchor" href="#何时使用何者"></a>何时使用何者</h2>
+<p>常在定义struct方法时遇到接收器类型的选择问题</p>
+<h3 id="指针接收器"><a class="header-anchor" href="#指针接收器"></a>指针接收器</h3>
+<p>需要改动接收器本身时：若需要在方法里修改接收器的状态或字段值时，使用指针接收器。因为值接收器只是本体的一个副本，对其任何的改动都只是作用在副本上</p>
+<p>需要性能的优化：如果struct非常多字段，占用内存大，则使用指针接收器，因为值接收器的副本复制成本太大，导致性能低下。</p>
+<h3 id="值接收器"><a class="header-anchor" href="#值接收器"></a>值接收器</h3>
+<p>需要并发安全：值接收器因为是副本，因此是并发安全的</p>
+<p>无需修改接收器本身时</p>
+<h3 id="两者兼存时，如何权衡"><a class="header-anchor" href="#两者兼存时，如何权衡"></a>两者兼存时，如何权衡</h3>
+<p>你定义的方法可能有指针接收器和值接收器，这时为了统一，选择全部统一改为指针接收器</p>
+]]></content>
+    
+    <summary type="html">
+    
+      常在定义struct方法时遇到该问题
+    
+    </summary>
+    
+      <category term="Go - 最佳实践" scheme="https://gingjan.com/categories/Go-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    
+      <category term="最佳实践" scheme="https://gingjan.com/categories/Go-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    
+    
+      <category term="Go" scheme="https://gingjan.com/tags/Go/"/>
+    
+      <category term="最佳实践" scheme="https://gingjan.com/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux日志查看常用命令</title>
@@ -1794,45 +1840,6 @@ $cache = $locator-&gt;cache;//通过属性</p>
     
     
       <category term="NodeJS" scheme="https://gingjan.com/tags/NodeJS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>push.default的 matching和simple</title>
-    <link href="https://gingjan.com/2016/05/22/git-push-default/"/>
-    <id>https://gingjan.com/2016/05/22/git-push-default/</id>
-    <published>2016-05-22T13:33:44.000Z</published>
-    <updated>2020-10-05T09:35:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>** push.default的设置 **：本文介绍push.default的两种设置，因为有两种不同设置是因为Git版本升级，导致默认设置不一样。</p>
-<a id="more"></a>
-<p>因为git的版本升级，导致了<code>push.default</code>的值改变了，因此会询问你，使用<code>matching</code>还是<code>simple</code>，下面讲讲这两者的区别</p>
-<h3 id="Matching"><a class="header-anchor" href="#Matching"></a>Matching</h3>
-<p>该参数是 Git 1.*的默认值，意思是如果在执行git push时没有指定分支，那么它将把所有本地的分支push到远程仓库中对应的分支</p>
-<h3 id="Simple"><a class="header-anchor" href="#Simple"></a>Simple</h3>
-<p>该参数是 Git 2.*的默认值，意思是如果在执行git push时没有指定分支，那么它只会把当前分支push到你用git pull时指定的那个分支。</p>
-<h3 id="修改默认设置"><a class="header-anchor" href="#修改默认设置"></a>修改默认设置</h3>
-<p>通过修改全局配置来隐藏git push时的提示，如果要设置matching模式则：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global push.default matching</span><br></pre></td></tr></table></figure>
-<p>设置simple模式：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global push.default simple</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;** push.default的设置 **：本文介绍push.default的两种设置，因为有两种不同设置是因为Git版本升级，导致默认设置不一样。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="CVS" scheme="https://gingjan.com/categories/CVS/"/>
-    
-      <category term="Git" scheme="https://gingjan.com/categories/CVS/Git/"/>
-    
-      <category term="基础" scheme="https://gingjan.com/categories/CVS/Git/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Git" scheme="https://gingjan.com/tags/Git/"/>
-    
-      <category term="CVS" scheme="https://gingjan.com/tags/CVS/"/>
     
   </entry>
   

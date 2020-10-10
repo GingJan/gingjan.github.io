@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title><![CDATA[Go最佳实践：如何选择「指针接收器」、「值接收器」]]></title>
+      <url>https://gingjan.com/2020/10/10/go-best-practices-pointer-or-value-receivers/</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h2 id="概念定义"><a class="header-anchor" href="#概念定义"></a>概念定义</h2>
+<ul>
+<li>指针接收器</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Type)</span> <span class="title">Method</span><span class="params">()</span></span> &#123;&#125; <span class="comment">//pointer receiver 指针接收器</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>值接收器</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Type)</span> <span class="title">Method</span><span class="params">()</span></span> &#123;&#125; <span class="comment">//value receiver 值接收器</span></span><br></pre></td></tr></table></figure>
+<h2 id="何时使用何者"><a class="header-anchor" href="#何时使用何者"></a>何时使用何者</h2>
+<p>常在定义struct方法时遇到接收器类型的选择问题</p>
+<h3 id="指针接收器"><a class="header-anchor" href="#指针接收器"></a>指针接收器</h3>
+<p>需要改动接收器本身时：若需要在方法里修改接收器的状态或字段值时，使用指针接收器。因为值接收器只是本体的一个副本，对其任何的改动都只是作用在副本上</p>
+<p>需要性能的优化：如果struct非常多字段，占用内存大，则使用指针接收器，因为值接收器的副本复制成本太大，导致性能低下。</p>
+<h3 id="值接收器"><a class="header-anchor" href="#值接收器"></a>值接收器</h3>
+<p>需要并发安全：值接收器因为是副本，因此是并发安全的</p>
+<p>无需修改接收器本身时</p>
+<h3 id="两者兼存时，如何权衡"><a class="header-anchor" href="#两者兼存时，如何权衡"></a>两者兼存时，如何权衡</h3>
+<p>你定义的方法可能有指针接收器和值接收器，这时为了统一，选择全部统一改为指针接收器</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Linux日志查看常用命令]]></title>
       <url>https://gingjan.com/2020/09/29/common-command-of-linux-for-log/</url>
       <content type="html"><![CDATA[<p>收集常用的Linux日志查看命令</p>
