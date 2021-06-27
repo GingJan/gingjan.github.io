@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gingjan.com/2021/06/27/graceful-restart-in-golang/</loc>
+    
+    <lastmod>2021-06-27T08:32:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://gingjan.com/2020/10/10/go-best-practices-pointer-or-value-receivers/</loc>
     
-    <lastmod>2020-10-10T04:27:29.000Z</lastmod>
+    <lastmod>2020-11-16T02:35:35.000Z</lastmod>
     
   </url>
   
