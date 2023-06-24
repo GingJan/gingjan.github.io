@@ -4,6 +4,139 @@
   
     
     <entry>
+      <title><![CDATA[OpenResty性能的保证 —— 非阻塞IO]]></title>
+      <url>https://gingjan.com/2023/03/24/non-blocking-io-of-openresty-performance/</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<p>在文件开始时，首先要说的是，在OpenResty编程里的原则是非阻塞IO优先。 OpenResty能有如此高性能的表现是因为基于Nginx的事件响应机制和Lua的协程机制。在请求的处理流里，若使用了阻塞式IO<br>
+而不使用如<code>cosocket</code>的非阻塞式方法来处理IO，那LuaJIT是不会把控制权交回给Nginx的事件循环（Event Loop），这就导致了<br>
+Nginx里的其他请求只能排队干等着前一个请求的IO处理完毕后才能被处理。以下介绍一些会导致性能下降的写法。</p>
+<h2 id="执行外部命令"><a class="header-anchor" href="#执行外部命令"></a>执行外部命令</h2>
+<h3 id="关闭进程"><a class="header-anchor" href="#关闭进程"></a>关闭进程</h3>
+<p>如使用 <code>os.execute(&quot; cp test.exe /tmp &quot;)</code>，该方法会阻塞当前请求的处理，该如何避免？有两种方式：</p>
+<h4 id="1-使用FFI库里的方法代替"><a class="header-anchor" href="#1-使用FFI库里的方法代替"></a>1.使用FFI库里的方法代替</h4>
+<p>比如当要kill一个进程时，可以使用：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> resty_signal = <span class="built_in">require</span> <span class="string">"resty.signal"</span></span><br><span class="line"><span class="built_in">local</span> pid = <span class="number">12345</span></span><br><span class="line"><span class="built_in">local</span> ok, err = resty_signal.<span class="built_in">kill</span>(pid, <span class="string">"KILL"</span>)</span><br></pre></td></tr></table></figure>
+<p>在涉及到对图片，加解密等CPU密集型的操作时，可以先查阅下FFI库里有无封装了对应方法。</p>
+<h4 id="2-使用基于nginx-pipe-的-lua-resty-shell库"><a class="header-anchor" href="#2-使用基于nginx-pipe-的-lua-resty-shell库"></a>2.使用基于<code>nginx.pipe</code> 的 <code>lua-resty-shell</code>库</h4>
+<p>你也可以在非阻塞操作<code>shell.run</code>里运行命令：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ resty -<span class="keyword">e</span> '<span class="keyword">local</span> <span class="keyword">shell</span> = require <span class="string">"resty.shell"</span></span><br><span class="line"><span class="keyword">local</span> ok, stdout, stderr, reason, status =</span><br><span class="line">    <span class="keyword">shell</span>.<span class="keyword">run</span>([[echo <span class="string">"hello, world"</span>]])</span><br><span class="line">    ngx.say(stdout) '</span><br></pre></td></tr></table></figure>
+<h2 id="磁盘IO"><a class="header-anchor" href="#磁盘IO"></a>磁盘IO</h2>
+<p>下面看下处理磁盘IO的场景，读取配置文件是服务端很常见的操作：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> path = <span class="string">"/conf/apisix.conf"</span></span><br><span class="line"><span class="built_in">local</span> <span class="built_in">file</span> = io.<span class="built_in">open</span>(path, <span class="string">"rb"</span>)</span><br><span class="line"><span class="built_in">local</span> content = <span class="built_in">file</span>:<span class="built_in">read</span>(<span class="string">"*a"</span>)</span><br><span class="line"><span class="built_in">file</span>:<span class="built_in">close</span>()</span><br></pre></td></tr></table></figure>
+<p>当然，配置读取只在<code>init</code>初始化时进行一次，而不会在每个请求进来时都进行。但是如果需要在请求里操作磁盘IO，<br>
+则需认真考虑如何解决了。<br>
+首先可以使用第三方的C模块<code>lua-io-nginx-module</code>，该模块为OpenResty提供了非阻塞IO的Lua API，但是你<br>
+不能像使用<code>cosocket</code>那样使用它，因为磁盘IO的耗时操作并没有消失，只是换一种方式进行而已。它利用Nginx的<br>
+线程池机制的优势，把磁盘IO的操作从主线程移到其他线程进行，所以主线程不会被磁盘IO所阻塞。<br>
+如果要使用该模块，因为它是C模块，所以需要重新编译Nginx，然后像使用普通Lua库那样使用即可。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> ngx_io = require <span class="string">"ngx.io"</span></span><br><span class="line"><span class="keyword">local</span> path = <span class="string">"/conf/apisix.conf"</span></span><br><span class="line"><span class="keyword">local</span> <span class="keyword">file</span>, <span class="keyword">err</span> = ngx_io.<span class="keyword">open</span>(path, <span class="string">"rb"</span>)</span><br><span class="line"><span class="keyword">local</span> data, <span class="keyword">err</span> = <span class="keyword">file</span>: <span class="keyword">read</span>(<span class="string">"*a"</span>)</span><br><span class="line"><span class="keyword">file</span>:<span class="keyword">close</span>()</span><br></pre></td></tr></table></figure>
+<p>还有一种方式，就是不把数据读/写到磁盘，例如在写日志时：<br>
+<code>ngx.log(ngx.WARN, &quot;info&quot;)</code><br>
+这好像很正常，但是不能经常调用，因为首先它是较昂贵的函数调用，其次即便有了缓冲，大量且频繁的磁盘写入很影响性能。<br>
+那如何处理需要这种写入日志的问题呢？</p>
+<p>可以尝试把日志通过<code>cosocket</code>的非阻塞网络调用传输到远程日志服务上。使用<code>lua-resty-logger-socket</code>来实现：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">local logger = require <span class="string">"resty.logger.socket"</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> logger.initted() then</span><br><span class="line">    local ok, err = logger.init&#123;</span><br><span class="line">        host = <span class="string">'xxx'</span>,</span><br><span class="line">       <span class="built_in"> port </span>= 1234,</span><br><span class="line">        flush_limit = 1234,</span><br><span class="line">        drop_limit = 5678,</span><br><span class="line">    &#125;</span><br><span class="line">local msg = <span class="string">"foo"</span></span><br><span class="line">local bytes, err = logger.log(msg)</span><br></pre></td></tr></table></figure>
+<p>以上两种方式都是为了避免主线程阻塞，一种是放到其他线程处理，一种是通过网络交给远程服务处理。</p>
+<h2 id="luasocket"><a class="header-anchor" href="#luasocket"></a>luasocket</h2>
+<p><code>luasocket</code>经常与OpenResty提供的<code>cosocket</code>混淆，<code>luasocket</code>也能执行网络通讯的功能，但是它不能<br>
+以非阻塞的方式进行，所以使用它会导致性能很差。<br>
+当然<code>luasocket</code>也有它的应用场景，在一些无法使用<code>cosocket</code>的阶段，通过会使用ngx.timer来规避，当然<br>
+也可以在<code>init_by_lua</code>、<code>init_worker_by_lua*</code>这种一次性阶段的地方使用<code>luasocket</code>来实现<code>cosocket</code><br>
+的功能。另外<code>lua-resty-socket</code>是一个兼容<code>luasocket</code>和<code>cosocket</code>的二次封装开源库，它内容值得深入学习，<br>
+如果有兴趣，可参考<a href="https://github.com/thibaultcha/lua-resty-socket/" target="_blank" rel="noopener">这里</a></p>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p>总的来说，在OpenResty里，意识到阻塞IO操作的类型和对应的非阻塞解决方案是写出高性能程序的基础。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Go：使用 build tag 来自定义构建配置]]></title>
+      <url>https://gingjan.com/2023/01/13/go-building-customized-by-using-tag/</url>
+      <content type="html"><![CDATA[<p>本文介绍如何通过build tag来根据需要自定义构建应用</p>
+<a id="more"></a>
+<h3 id="场景"><a class="header-anchor" href="#场景"></a>场景</h3>
+<p>通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。<br>
+配置文件通常会使用 env 或者 yml。这样每次构建包放在不同的环境就需要手写一套配置，开发也需要向运维提供配置文档。<br>
+最近在一直在用 python，项目通常都是使用 .py 作为配置，直接进行加载，写几份配置，在运行的时候通过命令行参数或者环境变量制定配置加载文件。这样子很大程度减少了开发和运维的沟通成本。<br>
+如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这么一说，那怎么实现？</p>
+<h3 id="使用"><a class="header-anchor" href="#使用"></a>使用</h3>
+<p>这个可以使用 build tags 来自定义配置。<br>
+假设我们现在有两个环境，dev 和 prod，那么我们可以新建一个 config 文件夹，放入 dev.go 和 prod.go 两个文件，分别写入对应的配置，如下所示。同一个包，同样的变量名，但是不会因为重复声明和报错，因为这里加了 tag，如下所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build dev #⚠️：这是1.17前语法，当在编译时，传入的-tags=dev，则采用本文件的源码进行构建 「go build -o=test -tags=dev .」</span></span><br><span class="line"><span class="comment">// go:build dev #⚠️：这是1.17+语法，当在编译时，传入的-tags=dev，则采用本文件的源码进行构建 「go build -o=test -tags=dev .」</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="comment">// config list</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	Redis = <span class="string">"redis://127.0.0.1:6379/0"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build prod #⚠️：这是1.17前语法，当在编译时，传入的-tags=prod，则采用本文件的源码进行构建 「go build -o=test -tags=prod .」</span></span><br><span class="line"><span class="comment">// go:build prod #⚠️：这是1.17+语法，当在编译时，传入的-tags=prod，则采用本文件的源码进行构建 「go build -o=test -tags=prod .」</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	Redis = <span class="string">"redis://192.168.0.1:6379"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>gin-gonic 也有一个编译指令，用于把 encoding/json 包替换为处理速度更快 jsoniter 包，也是使用的构建 tag：$ go build -tags=jsoniter .，实现也很简单，一个加上 // +build jsoniter 另一个默认使用 // +build !jsoniter 。</p>
+<p>这里 tag 前加上 <code>!（非标签）</code> 就代表非构建指令下的配置。解释是，非tag1，该文件才会参入编译</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build !tag1  #1.17前</span></span><br><span class="line"><span class="comment">//go:build !tag1 #1.17+</span></span><br></pre></td></tr></table></figure>
+<p>tag 常用于交叉编译的配置，例如有些文件针对 linux 而有些文件针对 windows，底层使用的系统调用是不同的，go 源码就包含了很多这样的构建指令：</p>
+<p>一行中使用空格就代表“或”的关系，下面指的是在 linux 或者 darwin 环境中使用。（编译时，<code>-tags &quot;linux&quot;</code> 或 <code>-tags &quot;linux || drawin&quot;</code>）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build linux darwin #1.17前</span></span><br><span class="line"><span class="comment">// go:bulid linux || darwin #1.17+</span></span><br></pre></td></tr></table></figure>
+<p>如果要指定“与”的关系，那么可以使用,，下面就是指使用 “linux” 和 “cgo” 两个环境同时满足才使用。（编译时，<code>-tags &quot;linux &amp;&amp; cgo&quot;</code>）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build linux,cgo #1.17前</span></span><br><span class="line"><span class="comment">// go:bulid linux &amp;&amp; cgo #1.17+</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//当然可以分成多行，下面的指令表述和上面一致：</span></span><br><span class="line">#<span class="number">1.17</span>前</span><br><span class="line"><span class="comment">// +build linux</span></span><br><span class="line"><span class="comment">// +build cgo</span></span><br><span class="line"></span><br><span class="line">#<span class="number">1.17</span>+</span><br><span class="line"><span class="comment">// go:build linux</span></span><br><span class="line"><span class="comment">// go:build cgo</span></span><br></pre></td></tr></table></figure>
+<h3 id="为何1-17后使用新的语法？"><a class="header-anchor" href="#为何1-17后使用新的语法？"></a>为何1.17后使用新的语法？</h3>
+<ul>
+<li>可以发现相对<code> </code>表示<code>或</code>、<code>,</code>表示<code>与</code>，使用<code>||</code>、<code>&amp;&amp;</code>更符合程序员的开发习惯</li>
+<li>//go:build 与 //go:embed 和 //go:generate 这些命令相比较，格式上进行了统一<br>
+更多还有 ignore 指令来忽略使用这个文件，更多可以查看官方文档，这里不在继续展开。</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Go里的并发和调度器亲和性]]></title>
+      <url>https://gingjan.com/2022/11/21/concurrency-and-scheduler-affinity-in-go/</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h2 id="亲和性的局限"><a class="header-anchor" href="#亲和性的局限"></a>亲和性的局限</h2>
+<p>要理解亲和性的局限，就得先知道本地队列和全局队列发生了什么。<br>
+本地队列会被用于除了系统调用外的如channel，select，timer等待等阻塞操作，<br>
+然而，两种情况会限制goroutine和线程的亲和性：goroutine窃取和系统调用。<br>
+但是，通过更好地管理本地队列的优先级，可以有效规避上述两种情况。<br>
+G1.5旨在给予那些通过channel通讯的goroutine更高优先级，从而优化goroutine<br>
+与所在线程的亲和性</p>
+<h2 id="如何提高亲和性"><a class="header-anchor" href="#如何提高亲和性"></a>如何提高亲和性</h2>
+<p>协程在channel上来回通讯会导致该协程被频繁地阻塞，例如前所述，频繁入队本地队列。<br>
+然而，由于本地队列是FIFO，当某个协程独占线程时，那些非阻塞的协程没法保证能尽快运行，<br>
+如下例子：</p>
+<p><img src="/img/concurrency-and-scheduler-affinity-in-go/g9-example.png" alt="从channel阻塞释放的协程"></p>
+<p>协程9在被channel阻塞完毕后恢复正常，然而它必须等待2号，5号和4号协程执行完毕，在本例中，<br>
+5号协程会独占协程，导致9号协程被延迟执行并增加了9号协程被其他P偷走的风险。<br>
+自从Go 1.5版本开始，从channel返回的协程会被传到P的runnext字段以最高优先级执行。</p>
+<p><img src="/img/concurrency-and-scheduler-affinity-in-go/runnext-in-processor.png" alt="协程放入到P的runnext"></p>
+<p>该方式在再次进入channel阻塞前尽快运行一次，然后其他协程才被陆续执行。<br>
+这个方式的引入对Go的标准库的整体起到积极作用。<br>
+因为本地队列是FIFO的结构，如果队列里有goroutine独占着OS线程，则刚从channel阻塞出来的<br>
+goroutine无法保证尽早的执行。</p>
+<p><a href="https://github.com/golang/go/commit/e870f06c3f49ed63960a2575e330c2c75fc54a34" target="_blank" rel="noopener">提高一些库的性能</a></p>
+<h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
+<p><a href="https://medium.com/a-journey-with-go/go-concurrency-scheduler-affinity-3b678f490488" target="_blank" rel="noopener">Go: Concurrency &amp; Scheduler Affinity</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[可拆箱即用的分布式追踪系统]]></title>
+      <url>https://gingjan.com/2022/07/05/towards-turnkey-distributed-tracing/</url>
+      <content type="html"><![CDATA[<h1 id="Reactive-Streams"><a class="header-anchor" href="#Reactive-Streams"></a>Reactive Streams</h1>
+<p>OpenTracing是一款为应用和开源软件包设计的，新的开源分布式追踪标准。具有构建大规模微服务经验的开发人员了解分布式追踪的作用和重要性。即便每个进程都有自己的日志系和指标监控，<br>
+但在分布式系统中它们之间都无法联成一个整体。</p>
+<p>第一篇关于分布式追凶系统的学术论文已有几十年了，从谷歌内部开始使用Dapper算也有12年了，Dapper论文发布也过去6年了，Zipkin也开源4年了。这个概念并不新颖。但你还在是为复杂的<br>
+服务架构，花费大量人力开发追踪系统。</p>
+<p>如果分布式追踪这么有价值，为什么大家还没运用呢？因为它在目前为止还是不够完善</p>
+<p>因为需要在进程内和进程间传递上下文信息，所以分布式追踪是不容易实现的，若要实现，上下文需要在这些地方之间相互传递：<br>
+1.开源服务（如Nginx、Cassandra、Redis等）<br>
+2.被用于自定义服务的开源库（如grpc、ORMs等）<br>
+3.业务逻辑</p>
+<p>还有一个困难点：无法要求全部的开源服务和开源库或者自定义业务逻辑使用单一提供商的追踪库，这样也就无法把服务之间的调用链路组织起来。</p>
+<p>因为我们需要一个标准机制来描述系统的行为</p>
+<h2 id="了解OpenTracing"><a class="header-anchor" href="#了解OpenTracing"></a>了解OpenTracing</h2>
+<p>OpenTracing就是那个「单一且标准的机制」。OpenTracing允许应用代码的开发者、开源库，开源服务不需要绑定特定提供商的追踪代码来实现链路追踪串连。<br>
+以下是这套标准：<br>
+1.标准化管理span：接口有开始和完成，以及描述定时任务的功能（span是Dapper和Zipkin里的术语）<br>
+2.标准化进程间的传递：接口有辅助进程间的追踪上下文传递<br>
+3.活跃span的标准化管理：接口可以在单个进程内，在不同包之间保存和获取活跃span<br>
+4.</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[优雅重启go应用]]></title>
       <url>https://gingjan.com/2021/06/27/graceful-restart-in-golang/</url>
       <content type="html"><![CDATA[<a id="more"></a>
@@ -69,6 +202,35 @@ A:这样做不管用，没法关闭listener，但是原因还不清楚呢，有�
 <h2 id="参考文章："><a class="header-anchor" href="#参考文章："></a>参考文章：</h2>
 <p><a href="https://grisha.org/blog/2014/06/03/graceful-restart-in-golang/" target="_blank" rel="noopener">Graceful Restart in Golang</a><br>
 <a href="https://colobu.com/2015/10/09/Linux-Signals/" target="_blank" rel="noopener">Linux Signal及Golang中的信号处理</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Reactive Streams 响应式流处理]]></title>
+      <url>https://gingjan.com/2020/11/16/reactive-streams/</url>
+      <content type="html"><![CDATA[<h1 id="Reactive-Streams"><a class="header-anchor" href="#Reactive-Streams"></a>Reactive Streams</h1>
+<p>Reactive Streams 是一项倡议，以提供标准的非阻塞异步流处理，包含运行环境（JVM，JavaScript）和网络协议的标准统一</p>
+<p>处理数据流特别是体积大小无法预知的「live（实时）」数据流，需要在异步系统里进行特别「关照」，最突出的问题是要知道资源消耗的量和对资源消耗的控制，<br>
+防止被大量的数据流入，消耗大量资源压垮系统<br>
+为了可以在多机协作网络或单机多核上并行使用计算资源，异步是不可或缺的<br>
+reactive streams的主要目标是管理流数据跨异步域传输，（跨异步域传输：可以类比想象成数据跨线程传递，）同时确保流的接收端不需缓冲任何数据，也即，作为<br>
+本模型一部分的背压（反压 back pressure）使得线程间的中介——队列 的大小被限制了。<br>
+如果背压的通讯是同步的，则异步带来的优点将毫无意义，因此必须注意Reactive Stream所有的具体实现（非阻塞和异步的实现等）</p>
+<p>本规范的目的：所有遵守本规范的各实现可以顺利平滑地交互，以在整个流处理应用/系统中保留前面所述的好处和特性</p>
+<h2 id="Scope"><a class="header-anchor" href="#Scope"></a>Scope</h2>
+<p>Reactive Stream的范畴是找到 实现非阻塞异步数据流的back pressure目标 的 操作/实体 的接口interface，方法Method，协议protocol<br>
+端的DSL和绑定API的协议</p>
+<h2 id="基本语义"><a class="header-anchor" href="#基本语义"></a>基本语义</h2>
+<p>基本语义定义了如何通过背压调节流元素的传输，至于元素如何传输，元素在传输过程中的表现，如何发出背压信号等都不属于本规范的范畴</p>
+<h2 id="给实现者的提示"><a class="header-anchor" href="#给实现者的提示"></a>给实现者的提示</h2>
+<p>若要实现本规范，建议先阅读<a href="https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md" target="_blank" rel="noopener">README</a>和<a href="http://www.reactive-streams.org/reactive-streams-1.0.3-javadoc" target="_blank" rel="noopener">Java API documentation</a><br>
+，然后看<a href="https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md#specification" target="_blank" rel="noopener">Specification</a>、<a href="https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3/tck" target="_blank" rel="noopener">TCK</a>、<br>
+<a href="https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3/examples/src/main/java/org/reactivestreams/example/unicast" target="_blank" rel="noopener">example implementations</a>。<br>
+如果有任何疑问，可以查阅<a href="https://github.com/reactive-streams/reactive-streams-jvm/issues?page=1&amp;state=closed" target="_blank" rel="noopener">closed issues</a>，若依旧无法解决你的疑问，则<br>
+到<a href="https://github.com/reactive-streams/reactive-streams-jvm/issues/new" target="_blank" rel="noopener">new issue</a>提出你的问题<br>
+** 深入阅读： **<br>
+<a href="https://lotabout.me/2020/Back-Pressure/" target="_blank" rel="noopener">背压(Back Pressure)与流量控制</a></p>
+<p><a href="http://www.reactive-streams.org/" target="_blank" rel="noopener">本文参考：Reactive Streams</a></p>
 ]]></content>
     </entry>
     

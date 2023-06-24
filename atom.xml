@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gingjan.com/"/>
-  <updated>2021-06-27T08:41:22.000Z</updated>
+  <updated>2023-06-24T11:21:00.167Z</updated>
   <id>https://gingjan.com/</id>
   
   <author>
@@ -14,6 +14,221 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OpenResty性能的保证 —— 非阻塞IO</title>
+    <link href="https://gingjan.com/2023/03/24/non-blocking-io-of-openresty-performance/"/>
+    <id>https://gingjan.com/2023/03/24/non-blocking-io-of-openresty-performance/</id>
+    <published>2023-03-24T10:04:55.000Z</published>
+    <updated>2023-06-24T11:21:00.167Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<p>在文件开始时，首先要说的是，在OpenResty编程里的原则是非阻塞IO优先。 OpenResty能有如此高性能的表现是因为基于Nginx的事件响应机制和Lua的协程机制。在请求的处理流里，若使用了阻塞式IO<br>
+而不使用如<code>cosocket</code>的非阻塞式方法来处理IO，那LuaJIT是不会把控制权交回给Nginx的事件循环（Event Loop），这就导致了<br>
+Nginx里的其他请求只能排队干等着前一个请求的IO处理完毕后才能被处理。以下介绍一些会导致性能下降的写法。</p>
+<h2 id="执行外部命令"><a class="header-anchor" href="#执行外部命令"></a>执行外部命令</h2>
+<h3 id="关闭进程"><a class="header-anchor" href="#关闭进程"></a>关闭进程</h3>
+<p>如使用 <code>os.execute(&quot; cp test.exe /tmp &quot;)</code>，该方法会阻塞当前请求的处理，该如何避免？有两种方式：</p>
+<h4 id="1-使用FFI库里的方法代替"><a class="header-anchor" href="#1-使用FFI库里的方法代替"></a>1.使用FFI库里的方法代替</h4>
+<p>比如当要kill一个进程时，可以使用：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> resty_signal = <span class="built_in">require</span> <span class="string">"resty.signal"</span></span><br><span class="line"><span class="built_in">local</span> pid = <span class="number">12345</span></span><br><span class="line"><span class="built_in">local</span> ok, err = resty_signal.<span class="built_in">kill</span>(pid, <span class="string">"KILL"</span>)</span><br></pre></td></tr></table></figure>
+<p>在涉及到对图片，加解密等CPU密集型的操作时，可以先查阅下FFI库里有无封装了对应方法。</p>
+<h4 id="2-使用基于nginx-pipe-的-lua-resty-shell库"><a class="header-anchor" href="#2-使用基于nginx-pipe-的-lua-resty-shell库"></a>2.使用基于<code>nginx.pipe</code> 的 <code>lua-resty-shell</code>库</h4>
+<p>你也可以在非阻塞操作<code>shell.run</code>里运行命令：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ resty -<span class="keyword">e</span> '<span class="keyword">local</span> <span class="keyword">shell</span> = require <span class="string">"resty.shell"</span></span><br><span class="line"><span class="keyword">local</span> ok, stdout, stderr, reason, status =</span><br><span class="line">    <span class="keyword">shell</span>.<span class="keyword">run</span>([[echo <span class="string">"hello, world"</span>]])</span><br><span class="line">    ngx.say(stdout) '</span><br></pre></td></tr></table></figure>
+<h2 id="磁盘IO"><a class="header-anchor" href="#磁盘IO"></a>磁盘IO</h2>
+<p>下面看下处理磁盘IO的场景，读取配置文件是服务端很常见的操作：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> path = <span class="string">"/conf/apisix.conf"</span></span><br><span class="line"><span class="built_in">local</span> <span class="built_in">file</span> = io.<span class="built_in">open</span>(path, <span class="string">"rb"</span>)</span><br><span class="line"><span class="built_in">local</span> content = <span class="built_in">file</span>:<span class="built_in">read</span>(<span class="string">"*a"</span>)</span><br><span class="line"><span class="built_in">file</span>:<span class="built_in">close</span>()</span><br></pre></td></tr></table></figure>
+<p>当然，配置读取只在<code>init</code>初始化时进行一次，而不会在每个请求进来时都进行。但是如果需要在请求里操作磁盘IO，<br>
+则需认真考虑如何解决了。<br>
+首先可以使用第三方的C模块<code>lua-io-nginx-module</code>，该模块为OpenResty提供了非阻塞IO的Lua API，但是你<br>
+不能像使用<code>cosocket</code>那样使用它，因为磁盘IO的耗时操作并没有消失，只是换一种方式进行而已。它利用Nginx的<br>
+线程池机制的优势，把磁盘IO的操作从主线程移到其他线程进行，所以主线程不会被磁盘IO所阻塞。<br>
+如果要使用该模块，因为它是C模块，所以需要重新编译Nginx，然后像使用普通Lua库那样使用即可。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> ngx_io = require <span class="string">"ngx.io"</span></span><br><span class="line"><span class="keyword">local</span> path = <span class="string">"/conf/apisix.conf"</span></span><br><span class="line"><span class="keyword">local</span> <span class="keyword">file</span>, <span class="keyword">err</span> = ngx_io.<span class="keyword">open</span>(path, <span class="string">"rb"</span>)</span><br><span class="line"><span class="keyword">local</span> data, <span class="keyword">err</span> = <span class="keyword">file</span>: <span class="keyword">read</span>(<span class="string">"*a"</span>)</span><br><span class="line"><span class="keyword">file</span>:<span class="keyword">close</span>()</span><br></pre></td></tr></table></figure>
+<p>还有一种方式，就是不把数据读/写到磁盘，例如在写日志时：<br>
+<code>ngx.log(ngx.WARN, &quot;info&quot;)</code><br>
+这好像很正常，但是不能经常调用，因为首先它是较昂贵的函数调用，其次即便有了缓冲，大量且频繁的磁盘写入很影响性能。<br>
+那如何处理需要这种写入日志的问题呢？</p>
+<p>可以尝试把日志通过<code>cosocket</code>的非阻塞网络调用传输到远程日志服务上。使用<code>lua-resty-logger-socket</code>来实现：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">local logger = require <span class="string">"resty.logger.socket"</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> logger.initted() then</span><br><span class="line">    local ok, err = logger.init&#123;</span><br><span class="line">        host = <span class="string">'xxx'</span>,</span><br><span class="line">       <span class="built_in"> port </span>= 1234,</span><br><span class="line">        flush_limit = 1234,</span><br><span class="line">        drop_limit = 5678,</span><br><span class="line">    &#125;</span><br><span class="line">local msg = <span class="string">"foo"</span></span><br><span class="line">local bytes, err = logger.log(msg)</span><br></pre></td></tr></table></figure>
+<p>以上两种方式都是为了避免主线程阻塞，一种是放到其他线程处理，一种是通过网络交给远程服务处理。</p>
+<h2 id="luasocket"><a class="header-anchor" href="#luasocket"></a>luasocket</h2>
+<p><code>luasocket</code>经常与OpenResty提供的<code>cosocket</code>混淆，<code>luasocket</code>也能执行网络通讯的功能，但是它不能<br>
+以非阻塞的方式进行，所以使用它会导致性能很差。<br>
+当然<code>luasocket</code>也有它的应用场景，在一些无法使用<code>cosocket</code>的阶段，通过会使用ngx.timer来规避，当然<br>
+也可以在<code>init_by_lua</code>、<code>init_worker_by_lua*</code>这种一次性阶段的地方使用<code>luasocket</code>来实现<code>cosocket</code><br>
+的功能。另外<code>lua-resty-socket</code>是一个兼容<code>luasocket</code>和<code>cosocket</code>的二次封装开源库，它内容值得深入学习，<br>
+如果有兴趣，可参考<a href="https://github.com/thibaultcha/lua-resty-socket/" target="_blank" rel="noopener">这里</a></p>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p>总的来说，在OpenResty里，意识到阻塞IO操作的类型和对应的非阻塞解决方案是写出高性能程序的基础。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;在文件开始时，首先要说的是，在OpenResty编程里的原则是非阻塞IO优先。 OpenResty能有如此高性能的表现是因为基于Nginx的事件响应机制和Lua的协程机制。在请求的处理流里，若使用了阻塞式IO&lt;br&gt;
+而不使用如&lt;code
+    
+    </summary>
+    
+      <category term="Lua" scheme="https://gingjan.com/categories/Lua/"/>
+    
+      <category term="OpenResty" scheme="https://gingjan.com/categories/Lua/OpenResty/"/>
+    
+      <category term="Nginx" scheme="https://gingjan.com/categories/Lua/OpenResty/Nginx/"/>
+    
+    
+      <category term="Nginx" scheme="https://gingjan.com/tags/Nginx/"/>
+    
+      <category term="OpenResty" scheme="https://gingjan.com/tags/OpenResty/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go：使用 build tag 来自定义构建配置</title>
+    <link href="https://gingjan.com/2023/01/13/go-building-customized-by-using-tag/"/>
+    <id>https://gingjan.com/2023/01/13/go-building-customized-by-using-tag/</id>
+    <published>2023-01-13T08:25:56.000Z</published>
+    <updated>2023-03-21T15:44:30.344Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文介绍如何通过build tag来根据需要自定义构建应用</p>
+<a id="more"></a>
+<h3 id="场景"><a class="header-anchor" href="#场景"></a>场景</h3>
+<p>通常我们会给每个产品环境设置不同的配置，比如 redis 要在开发环境就连接 localhost:6379，测试环境可能连接某一个主机的 redis。<br>
+配置文件通常会使用 env 或者 yml。这样每次构建包放在不同的环境就需要手写一套配置，开发也需要向运维提供配置文档。<br>
+最近在一直在用 python，项目通常都是使用 .py 作为配置，直接进行加载，写几份配置，在运行的时候通过命令行参数或者环境变量制定配置加载文件。这样子很大程度减少了开发和运维的沟通成本。<br>
+如果放在 go 里面是否可行？因为 go 是编译二进制包，也没有动态加载这么一说，那怎么实现？</p>
+<h3 id="使用"><a class="header-anchor" href="#使用"></a>使用</h3>
+<p>这个可以使用 build tags 来自定义配置。<br>
+假设我们现在有两个环境，dev 和 prod，那么我们可以新建一个 config 文件夹，放入 dev.go 和 prod.go 两个文件，分别写入对应的配置，如下所示。同一个包，同样的变量名，但是不会因为重复声明和报错，因为这里加了 tag，如下所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build dev #⚠️：这是1.17前语法，当在编译时，传入的-tags=dev，则采用本文件的源码进行构建 「go build -o=test -tags=dev .」</span></span><br><span class="line"><span class="comment">// go:build dev #⚠️：这是1.17+语法，当在编译时，传入的-tags=dev，则采用本文件的源码进行构建 「go build -o=test -tags=dev .」</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="comment">// config list</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	Redis = <span class="string">"redis://127.0.0.1:6379/0"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build prod #⚠️：这是1.17前语法，当在编译时，传入的-tags=prod，则采用本文件的源码进行构建 「go build -o=test -tags=prod .」</span></span><br><span class="line"><span class="comment">// go:build prod #⚠️：这是1.17+语法，当在编译时，传入的-tags=prod，则采用本文件的源码进行构建 「go build -o=test -tags=prod .」</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	Redis = <span class="string">"redis://192.168.0.1:6379"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>gin-gonic 也有一个编译指令，用于把 encoding/json 包替换为处理速度更快 jsoniter 包，也是使用的构建 tag：$ go build -tags=jsoniter .，实现也很简单，一个加上 // +build jsoniter 另一个默认使用 // +build !jsoniter 。</p>
+<p>这里 tag 前加上 <code>!（非标签）</code> 就代表非构建指令下的配置。解释是，非tag1，该文件才会参入编译</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build !tag1  #1.17前</span></span><br><span class="line"><span class="comment">//go:build !tag1 #1.17+</span></span><br></pre></td></tr></table></figure>
+<p>tag 常用于交叉编译的配置，例如有些文件针对 linux 而有些文件针对 windows，底层使用的系统调用是不同的，go 源码就包含了很多这样的构建指令：</p>
+<p>一行中使用空格就代表“或”的关系，下面指的是在 linux 或者 darwin 环境中使用。（编译时，<code>-tags &quot;linux&quot;</code> 或 <code>-tags &quot;linux || drawin&quot;</code>）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build linux darwin #1.17前</span></span><br><span class="line"><span class="comment">// go:bulid linux || darwin #1.17+</span></span><br></pre></td></tr></table></figure>
+<p>如果要指定“与”的关系，那么可以使用,，下面就是指使用 “linux” 和 “cgo” 两个环境同时满足才使用。（编译时，<code>-tags &quot;linux &amp;&amp; cgo&quot;</code>）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// +build linux,cgo #1.17前</span></span><br><span class="line"><span class="comment">// go:bulid linux &amp;&amp; cgo #1.17+</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//当然可以分成多行，下面的指令表述和上面一致：</span></span><br><span class="line">#<span class="number">1.17</span>前</span><br><span class="line"><span class="comment">// +build linux</span></span><br><span class="line"><span class="comment">// +build cgo</span></span><br><span class="line"></span><br><span class="line">#<span class="number">1.17</span>+</span><br><span class="line"><span class="comment">// go:build linux</span></span><br><span class="line"><span class="comment">// go:build cgo</span></span><br></pre></td></tr></table></figure>
+<h3 id="为何1-17后使用新的语法？"><a class="header-anchor" href="#为何1-17后使用新的语法？"></a>为何1.17后使用新的语法？</h3>
+<ul>
+<li>可以发现相对<code> </code>表示<code>或</code>、<code>,</code>表示<code>与</code>，使用<code>||</code>、<code>&amp;&amp;</code>更符合程序员的开发习惯</li>
+<li>//go:build 与 //go:embed 和 //go:generate 这些命令相比较，格式上进行了统一<br>
+更多还有 ignore 指令来忽略使用这个文件，更多可以查看官方文档，这里不在继续展开。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍如何通过build tag来根据需要自定义构建应用&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Go语言" scheme="https://gingjan.com/categories/Go%E8%AF%AD%E8%A8%80/"/>
+    
+    
+      <category term="Go" scheme="https://gingjan.com/tags/Go/"/>
+    
+      <category term="语言" scheme="https://gingjan.com/tags/%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go里的并发和调度器亲和性</title>
+    <link href="https://gingjan.com/2022/11/21/concurrency-and-scheduler-affinity-in-go/"/>
+    <id>https://gingjan.com/2022/11/21/concurrency-and-scheduler-affinity-in-go/</id>
+    <published>2022-11-21T15:47:27.000Z</published>
+    <updated>2023-03-25T14:52:53.787Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h2 id="亲和性的局限"><a class="header-anchor" href="#亲和性的局限"></a>亲和性的局限</h2>
+<p>要理解亲和性的局限，就得先知道本地队列和全局队列发生了什么。<br>
+本地队列会被用于除了系统调用外的如channel，select，timer等待等阻塞操作，<br>
+然而，两种情况会限制goroutine和线程的亲和性：goroutine窃取和系统调用。<br>
+但是，通过更好地管理本地队列的优先级，可以有效规避上述两种情况。<br>
+G1.5旨在给予那些通过channel通讯的goroutine更高优先级，从而优化goroutine<br>
+与所在线程的亲和性</p>
+<h2 id="如何提高亲和性"><a class="header-anchor" href="#如何提高亲和性"></a>如何提高亲和性</h2>
+<p>协程在channel上来回通讯会导致该协程被频繁地阻塞，例如前所述，频繁入队本地队列。<br>
+然而，由于本地队列是FIFO，当某个协程独占线程时，那些非阻塞的协程没法保证能尽快运行，<br>
+如下例子：</p>
+<p><img src="/img/concurrency-and-scheduler-affinity-in-go/g9-example.png" alt="从channel阻塞释放的协程"></p>
+<p>协程9在被channel阻塞完毕后恢复正常，然而它必须等待2号，5号和4号协程执行完毕，在本例中，<br>
+5号协程会独占协程，导致9号协程被延迟执行并增加了9号协程被其他P偷走的风险。<br>
+自从Go 1.5版本开始，从channel返回的协程会被传到P的runnext字段以最高优先级执行。</p>
+<p><img src="/img/concurrency-and-scheduler-affinity-in-go/runnext-in-processor.png" alt="协程放入到P的runnext"></p>
+<p>该方式在再次进入channel阻塞前尽快运行一次，然后其他协程才被陆续执行。<br>
+这个方式的引入对Go的标准库的整体起到积极作用。<br>
+因为本地队列是FIFO的结构，如果队列里有goroutine独占着OS线程，则刚从channel阻塞出来的<br>
+goroutine无法保证尽早的执行。</p>
+<p><a href="https://github.com/golang/go/commit/e870f06c3f49ed63960a2575e330c2c75fc54a34" target="_blank" rel="noopener">提高一些库的性能</a></p>
+<h2 id="参考"><a class="header-anchor" href="#参考"></a>参考</h2>
+<p><a href="https://medium.com/a-journey-with-go/go-concurrency-scheduler-affinity-3b678f490488" target="_blank" rel="noopener">Go: Concurrency &amp; Scheduler Affinity</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;亲和性的局限&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#亲和性的局限&quot;&gt;&lt;/a&gt;亲和性的局限&lt;/h2&gt;
+&lt;p&gt;要理解亲和性的局限，就得先知道本地队列和全局队列发生了什么。&lt;br&gt;
+本地队列会被用于除了系统
+    
+    </summary>
+    
+      <category term="go" scheme="https://gingjan.com/categories/go/"/>
+    
+      <category term="原理" scheme="https://gingjan.com/categories/go/%E5%8E%9F%E7%90%86/"/>
+    
+    
+      <category term="go" scheme="https://gingjan.com/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>可拆箱即用的分布式追踪系统</title>
+    <link href="https://gingjan.com/2022/07/05/towards-turnkey-distributed-tracing/"/>
+    <id>https://gingjan.com/2022/07/05/towards-turnkey-distributed-tracing/</id>
+    <published>2022-07-05T13:15:27.000Z</published>
+    <updated>2023-03-21T15:44:30.346Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Reactive-Streams"><a class="header-anchor" href="#Reactive-Streams"></a>Reactive Streams</h1>
+<p>OpenTracing是一款为应用和开源软件包设计的，新的开源分布式追踪标准。具有构建大规模微服务经验的开发人员了解分布式追踪的作用和重要性。即便每个进程都有自己的日志系和指标监控，<br>
+但在分布式系统中它们之间都无法联成一个整体。</p>
+<p>第一篇关于分布式追凶系统的学术论文已有几十年了，从谷歌内部开始使用Dapper算也有12年了，Dapper论文发布也过去6年了，Zipkin也开源4年了。这个概念并不新颖。但你还在是为复杂的<br>
+服务架构，花费大量人力开发追踪系统。</p>
+<p>如果分布式追踪这么有价值，为什么大家还没运用呢？因为它在目前为止还是不够完善</p>
+<p>因为需要在进程内和进程间传递上下文信息，所以分布式追踪是不容易实现的，若要实现，上下文需要在这些地方之间相互传递：<br>
+1.开源服务（如Nginx、Cassandra、Redis等）<br>
+2.被用于自定义服务的开源库（如grpc、ORMs等）<br>
+3.业务逻辑</p>
+<p>还有一个困难点：无法要求全部的开源服务和开源库或者自定义业务逻辑使用单一提供商的追踪库，这样也就无法把服务之间的调用链路组织起来。</p>
+<p>因为我们需要一个标准机制来描述系统的行为</p>
+<h2 id="了解OpenTracing"><a class="header-anchor" href="#了解OpenTracing"></a>了解OpenTracing</h2>
+<p>OpenTracing就是那个「单一且标准的机制」。OpenTracing允许应用代码的开发者、开源库，开源服务不需要绑定特定提供商的追踪代码来实现链路追踪串连。<br>
+以下是这套标准：<br>
+1.标准化管理span：接口有开始和完成，以及描述定时任务的功能（span是Dapper和Zipkin里的术语）<br>
+2.标准化进程间的传递：接口有辅助进程间的追踪上下文传递<br>
+3.活跃span的标准化管理：接口可以在单个进程内，在不同包之间保存和获取活跃span<br>
+4.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Reactive-Streams&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#Reactive-Streams&quot;&gt;&lt;/a&gt;Reactive Streams&lt;/h1&gt;
+&lt;p&gt;OpenTracing是一款为应用和开源软件包设计的，新的开源分布式追
+    
+    </summary>
+    
+      <category term="代码之上" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
+    
+      <category term="架构" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="架构" scheme="https://gingjan.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
   
   <entry>
     <title>优雅重启go应用</title>
@@ -99,6 +314,52 @@ A:这样做不管用，没法关闭listener，但是原因还不清楚呢，有�
       <category term="Go" scheme="https://gingjan.com/tags/Go/"/>
     
       <category term="Hack" scheme="https://gingjan.com/tags/Hack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Reactive Streams 响应式流处理</title>
+    <link href="https://gingjan.com/2020/11/16/reactive-streams/"/>
+    <id>https://gingjan.com/2020/11/16/reactive-streams/</id>
+    <published>2020-11-16T02:36:32.000Z</published>
+    <updated>2023-03-21T15:44:30.346Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Reactive-Streams"><a class="header-anchor" href="#Reactive-Streams"></a>Reactive Streams</h1>
+<p>Reactive Streams 是一项倡议，以提供标准的非阻塞异步流处理，包含运行环境（JVM，JavaScript）和网络协议的标准统一</p>
+<p>处理数据流特别是体积大小无法预知的「live（实时）」数据流，需要在异步系统里进行特别「关照」，最突出的问题是要知道资源消耗的量和对资源消耗的控制，<br>
+防止被大量的数据流入，消耗大量资源压垮系统<br>
+为了可以在多机协作网络或单机多核上并行使用计算资源，异步是不可或缺的<br>
+reactive streams的主要目标是管理流数据跨异步域传输，（跨异步域传输：可以类比想象成数据跨线程传递，）同时确保流的接收端不需缓冲任何数据，也即，作为<br>
+本模型一部分的背压（反压 back pressure）使得线程间的中介——队列 的大小被限制了。<br>
+如果背压的通讯是同步的，则异步带来的优点将毫无意义，因此必须注意Reactive Stream所有的具体实现（非阻塞和异步的实现等）</p>
+<p>本规范的目的：所有遵守本规范的各实现可以顺利平滑地交互，以在整个流处理应用/系统中保留前面所述的好处和特性</p>
+<h2 id="Scope"><a class="header-anchor" href="#Scope"></a>Scope</h2>
+<p>Reactive Stream的范畴是找到 实现非阻塞异步数据流的back pressure目标 的 操作/实体 的接口interface，方法Method，协议protocol<br>
+端的DSL和绑定API的协议</p>
+<h2 id="基本语义"><a class="header-anchor" href="#基本语义"></a>基本语义</h2>
+<p>基本语义定义了如何通过背压调节流元素的传输，至于元素如何传输，元素在传输过程中的表现，如何发出背压信号等都不属于本规范的范畴</p>
+<h2 id="给实现者的提示"><a class="header-anchor" href="#给实现者的提示"></a>给实现者的提示</h2>
+<p>若要实现本规范，建议先阅读<a href="https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md" target="_blank" rel="noopener">README</a>和<a href="http://www.reactive-streams.org/reactive-streams-1.0.3-javadoc" target="_blank" rel="noopener">Java API documentation</a><br>
+，然后看<a href="https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md#specification" target="_blank" rel="noopener">Specification</a>、<a href="https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3/tck" target="_blank" rel="noopener">TCK</a>、<br>
+<a href="https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3/examples/src/main/java/org/reactivestreams/example/unicast" target="_blank" rel="noopener">example implementations</a>。<br>
+如果有任何疑问，可以查阅<a href="https://github.com/reactive-streams/reactive-streams-jvm/issues?page=1&amp;state=closed" target="_blank" rel="noopener">closed issues</a>，若依旧无法解决你的疑问，则<br>
+到<a href="https://github.com/reactive-streams/reactive-streams-jvm/issues/new" target="_blank" rel="noopener">new issue</a>提出你的问题<br>
+** 深入阅读： **<br>
+<a href="https://lotabout.me/2020/Back-Pressure/" target="_blank" rel="noopener">背压(Back Pressure)与流量控制</a></p>
+<p><a href="http://www.reactive-streams.org/" target="_blank" rel="noopener">本文参考：Reactive Streams</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Reactive-Streams&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#Reactive-Streams&quot;&gt;&lt;/a&gt;Reactive Streams&lt;/h1&gt;
+&lt;p&gt;Reactive Streams 是一项倡议，以提供标准的非阻塞异步流
+    
+    </summary>
+    
+      <category term="代码之上" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
+    
+    
+      <category term="编程思想" scheme="https://gingjan.com/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
     
   </entry>
   
@@ -1117,752 +1378,6 @@ PATCH，补丁，碎片，可以知道，使用PATCH更新资源时，只需要�
       <category term="框架" scheme="https://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
     
       <category term="Yii" scheme="https://gingjan.com/tags/Yii/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>访问修饰符的意义</title>
-    <link href="https://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/"/>
-    <id>https://gingjan.com/2016/06/06/accessing-control-and-locator-qualifer-purpose/</id>
-    <published>2016-06-06T14:45:07.000Z</published>
-    <updated>2020-10-05T09:34:04.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法__get()和__set()的使用</p>
-<a id="more"></a>
-<p>先上一段代码好说明问题</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_salary;<span class="comment">//私用属性命名加_</span></span><br><span class="line">    <span class="comment">//setter and getter</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSalary</span><span class="params">()</span> </span>&#123;<span class="comment">//如果只有get，那么说明该 属性/成员变量 只是可读，不可写</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_salary;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSalary</span><span class="params">($salary)</span> </span>&#123;<span class="comment">//如果只有set，说明该 属性/成员变量 只是可写，不可读</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;_salary = $salary;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>如上，我们觉得好像private改成public也没什么大问题，但是如果有这样一个场景，调用代码中，多处调用了User的salary属性，有写的也有读的，但是有一天，你不想让调用者修改salary了（禁用写），那怎么办？要怎么保证调用者的代码中没有直接修改salary的代码？如果提供了setter，那么只要把setter删掉，一旦调用代码中有没清理干净的对salary进行写入/修改 的代码，那么就会抛出异常。而使用public $salary这种方式的话，改成private后，虽然是可以禁止写了但是连读取也被禁止了。</li>
-<li>对写入数据的操作/过滤，使用setter和getter，可以统一对写入/读取 进行操作或者过滤，比如要去掉写入数据中的空格，如果使用public，那么要在每个调用处写上trim()，但是我们无法保证每处都写上trim了。如果用setter，那么我们可以在setter中写一次trim即可，而且也保证对每次写入都会进行过滤，不会有遗漏。</li>
-</ul>
-<blockquote>
-<p>注意:由于 __get() 和 __set() 是在遍历所有成员变量，找不到匹配的成员变量时才被调用。因此，其效率是低于直接访问成员变量的形式。在一些表示数据结构、数据集合等简单情况下，且不需读写控制等， 可以考虑使用成员变量作为属性直接访问，这样可以提高一点效率。<br>
-另外一个提高效率的技巧就是：使用 $k1 = $obj-&gt;getK1() 来代替 $k1 = $obj-&gt;K1 ， 用 $obj-&gt;setK1($value) 来代替 $obj-&gt;K1 = $value 。 这在功能上是完全一样的效果，但是避免了使用 __get() 和 __set() ，相当于绕过了遍历的过程。</p>
-</blockquote>
-<p>这里还要区分，在类里成员变量和属性的区别。成员变量和属性的区别与联系在于：</p>
-<ul>
-<li>成员变量是一个“内”概念，反映的是就类的结构构成而言的该你那。属性是一个“外”概念，反映的是类的功能逻辑意义而言的概念。</li>
-<li>成员变量没有读写权限控制，而属性可以指定为只读或只写，或可读可写。</li>
-<li>成员变量不对读出作任何后处理，不对写入作任何预处理，而属性则可以。</li>
-<li>public成员变量可以视为一个可读可写、没有任何预处理或后处理的属性。 而private成员变量由于外部不可见，与属性“外”的特性不相符，所以不能视为属性。</li>
-<li>虽然大多数情况下，属性会由某个或某些成员变量来表示，但属性与成员变量没有必然的对应关系， 比如与非门的 output 属性，就没有一个所谓的 $output 成员变量与之对应。</li>
-</ul>
-<p>为了更形象，我们看个例子</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotAndGate</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_k1;</span><br><span class="line">    <span class="keyword">private</span> $_k2;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setK1</span><span class="params">($value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;$_k1 = $value;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setK2</span><span class="params">($value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;$_k2 = $value;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getOutput</span><span class="params">()</span> </span>&#123;<span class="comment">//与非门有两个输入，当两个输入都为真时，与非门的输出为假，否则，输出为真。</span></span><br><span class="line">        <span class="keyword">if</span> ( !<span class="keyword">$this</span>-&gt;_k1 || !<span class="keyword">$this</span>-&gt;_k2 ) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">elseif</span> (<span class="keyword">$this</span>-&gt;_k1 &amp;&amp; <span class="keyword">$this</span>-&gt;_k2) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的代码中，与非门类有两个成员变量， <code>$_k1</code> 和 <code>$_k2</code> 。<strong>但是有3个属性</strong>，表示2个输入的 <code>key1</code> 和 <code>key2</code> ，以及表示输出的 <code>output </code>。<br>
-由于我们知道，属性一般是通过<code>$obj-&gt;property</code>方式来访问的，但是这里根本没有<code>output</code>这个成员变量呀？那还怎么访问呢？<br>
-没错，这时候就要靠我们的<code>魔术方法__get()</code>来配合<code>getter</code>了，上<code>__get()</code>的代码：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span> </span>&#123;</span><br><span class="line">    $getter = <span class="string">'get'</span> . $name;<span class="comment">//如此，当调用$obj-&gt;output属性时，就会去调用getOutput()，以达到具有output属性的效果</span></span><br><span class="line">    <span class="keyword">if</span> (method_exists(<span class="keyword">$this</span>, $getter)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$getter();</span><br><span class="line">    &#125; <span class="keyword">elseif</span> (method_exists(<span class="keyword">$this</span>, <span class="string">'set'</span>.$name)) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'只存在setter，也即该属性为只写'</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'无'</span> , $name , <span class="string">'属性'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>欢迎转载但请附上链接，谢谢。</p>
-<p><a href="http://www.digpage.com/property.html" target="_blank" rel="noopener">参考：http://www.digpage.com/property.html</a></p>
-<p>如有什么错误，欢迎提出、讨论，大家共同进步 <sup>_</sup></p>
-]]></content>
-    
-    <summary type="html">
-    
-      本文主要讲解为何有些成员变量需要设置成私有的，为什么不能直接设置成public直接在外部访问，以及PHP魔术方法__get()和__set()的使用
-    
-    </summary>
-    
-      <category term="代码之上" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/"/>
-    
-      <category term="OOP" scheme="https://gingjan.com/categories/%E4%BB%A3%E7%A0%81%E4%B9%8B%E4%B8%8A/OOP/"/>
-    
-    
-      <category term="OOP" scheme="https://gingjan.com/tags/OOP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Yii框架的服务定位器</title>
-    <link href="https://gingjan.com/2016/06/02/yii-service-locator/"/>
-    <id>https://gingjan.com/2016/06/02/yii-service-locator/</id>
-    <published>2016-06-02T12:02:51.000Z</published>
-    <updated>2020-10-05T09:36:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>** Yii——组件注册 **：Yii的组件相当于Laravel的服务，同样需要注册到一个IOC容器中，以便在应用其他地方使用这些组件/服务</p>
-<a id="more"></a>
-<p>这相当与在laravel中，使用$app应用的register或者singleton方法注册服务，而在Yii中则称为服务定位器Service Locator。</p>
-<h2 id="注册组件"><a class="header-anchor" href="#注册组件"></a>注册组件</h2>
-<p>在Yii中，要注册组件(laravel中称之为服务)可以使用如下方式：</p>
-<h3 id="方法一：set方法"><a class="header-anchor" href="#方法一：set方法"></a>方法一：set方法</h3>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">di</span>\<span class="title">ServiceLocator</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">yii</span>\<span class="title">caching</span>\<span class="title">FileCache</span>;</span><br><span class="line">$locator = <span class="keyword">new</span> ServiceLocator;</span><br><span class="line">$locator-&gt;set(<span class="string">'cache'</span>, <span class="string">'yii\caching\ApcCache'</span>);<span class="comment">//使用类名直接创建</span></span><br><span class="line">$locator-&gt;set(<span class="string">'db'</span>, [<span class="comment">//通过配置数组来注册</span></span><br><span class="line"><span class="string">'class'</span> =&gt; <span class="string">'yii\db\Connection'</span>,</span><br><span class="line"><span class="string">'dsn'</span> =&gt; <span class="string">'mysql:host=localhost;dbname=demo'</span>,</span><br><span class="line"><span class="string">'username'</span> =&gt; <span class="string">'root'</span>,</span><br><span class="line"><span class="string">'password'</span> =&gt; <span class="string">''</span>,</span><br><span class="line">]);</span><br><span class="line">$locator-&gt;set(<span class="string">'search'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;<span class="comment">//通过一个匿名函数返回实例来注册</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> app\components\SolrService;</span><br><span class="line">&#125;);</span><br><span class="line">$locator-&gt;set(<span class="string">'pageCache'</span>, <span class="keyword">new</span> FileCache);<span class="comment">//直接使用new实例化来注册</span></span><br></pre></td></tr></table></figure>
-<h3 id="方法二：在配置文件中配置"><a class="header-anchor" href="#方法二：在配置文件中配置"></a>方法二：在配置文件中配置</h3>
-<p>返回配置数组的方式，即在应用的配置文件中配置components项</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="string">'components'</span> =&gt; [</span><br><span class="line">        <span class="string">'db'</span> =&gt; [</span><br><span class="line">            <span class="string">'class'</span> =&gt; <span class="string">'yii\db\Connection'</span>,</span><br><span class="line">            <span class="string">'dsn'</span> =&gt; <span class="string">'mysql:host=localhost;dbname=demo'</span>,</span><br><span class="line">            <span class="string">'username'</span> =&gt; <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'password'</span> =&gt; <span class="string">''</span>,</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">'cache'</span> =&gt; <span class="string">'yii\caching\ApcCache'</span>,</span><br><span class="line">        <span class="string">'search'</span> =&gt; <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> app\components\SolrService;</span><br><span class="line">        &#125;，</span><br><span class="line">    ]，</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>请谨慎注册太多应用组件，应用组件就像全局变量，使用太多可能加大测试和维护的难度。 一般情况下可以在需要时再创建本地组件。</p>
-</blockquote>
-<hr>
-<h2 id="使用-访问-组件"><a class="header-anchor" href="#使用-访问-组件"></a>使用/访问 组件</h2>
-<p>通过访问上面注册时的名字/ID 来访问，两种方式，get(‘name/id’)和属性<br>
-$cache = $locator-&gt;get(‘cache’);<br>
-$cache = $locator-&gt;cache;//通过属性</p>
-<hr>
-<h2 id="检查是否注册某个组件"><a class="header-anchor" href="#检查是否注册某个组件"></a>检查是否注册某个组件</h2>
-<p>$locator-&gt;has(‘name’);</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;** Yii——组件注册 **：Yii的组件相当于Laravel的服务，同样需要注册到一个IOC容器中，以便在应用其他地方使用这些组件/服务&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="框架" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="PHP" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/"/>
-    
-      <category term="Yii" scheme="https://gingjan.com/categories/%E6%A1%86%E6%9E%B6/PHP/Yii/"/>
-    
-    
-      <category term="框架" scheme="https://gingjan.com/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="Yii" scheme="https://gingjan.com/tags/Yii/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Javascript的单线程和异步之间的关系</title>
-    <link href="https://gingjan.com/2016/06/01/js-async-single-thread-queue/"/>
-    <id>https://gingjan.com/2016/06/01/js-async-single-thread-queue/</id>
-    <published>2016-06-01T03:26:32.000Z</published>
-    <updated>2020-10-05T09:35:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文介绍javascript的异步和单线程的关系，以及简单解释了单线程的js怎么异步处理。</p>
-<a id="more"></a>
-<h2 id="异步计时函数setTimeout"><a class="header-anchor" href="#异步计时函数setTimeout"></a>异步计时函数setTimeout()</h2>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> begin = <span class="keyword">new</span> <span class="built_in">Date</span>();<span class="comment">//代码开始</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    alert(<span class="string">'你好，这个程序已经运行了'</span> + (end - begin) + <span class="string">'毫秒'</span>);</span><br><span class="line">&#125;,<span class="number">3000</span>);<span class="comment">//1秒后弹出对话框</span></span><br><span class="line"><span class="keyword">while</span> ((<span class="keyword">new</span> <span class="built_in">Date</span>() - begin) &lt; <span class="number">6000</span>) &#123;&#125;<span class="comment">//循环代码持续3秒，3秒后，整个js调用栈的程序才执行完毕（在控制台中可以看到3秒后才出现一个响应undefined）</span></span><br></pre></td></tr></table></figure>
-<p>上面的代码跟下面的对比一下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> begin = <span class="keyword">new</span> <span class="built_in">Date</span>();<span class="comment">//代码开始</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">    alert(<span class="string">'你好，这个程序已经运行了'</span> + (end - begin) + <span class="string">'毫秒'</span>);</span><br><span class="line">&#125;,<span class="number">6000</span>);<span class="comment">//6秒后弹出对话框</span></span><br><span class="line"><span class="keyword">while</span> ((<span class="keyword">new</span> <span class="built_in">Date</span>() - begin) &lt; <span class="number">3000</span>) &#123;&#125;<span class="comment">//循环代码持续3秒，3秒后，js调用栈执行完毕，控制台出现undefined，然后再过6-3=3秒后，出现弹框</span></span><br></pre></td></tr></table></figure>
-<p>解析：<br>
-当js解析器解析到setTimeout时，就调用了浏览器的api——异步函数setTimeout，此时js继续往下解析执行，而浏览器就另有一个线程来处理异步函数setTimeout，也就是1秒后把回调函数放入js执行队列中。而此时，js调用栈中继续执行剩下的代码，直至完成了后面的循环后（调用栈中所有代码已经执行完毕）才解析队列中的回调函数来执行。</p>
-<hr>
-<h2 id="异步IO函数"><a class="header-anchor" href="#异步IO函数"></a>异步IO函数</h2>
-<p>这里我们介绍下ajax，为了方便起见，直接使用jquery来说明</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="keyword">get</span>('http://blog.zjien.com', function(resData)&#123;</span><br><span class="line">alert(resData);</span><br><span class="line">&#125; );</span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>js在解析并执行到$.get()时，发起http请求，我看打开F12可以看到请求是处于Pending状态，通过WireShark或Fiddler2可以查看到HTTP请求状态，可知请求是成功发送并且有响应，但是因为下面的while是死循环，因此$.get()里的回调函数一直在队列中排队，得不到js的解析和执行，呈现出假死的状态。<br>
-换一种形式来展示</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="keyword">get</span>('http://blog.zjien.com',function(resData)&#123;</span><br><span class="line">alert(resData);</span><br><span class="line">&#125;);</span><br><span class="line">alert(<span class="string">'go on?'</span>);</span><br></pre></td></tr></table></figure>
-<p>js解析并执行到go on时，浏览器弹出窗口，暂时不要关闭窗口，通过F12可以看到，请求是Pending状态，但通过Wireshark等工具看到请求是完成并得到响应的，只是因为go on阻塞/阻止了时间循环，导致$.get的回调无法执行，只有按下确定关闭了go on框，回调才得以执行。这是在chrome的情况如此。<br>
-在Firefox下却不会出现此情况，go on并不能阻止事件循环，所以上面两个代码段的ajax（$.get）的回调都可以执行，于是界面出现3个alert弹框。</p>
-<blockquote>
-<p>注意，每个窗口有一个js线程(单线程)，若一个窗口中有多个tag，那么这多个tag都是用同一个js线程。</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文介绍javascript的异步和单线程的关系，以及简单解释了单线程的js怎么异步处理。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="Javascript" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/"/>
-    
-      <category term="基础" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="js" scheme="https://gingjan.com/tags/js/"/>
-    
-      <category term="Javascript" scheme="https://gingjan.com/tags/Javascript/"/>
-    
-      <category term="异步" scheme="https://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
-    
-      <category term="线程" scheme="https://gingjan.com/tags/%E7%BA%BF%E7%A8%8B/"/>
-    
-      <category term="队列" scheme="https://gingjan.com/tags/%E9%98%9F%E5%88%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>超时调用和循环调用</title>
-    <link href="https://gingjan.com/2016/05/25/settimeout-and-setintervel/"/>
-    <id>https://gingjan.com/2016/05/25/settimeout-and-setintervel/</id>
-    <published>2016-05-25T15:36:28.000Z</published>
-    <updated>2020-10-05T09:36:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>** setTimeout和setInterval **：本文介绍这两个浏览器提供的api及其底层的原理</p>
-<a id="more"></a>
-<h3 id="超时调用就是setTimeout-function-delay"><a class="header-anchor" href="#超时调用就是setTimeout-function-delay"></a>超时调用就是setTimeout(function(){}, delay);</h3>
-<p>第一参数：要执行的回调函数<br>
-第二参数：延迟多少毫秒，表示在指定时间之后添加回调函数到执行队列中，如果指定时间之后队列中没有其他要执行的代码，那么被添加的代码（即回调函数）会被立即执行。如果队列中有其他代码，那么回调函数会在队列里的代码执行完毕之后才执行。</p>
-<p>可以使用<code>clearTimeout()；</code>来清楚 未执行 的任务</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;, <span class="number">1000</span>);</span><br><span class="line">clearTimeout(a);</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="循环调用就是setInterval"><a class="header-anchor" href="#循环调用就是setInterval"></a>循环调用就是setInterval();</h3>
-<p>第一参数：要执行的回调函数<br>
-第二参数：延迟多少毫秒，表示定期添加回调函数到执行队列中，如果指定时间之后队列中没有其他要执行的代码，那么被添加的代码（即回调函数）会被立即执行。如果队列中有其他代码，那么回调函数会在队列里的代码执行完毕之后才执行。注意，这个函数会定期不停的添加回调函数到执行队列的。</p>
-<p>清除同上，使用<code>clearInterval(a);</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;, <span class="number">1000</span>);</span><br><span class="line">clearInterval(a);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>以上两个函数都不一定会严格按照指定的时间间隔执行，这主要看执行队列中是否还有其他待执行的代码（也因为JS是单线程的）</p>
-</blockquote>
-<blockquote>
-<p>注意,setTimeout和setInterval都是浏览器的api（由浏览器提供的内置函数），是一种异步函数。上面所说的队列是准确来说是指 异步任务队列 ，而js在执行着的代码是处于js调用栈里的代码<br>
-<img src="/img/js-called-stack1.png" alt="js调用栈和异步队列1"><br>
-<img src="/img/js-called-stack2.png" alt="js调用栈和异步队列2"></p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;** setTimeout和setInterval **：本文介绍这两个浏览器提供的api及其底层的原理&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="前端" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="Javascript" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/"/>
-    
-      <category term="基础" scheme="https://gingjan.com/categories/%E5%89%8D%E7%AB%AF/Javascript/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Javascript" scheme="https://gingjan.com/tags/Javascript/"/>
-    
-      <category term="异步" scheme="https://gingjan.com/tags/%E5%BC%82%E6%AD%A5/"/>
-    
-      <category term="回调" scheme="https://gingjan.com/tags/%E5%9B%9E%E8%B0%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git常用命令</title>
-    <link href="https://gingjan.com/2016/05/24/git-command/"/>
-    <id>https://gingjan.com/2016/05/24/git-command/</id>
-    <published>2016-05-24T09:08:33.000Z</published>
-    <updated>2020-10-05T09:35:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文讲解并且亲测了常用的Git命令</p>
-<a id="more"></a>
-<table>
-<thead>
-<tr>
-<th>Git命令</th>
-<th>选项</th>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>git init</td>
-<td></td>
-<td></td>
-<td>初始化/新建 当前目录为本地git仓库</td>
-</tr>
-<tr>
-<td>git add</td>
-<td>-A或-add</td>
-<td></td>
-<td>添加当前目录下所有未被tracking以及被修改的文件到index中</td>
-</tr>
-<tr>
-<td>git add</td>
-<td></td>
-<td>file</td>
-<td>添加 file文件/指定文件 到index中</td>
-</tr>
-<tr>
-<td>git add</td>
-<td></td>
-<td>.</td>
-<td>递归添加当前目录下的所有文件(包含目录)到index中</td>
-</tr>
-<tr>
-<td>git rm</td>
-<td>–cached</td>
-<td>file</td>
-<td>只删除index中指定的文件，而处于工作目录（也即文件目录）中的文件不会受到影响（不会被删除）</td>
-</tr>
-<tr>
-<td>git rm</td>
-<td>-f或–force</td>
-<td>file</td>
-<td>同时删除index和工作目录中指定的文件</td>
-</tr>
-<tr>
-<td>git rm</td>
-<td>-r</td>
-<td>*</td>
-<td>删除index暂存区里的全部文件</td>
-</tr>
-<tr>
-<td>git status</td>
-<td></td>
-<td></td>
-<td>查看整个项目已经初始化的目录下所有文件的状态(处于 .gitignore 文件里的文件会被)</td>
-</tr>
-<tr>
-<td>git status</td>
-<td></td>
-<td>.</td>
-<td>查看当前目录下所有文件和目录的状态(非递归,也即当前目录内的子目录内的文件无法查看)</td>
-</tr>
-<tr>
-<td>git commit</td>
-<td>-m</td>
-<td>‘message’</td>
-<td>提交当前index中的文件到仓库repo中，并且附上提交说明/信息</td>
-</tr>
-<tr>
-<td>git commit</td>
-<td>-am</td>
-<td>‘message’</td>
-<td>git add 和 git commit 的组合</td>
-</tr>
-<tr>
-<td>git commit</td>
-<td>–amend -m</td>
-<td>‘this is amend command’</td>
-<td>当index没有新文件/修改的文件的前提下，该参数可以用来修改上一次commit的说明。当index中有新的文件或者修改的文件，该参数就会把这次index里的文件追加到上一次的commit中，而不会产生一次新的commit</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td></td>
-<td>显示所有的commit记录</td>
-</tr>
-<tr>
-<td>git log</td>
-<td>-1</td>
-<td></td>
-<td>显示1行日志 -n为n行</td>
-</tr>
-<tr>
-<td>git log</td>
-<td>–stat</td>
-<td></td>
-<td>显示每个文件的变动信息</td>
-</tr>
-<tr>
-<td>git log</td>
-<td>-p -m</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>v1.0</td>
-<td>显示v1.0的日志</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-1 ^branch-2</td>
-<td>查看 branch-1 有，而 branch-2 中没有的 commit</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-2 ^branch-1</td>
-<td>同理 查看 branch-2 有，而 branch-1 中没有的 commit</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-1…branch-2</td>
-<td>查看 branch-2 中比 branch-1 中多提交了哪些commit，注意，列出来的是两个点后边（此处即branch-2）比前边（此处即branch-1）多提交的内容。</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-2…branch-1</td>
-<td>同理 查看 branch-1 中比 branch-2 中多提交了哪些commit</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-1…branch-2</td>
-<td>不知道谁提交的多谁提交的少，单纯想知道有什么不一样，注意三个点</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>–left-right branch-1…branch-2</td>
-<td>在上述情况下，再显示出每个提交是在哪个分支上，注意 commit 后面的箭头，根据我们在 --left-right branch-1…branch-2 的顺序，左箭头 &lt; 表示是 branch-1 的，右箭头 &gt; 表示是 branch-2的。</td>
-</tr>
-<tr>
-<td>git show</td>
-<td></td>
-<td>fjf01</td>
-<td>显示某个commit的详细内容</td>
-</tr>
-<tr>
-<td>git show</td>
-<td></td>
-<td>HEAD</td>
-<td>显示HEAD指向的commit的提交日志</td>
-</tr>
-<tr>
-<td>git show</td>
-<td></td>
-<td>HEAD^</td>
-<td>显示HEAD的父(上一个版本)的commit的提交日志</td>
-</tr>
-<tr>
-<td>git show</td>
-<td></td>
-<td>HEAD^^</td>
-<td>显示HEAD的上两个版本的commit的提交日志</td>
-</tr>
-<tr>
-<td>git show</td>
-<td></td>
-<td>HEAD^5</td>
-<td>显示HEAD的上5个版本的commit的提交日志</td>
-</tr>
-<tr>
-<td>git show</td>
-<td></td>
-<td>v1.0</td>
-<td>显示v1.0标签的版本信息</td>
-</tr>
-<tr>
-<td>git tag</td>
-<td></td>
-<td></td>
-<td>显示已存在的tag</td>
-</tr>
-<tr>
-<td>git tag</td>
-<td>-l</td>
-<td></td>
-<td>显示已存在的tag</td>
-</tr>
-<tr>
-<td>git tag</td>
-<td>-a v3.0 -m ‘new version’</td>
-<td></td>
-<td>给当前HEAD指向的commit打上标签(tag)，每次打tag都需要加上说明-m</td>
-</tr>
-<tr>
-<td>git tag</td>
-<td>-a v3.1 eci3t8 -m ‘new version’</td>
-<td></td>
-<td>给以前的某个历史提交打上标签(tag)，并附加上说明-m</td>
-</tr>
-<tr>
-<td>git push</td>
-<td>–tags</td>
-<td></td>
-<td>把本地全部标签推送到远程仓库，不加–tags参数默认是不会把标签推送到远程的</td>
-</tr>
-<tr>
-<td>git push</td>
-<td>remote_host</td>
-<td>v1.0.1</td>
-<td>推送本地指定标签到远程</td>
-</tr>
-<tr>
-<td>git push</td>
-<td>remote_host --delete tag</td>
-<td>v1.0.1</td>
-<td>删除远程指定标签</td>
-</tr>
-<tr>
-<td>git clone</td>
-<td></td>
-<td>xxx.git</td>
-<td>克隆远程仓库到本地</td>
-</tr>
-<tr>
-<td>git clone</td>
-<td></td>
-<td>xxx.git local_dir</td>
-<td>克隆远程仓库到本地指定目录下</td>
-</tr>
-<tr>
-<td>git clone</td>
-<td>-b</td>
-<td>new_branch_name <a href="https://xxxxx.git" target="_blank" rel="noopener">https://xxxxx.git</a></td>
-<td>clone时创建新的分支替代默认Origin HEAD（master）</td>
-</tr>
-</tbody>
-</table>
-<h3 id="配置"><a class="header-anchor" href="#配置"></a>配置</h3>
-<table>
-<thead>
-<tr>
-<th>Git命令</th>
-<th>选项</th>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>git config</td>
-<td>–system</td>
-<td><a href="http://user.name" target="_blank" rel="noopener">user.name</a> “your name”</td>
-<td>该系统下，所有用户使用的配置</td>
-</tr>
-<tr>
-<td>git config</td>
-<td>–global</td>
-<td><a href="http://user.name" target="_blank" rel="noopener">user.name</a> “your name”</td>
-<td>该用户下的配置</td>
-</tr>
-<tr>
-<td>git config</td>
-<td>–local</td>
-<td><a href="http://user.name" target="_blank" rel="noopener">user.name</a> “your name”</td>
-<td>该 项目project/仓库repository 下的配置</td>
-</tr>
-<tr>
-<td>git config</td>
-<td>–system</td>
-<td>user.email <a href="mailto:myemail@gmail.com">myemail@gmail.com</a></td>
-<td></td>
-</tr>
-<tr>
-<td>git config</td>
-<td>–global</td>
-<td>user.email <a href="mailto:myemail@gmail.com">myemail@gmail.com</a></td>
-<td></td>
-</tr>
-<tr>
-<td>git config</td>
-<td>–local</td>
-<td>user.email <a href="mailto:myemail@gmail.com">myemail@gmail.com</a></td>
-<td></td>
-</tr>
-<tr>
-<td>git config</td>
-<td>–list</td>
-<td></td>
-<td>查看配置，注意，所处的目录不同，显示的配置信息也不同哦</td>
-</tr>
-</tbody>
-</table>
-<h3 id="分支命令"><a class="header-anchor" href="#分支命令"></a>分支命令</h3>
-<table>
-<thead>
-<tr>
-<th>Git命令</th>
-<th>选项</th>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>git checkout</td>
-<td></td>
-<td>dev</td>
-<td>切换到dev分支上，也是把dev分支的代码检出到工作区（working tree）</td>
-</tr>
-<tr>
-<td>git checkout</td>
-<td></td>
-<td>sha1-value</td>
-<td>把指定历史版本的代码完整检出到工作区</td>
-</tr>
-<tr>
-<td>git checkout</td>
-<td></td>
-<td>sha1-value /path/to/file</td>
-<td>将指定文件的某个历史版本检出到工作区</td>
-</tr>
-<tr>
-<td>git checkout</td>
-<td></td>
-<td>sha1-value:/path/to/file new-name</td>
-<td>将指定文件的某个历史版本检出到工作区并且修改该文件名</td>
-</tr>
-<tr>
-<td>git checkout</td>
-<td>-t</td>
-<td>origin/dev</td>
-<td>创建本地dev分支(与远程对应分支同名)并换到该分支上，并且设置新分支dev的upstream信息</td>
-</tr>
-<tr>
-<td>git checkout</td>
-<td>-b</td>
-<td>dev origin/dev</td>
-<td>等同于上面命令。从当前分支创建并检出（切换到）新分支的命令。实际上是git checkout -b new-branch-name current-branch 的简写形式，即默认从当前HEAD分支创建新新分支</td>
-</tr>
-<tr>
-<td>git checkout</td>
-<td>-b</td>
-<td>new-branch-name 172je2</td>
-<td>从历史版本为 172je2 上创建新分支并且切换到该分之上</td>
-</tr>
-<tr>
-<td>git checkout</td>
-<td>–</td>
-<td><file-name></td>
-<td>取消对文件的修改,还原到最近的版本,废弃本地做的修改</td>
-</tr>
-<tr>
-<td>git branch</td>
-<td>new-branch-name</td>
-<td>172je2</td>
-<td>从历史版本为 172je2 上创建新分支，但不会切换到该分之上</td>
-</tr>
-<tr>
-<td>git branch</td>
-<td>-a</td>
-<td></td>
-<td>查看所有分支</td>
-</tr>
-<tr>
-<td>git branch</td>
-<td>-d</td>
-<td>branch_name</td>
-<td>删除branch_name分支</td>
-</tr>
-<tr>
-<td>git merge</td>
-<td></td>
-<td>branch_name</td>
-<td>把branch_name分支合并到本分支中（fast-forward模式）</td>
-</tr>
-<tr>
-<td>git merge</td>
-<td>–no-ff</td>
-<td>branch_name</td>
-<td>把branch_name分支合并到本分支中，非fast-forward模式，即会创建一个合并的提交</td>
-</tr>
-</tbody>
-</table>
-<h3 id="分支对比"><a class="header-anchor" href="#分支对比"></a>分支对比</h3>
-<table>
-<thead>
-<tr>
-<th>Git命令</th>
-<th>选项</th>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>git diff branch1 branch2</td>
-<td>–stat</td>
-<td></td>
-<td>显示出所有有差异的文件列表</td>
-</tr>
-<tr>
-<td>git diff branch1 branch2</td>
-<td></td>
-<td>文件名(带路径)</td>
-<td>显示指定文件的详细差异</td>
-</tr>
-<tr>
-<td>git diff branch1 branch2</td>
-<td></td>
-<td></td>
-<td>显示出所有有差异的文件的详细差异</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-1 ^branch-2</td>
-<td>查看 branch-1 有，而 branch-2 中没有的 commit</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-2 ^branch-1</td>
-<td>同理 查看 branch-2 有，而 branch-1 中没有的 commit</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-1…branch-2</td>
-<td>查看 branch-2 中比 branch-1 中多提交了哪些commit，注意，列出来的是两个点后边（此处即branch-2）比前边（此处即branch-1）多提交的内容。</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-2…branch-1</td>
-<td>同理 查看 branch-1 中比 branch-2 中多提交了哪些commit</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>branch-1…branch-2</td>
-<td>不知道谁提交的多谁提交的少，单纯想知道有什么不一样，注意三个点</td>
-</tr>
-<tr>
-<td>git log</td>
-<td></td>
-<td>–left-right branch-1…branch-2</td>
-<td>在上述情况下，再显示出每个提交是在哪个分支上，注意 commit 后面的箭头，根据我们在 --left-right branch-1…branch-2 的顺序，左箭头 &lt; 表示是 branch-1 的，右箭头 &gt; 表示是 branch-2的。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="修改commit"><a class="header-anchor" href="#修改commit"></a>修改commit</h3>
-<table>
-<thead>
-<tr>
-<th>Git命令</th>
-<th>选项</th>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>git rebase</td>
-<td>-i</td>
-<td>到哪个旧commit的hash值</td>
-<td>注意，该commit是不会被合并的。接着进入交互模式，排第一行的是最旧的commit，除了这一个外，把每个commit前的pick改成squash，就相当于合并到第一行的commit上，接着修改commit信息。</td>
-</tr>
-</tbody>
-</table>
-<h2 id="按功能排序"><a class="header-anchor" href="#按功能排序"></a>按功能排序</h2>
-<h3 id="取消修改-恢复版本"><a class="header-anchor" href="#取消修改-恢复版本"></a>取消修改,恢复版本</h3>
-<p><strong>取消对文件的修改。还原到最近的版本，废弃本地做的修改。</strong><br>
-<code>git checkout -- &lt;file&gt;</code></p>
-<p><strong>取消已经暂存的文件。即，撤销先前&quot;git add&quot;的操作</strong><br>
-<code>git reset HEAD &lt;file&gt;...</code></p>
-<p><strong>修改最后一次提交。用于修改上一次的提交信息，或漏提交文件等情况。</strong><br>
-<code>git commit --amend</code></p>
-<p><strong>回退所有内容到上一个版本</strong><br>
-<code>git reset HEAD^</code></p>
-<p><strong>回退a.py这个文件的版本到上一个版本</strong><br>
-<code>git reset HEAD^ a.py</code></p>
-<p><strong>向前回退到第3个版本</strong><br>
-<code>git reset –soft HEAD~3</code></p>
-<p><strong>将本地的状态回退到和远程的一样</strong><br>
-<code>git reset –hard origin/master</code></p>
-<p><strong>回退到某个版本</strong><br>
-<code>git reset 057d</code></p>
-<p><strong>回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit.(代码回滚到上个版本，并提交git)</strong><br>
-<code>git revert HEAD</code></p>
-<p><strong>回滚单个文件</strong><br>
-<code>git reset sha-1 path/to/file</code><br>
-<code>git commit path/to/file -m 'message'</code><br>
-<code>git checkout path/to/file</code></p>
-<blockquote>
-<p>几点说明：</p>
-</blockquote>
-<ul>
-<li>一次commit是指当你输入git log是，看到的一串码，如commit e7d1b777de790970af704dbeac8c0ef3d21335b4，这算一次commit</li>
-</ul>
-<p>[<a href="https://www.pureweber.com/article/git-pretty-output/" target="_blank" rel="noopener">https://www.pureweber.com/article/git-pretty-output/</a>]</p>
-]]></content>
-    
-    <summary type="html">
-    
-      本文持续更新中…
-    
-    </summary>
-    
-      <category term="CVS" scheme="https://gingjan.com/categories/CVS/"/>
-    
-      <category term="Git" scheme="https://gingjan.com/categories/CVS/Git/"/>
-    
-      <category term="Git命令" scheme="https://gingjan.com/categories/CVS/Git/Git%E5%91%BD%E4%BB%A4/"/>
-    
-    
-      <category term="Git" scheme="https://gingjan.com/tags/Git/"/>
-    
-      <category term="CVS" scheme="https://gingjan.com/tags/CVS/"/>
     
   </entry>
   
