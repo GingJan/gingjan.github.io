@@ -322,7 +322,7 @@ A:这样做不管用，没法关闭listener，但是原因还不清楚呢，有�
     <link href="https://gingjan.com/2020/11/16/reactive-streams/"/>
     <id>https://gingjan.com/2020/11/16/reactive-streams/</id>
     <published>2020-11-16T02:36:32.000Z</published>
-    <updated>2023-03-21T15:44:30.346Z</updated>
+    <updated>2023-06-24T11:29:45.459Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Reactive-Streams"><a class="header-anchor" href="#Reactive-Streams"></a>Reactive Streams</h1>
 <p>Reactive Streams 是一项倡议，以提供标准的非阻塞异步流处理，包含运行环境（JVM，JavaScript）和网络协议的标准统一</p>
@@ -343,10 +343,10 @@ reactive streams的主要目标是管理流数据跨异步域传输，（跨异�
 ，然后看<a href="https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.3/README.md#specification" target="_blank" rel="noopener">Specification</a>、<a href="https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3/tck" target="_blank" rel="noopener">TCK</a>、<br>
 <a href="https://github.com/reactive-streams/reactive-streams-jvm/tree/v1.0.3/examples/src/main/java/org/reactivestreams/example/unicast" target="_blank" rel="noopener">example implementations</a>。<br>
 如果有任何疑问，可以查阅<a href="https://github.com/reactive-streams/reactive-streams-jvm/issues?page=1&amp;state=closed" target="_blank" rel="noopener">closed issues</a>，若依旧无法解决你的疑问，则<br>
-到<a href="https://github.com/reactive-streams/reactive-streams-jvm/issues/new" target="_blank" rel="noopener">new issue</a>提出你的问题<br>
-** 深入阅读： **<br>
-<a href="https://lotabout.me/2020/Back-Pressure/" target="_blank" rel="noopener">背压(Back Pressure)与流量控制</a></p>
-<p><a href="http://www.reactive-streams.org/" target="_blank" rel="noopener">本文参考：Reactive Streams</a></p>
+到<a href="https://github.com/reactive-streams/reactive-streams-jvm/issues/new" target="_blank" rel="noopener">new issue</a>提出你的问题</p>
+<h3 id="深入阅读："><a class="header-anchor" href="#深入阅读："></a>深入阅读：</h3>
+<p><a href="https://lotabout.me/2020/Back-Pressure/" target="_blank" rel="noopener">背压(Back Pressure)与流量控制</a><br>
+<a href="http://www.reactive-streams.org/" target="_blank" rel="noopener">本文参考：Reactive Streams</a></p>
 ]]></content>
     
     <summary type="html">
